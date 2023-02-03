@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 50);
             $table->mediumText('description');
             $table->boolean('visible')->default(true);
-            $table->smallInteger('square_meters');
+            $table->smallInteger('mq');
             $table->string('address');
             $table->string('latitude');
             $table->string('longitude');
@@ -27,9 +27,10 @@ return new class extends Migration
             $table->tinyInteger('baths');
             $table->string('media');
             $table->tinyInteger('guests')->nullable();
-            $table->date('check_in')->nullable();
-            $table->date('check_out')->nullable();
+            $table->string('check_in')->nullable();
+            $table->string('check_out')->nullable();
             $table->float('price', 5, 2)->nullable();
+            $table->timestamps();
         });
     }
 
