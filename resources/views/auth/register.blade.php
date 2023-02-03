@@ -10,6 +10,22 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
+                            <div class="mb-4 row">
+                                <label for="surname"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="surname" type="text"
+                                        class="form-control @error('surname') is-invalid @enderror" name="surname"
+                                        value="{{ old('surname') }}" required autocomplete="surname" autofocus>
+
+                                    @error('surname')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="mb-4 row">
                                 <label for="name"
@@ -77,7 +93,7 @@
                                 <div class="col-md-6">
                                     <input type="date" name="birth_date" id="birth_date"
                                         class="form-control  @error('birth_date') is-invalid @enderror" placeholder=""
-                                        aria-describedby="helpId">
+                                        value="{{ old('surname') }}" aria-describedby="helpId">
                                     @error('birth_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
