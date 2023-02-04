@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class ApartmentsController extends Controller
 {
+    //TODO: Implement methods
     /**
      * Display a listing of the resource.
      *
