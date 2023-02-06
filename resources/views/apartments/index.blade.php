@@ -16,7 +16,9 @@
                 @forelse($apartments as $apartment)
                     <div class="col">
                         <div class="card ms_card d-flex flex-row flex-wrap flex-xxl-nowrap my-3">
-                            <img class="apartment-img" src="{{ $apartment->media }}" alt="Title">
+                            <img class="apartment-img"
+                                src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
+                                alt="Title">
                             <div class="card-body">
                                 <h4 class="card-title">{{ $apartment->title }}</h4>
                                 <p class="card-text">{{ $apartment->description }}</p>

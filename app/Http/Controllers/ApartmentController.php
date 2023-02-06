@@ -45,7 +45,7 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        $val_data = $request->validate();
+        $val_data = $request->validated();
 
         // image
         if ($request->hasFile('media')) {
@@ -54,8 +54,12 @@ class ApartmentController extends Controller
         }
 
         $apartment_slug = Apartment::slugGenerator($val_data['title']);
-
+        $user_id = Auth::user()->id;
+        $val_data['user_id'] = $user_id;
         $val_data['slug'] = $apartment_slug;
+        $val_data['longitude'] = 40;
+        $val_data['latitude'] = 40;
+
 
 
         $apartment = Apartment::create($val_data);

@@ -51,6 +51,11 @@ span {
     font-weight: 500;
     font-size: 1.1rem;
     background-color: $bb-secondary-background;
+
+    &:hover {
+        color: $bb-secondary;
+        background-color: $bb-secondary-background;
+    }
 }
 
 
@@ -89,4 +94,8 @@ span {
 
         }
     }
+}
+
+.ms_form {
+    background: #efefef;
 }
