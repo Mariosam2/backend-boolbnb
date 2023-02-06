@@ -24,7 +24,7 @@
                                     <i class="fas fa-eye fa-sm fa-fw"></i>
                                 </a>
                                 <!-- edit -->
-                                <a href="">
+                                <a href="{{ route('apartments.edit', $apartment->slug) }}">
                                     <i class="fas fa-pencil fa-sm fa-fw"></i>
                                 </a>
                                 <a href="">
