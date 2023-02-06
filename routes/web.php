@@ -28,7 +28,9 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
-        Route::resource('apartments', ApartmentController::class);
+        Route::resource('apartments', ApartmentController::class)->parameters([
+            'apartments' => 'project:slug',
+        ]);
     });
 
 Route::middleware('auth')->group(function () {
