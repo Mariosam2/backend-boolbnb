@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Apartment extends Model
+{
+    use HasFactory;
+    protected $fillable = ['user_id', 'apartment_category_id', 'title', 'description', 'visible', 'square_meters', 'address', 'latitude', 'longitude', 'beds', 'total_rooms', 'baths', 'media', 'guests', 'check_in', 'check_out', 'price'];
+
+    /**
+     * Get the user associated with the Apartment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The services that belong to the Apartment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class);
+    }
+
+
+    /**
+     * Get all of the messages for the Apartment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
+
+    /**
+     * Get all of the views for the Apartment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function views(): HasMany
+    {
+        return $this->hasMany(View::class);
+    }
+
+
+    /**
+     * The promotions that belong to the Apartment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function promotions(): BelongsToMany
+    {
+        return $this->belongsToMany(Promotion::class);
+    }
+
+
+
+    /**
+     * Get the apartment_category that owns the Apartment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function apartment_category(): BelongsTo
+    {
+        return $this->belongsTo(ApartmentCategory::class);
+    }
+}
