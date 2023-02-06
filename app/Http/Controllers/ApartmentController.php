@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreApartmentRequest;
+use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
-use Illuminate\Http\Request;
+use App\Models\ApartmentCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -27,7 +30,11 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+
+        $categories = ApartmentCategory::all();
+
+
+        return view('apartments.create', compact('categories'));
     }
 
     /**
@@ -36,9 +43,30 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
-        //
+        $val_data = $request->validated();
+
+        // image
+        if ($request->hasFile('media')) {
+            $media = Storage::put('uploads', $val_data['media']);
+            $val_data['media'] = $media;
+        }
+
+        $apartment_slug = Apartment::slugGenerator($val_data['title']);
+        $user_id = Auth::user()->id;
+        $val_data['user_id'] = $user_id;
+        $val_data['slug'] = $apartment_slug;
+        $val_data['longitude'] = 40;
+        $val_data['latitude'] = 40;
+
+
+
+        $apartment = Apartment::create($val_data);
+
+        // redirect
+
+        return to_route('apartments.index')->with('message', "You add a new Apartment: $apartment->title");
     }
 
     /**
@@ -47,9 +75,10 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
         //
+        return view('apartments.show', compact('apartment'));
     }
 
     /**
@@ -58,9 +87,11 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
         //
+        $categories = ApartmentCategory::all();
+        return view('apartments.edit', compact('apartment', 'categories'));
     }
 
     /**
@@ -70,9 +101,24 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $val_data = $request->validated();
+
+        if ($request->hasFile('media')) {
+            if ($apartment->media) {
+                Storage::delete($apartment->media);
+            }
+            $media = Storage::put('uploads', $val_data['media']);
+            $val_data['media'] = $media;
+        }
+
+        $apartment_slug = Apartment::slugGenerator($val_data['title']);
+        $val_data['slug'] = $apartment_slug;
+
+        $apartment->update($val_data);
+
+        return to_route('apartments.index')->with('message', "You edit Apartment: $apartment->title");
     }
 
     /**
@@ -81,8 +127,12 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        if ($apartment->media) {
+            Storage::delete($apartment->media);
+        }
+        $apartment->delete();
+        return to_route('apartments.index')->with('message', "You delete this Apartment: $apartment->title");
     }
 }

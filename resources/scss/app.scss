@@ -1,5 +1,6 @@
 // Import variables
 @use './partials/variables.scss' as *;
+@use './partials/sidebar';
 // Import all of Bootstrap's CSS
 @import '~bootstrap/scss/bootstrap';
 
@@ -50,6 +51,11 @@ span {
     font-weight: 500;
     font-size: 1.1rem;
     background-color: $bb-secondary-background;
+
+    &:hover {
+        color: $bb-secondary;
+        background-color: $bb-secondary-background;
+    }
 }
 
 
@@ -58,4 +64,42 @@ span {
     // mark title with primary color
     color: $bb-primary;
     font-weight: 700;
+}
+
+.text_lighter {
+    color: $bb-lighter;
+}
+
+.font_primary {
+    font-family: $bb-font-primary;
+}
+
+.font_secondary {
+    font-family: $bb-font-secondary;
+}
+
+
+.container.apartments {
+    height: 100vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .ms_card {
+        border-radius: 3rem;
+
+        .apartment-img {
+            width: 40%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 3rem 0 0 3rem;
+
+        }
+    }
+}
+
+.ms_form {
+    background: #efefef;
 }
