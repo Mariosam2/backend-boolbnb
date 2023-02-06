@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">{{ $apartment->title }}</h4>
                                 <p class="card-text">{{ $apartment->description }}</p>
-                                <a href="">
+                                <a href="{{ route('apartments.show', $apartment->slug) }}">
                                     <i class="fas fa-eye fa-sm fa-fw"></i>
                                 </a>
                                 <!-- edit -->
