@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ApartmentCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,12 @@ class ApartmentCategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        $categories = ['Minicasa', 'Luxury', 'Fronte lago', 'Fronte mare', 'Sulle piste', 'Design', 'Dimore storiche', 'Case Gallegianti', 'Case sull\'albero', 'Nel deserto'];
+
+        foreach ($categories as $category) {
+            $new_category = new ApartmentCategory();
+            $new_category->name = $category;
+            $new_category->save();
+        }
     }
 }

@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50);
+            $table->string('title');
+            $table->string('slug');
             $table->mediumText('description');
             $table->boolean('visible')->default(true);
             $table->smallInteger('mq');

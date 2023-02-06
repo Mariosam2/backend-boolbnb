@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ApartmentsController extends Controller
+class ApartmentController extends Controller
 {
     //TODO: Implement methods
     /**
