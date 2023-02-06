@@ -31,7 +31,8 @@
                                 </a>
 
                                 <!-- Modal trigger button -->
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#apartment-{{ $apartment->slug }}">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#apartment-{{ $apartment->slug }}"
+                                    style="color: #0d6efd">
                                     <i class="fa-solid fa-trash"></i>
 
                                 </a>
@@ -71,18 +72,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <form action="{{ route('apartments.destroy', $apartment->slug) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="{{ route('apartments.destroy', $apartment->slug) }}">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </form> --}}
 
                             </div>
                         </div>
                     </div>
                 @empty
+                    No Apartment now
                 @endforelse
             </div>
         </div>
