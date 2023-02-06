@@ -37,7 +37,7 @@
             <div class="d-flex">
                 <div class="mb-3">
                     <label for="apartment_category_id" class="form-label">Categories</label>
-                    <select class="form-select form-select-lg" name="apartment_category_id" id="apartment_category_id">
+                    <select class="form-select form-select-md" name="apartment_category_id" id="apartment_category_id">
                         <option selected value="[]">None</option>
                         @foreach ($categories as $apartment_category)
                             <option value="{{ $apartment_category->id }}"
@@ -46,11 +46,12 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="mb-3 mx-2 me-auto">
                     <label for="media" class="form-label">Media</label>
-                    <input type="file" name="media" id="media" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127" value="{{ old('media') }}">
-                    <small id="helpId" class="text-muted">Help text</small>
+                    <input type="file" class="form-control" name="media" id="media" placeholder=""
+                        aria-describedby="fileHelpId">
+                    <div id="fileHelpId" class="form-text">Help text</div>
                 </div>
                 <div class="mb-3 mx-2">
                     <label for="beds" class="form-label">Beds</label>

@@ -4,7 +4,16 @@
 @section('content')
     <div class="col">
         <h1 class="mt-5 ps-5">Aggiungi un nuovo appartamento</h1>
-        <form action="{{ route('apartments.store') }}" method="POST" class=" ms_form m-5 p-5 rounded-3"
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('apartments.update', $apartment->slug) }}" method="POST" class=" ms_form m-5 p-5 rounded-3"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -26,18 +35,39 @@
                     aria-describedby="helpId" min="1" max="32767" value="{{ old('mq', $apartment->mq) }}">
                 <small id="helpId" class="text-muted">Help text</small>
             </div>
-            <div class="d-flex">
-                <div class="mb-3 mx-2 me-auto">
-                    <label for="media" class="form-label">Media</label>
-                    <input type="file" name="media" id="media" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127"
-                        value="{{ old('media', $apartment->media) }}">
-                    <small id="helpId" class="text-muted">Help text</small>
+            <div class="mb-3">
+                <label for="apartment_category_id" class="form-label">Categories</label>
+                <select class="form-select form-select-md" name="apartment_category_id" id="apartment_category_id">
+                    <option selected value="[]">None</option>
+                    @foreach ($categories as $apartment_category)
+                        <option value="{{ $apartment_category->id }}"
+                            {{ old('apartment_category_id', $apartment->apartment_category->id) == $apartment_category->id ? 'selected' : '' }}>
+                            {{ $apartment_category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="mb-3 mx-2 me-auto d-flex align-items-center">
+                    <img width="160" height="120"style="object-fit: cover"
+                        src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
+                        alt="">
+
+
+                    <div class="mx-3">
+                        <label for="media" class="form-label">Media</label>
+                        <input type="file" class="form-control" name="media" id="media" placeholder=""
+                            aria-describedby="fileHelpId" value="{{ $apartment->media }}">
+                        <div id="fileHelpId" class="form-text">Help text</div>
+                    </div>
+
+
                 </div>
                 <div class="mb-3 mx-2">
                     <label for="beds" class="form-label">Beds</label>
                     <input type="number" name="beds" id="beds" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127" value="{{ old('beds', $apartment->beds) }}">
+                        aria-describedby="helpId" min="1" max="127"
+                        value="{{ old('beds', $apartment->beds) }}">
                     <small id="helpId" class="text-muted">Help text</small>
                 </div>
                 <div class="mb-3 mx-2">

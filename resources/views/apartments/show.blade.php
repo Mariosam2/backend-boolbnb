@@ -1,7 +1,9 @@
 @extends('layouts.user')
 @section('content')
     <div class="col d-flex p-5 gap-4">
-        <img width="500" style="object-fit: cover" src="{{ $apartment->media }}" alt="{{ $apartment->title }}">
+        <img width="500" style="object-fit: cover"
+            src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
+            alt="{{ $apartment->title }}">
         <div class="details">
             <h1> {{ $apartment->title }}</h1>
             <h3>{{ $apartment->slug }}</h3>

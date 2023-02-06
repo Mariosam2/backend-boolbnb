@@ -91,7 +91,6 @@ class ApartmentController extends Controller
     {
         //
         $categories = ApartmentCategory::all();
-
         return view('apartments.edit', compact('apartment', 'categories'));
     }
 
