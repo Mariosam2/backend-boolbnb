@@ -29,7 +29,8 @@
                                 </a>
 
                                 <!-- Modal trigger button -->
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#apartment-{{ $apartment->slug }}">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#apartment-{{ $apartment->slug }}"
+                                    style="color: #0d6efd">
                                     <i class="fa-solid fa-trash"></i>
 
                                 </a>
