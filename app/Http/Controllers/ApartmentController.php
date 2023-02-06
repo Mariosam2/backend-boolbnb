@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -14,7 +16,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $apartments =  Auth::user()->apartments()->get();
+        return view('apartments.index', compact('apartments'));
     }
 
     /**

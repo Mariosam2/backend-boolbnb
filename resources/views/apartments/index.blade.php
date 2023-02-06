@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 @section('content')
     <div class="col">
 
@@ -23,34 +23,34 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
+                    @forelse ($apartments as $apartment)
+                        <tr class="table-primary">
 
-                    <tr class="table-primary">
-                        {{-- id --}}
-                        <td scope="row">
+                            <td scope="row">
+                                {{ $apartment->id }}
+                            </td>
+                            <td scope="row">
+                                {{ $apartment->title }}
+                            </td>
 
-                        </td>
-                        {{-- title --}}
-                        <td scope="row">
-
-                        </td>
-
-                        <td>lorem</td>
-                        <td>lorem</td>
-                        <td>lorem</td>
-                        <td>
-                            <!-- show -->
-                            <a href="">
-                                <i class="fas fa-eye fa-sm fa-fw"></i>
-                            </a>
-                            <!-- edit -->
-                            <a href="">
-                                <i class="fas fa-pencil fa-sm fa-fw"></i>
-                            </a>
-                            <a href="">
-                                <i class="fas fa-pencil fa-sm fa-fw"></i>
-                            </a>
-                        </td>
-                    </tr>
+                            <td>{{ $apartment->price }}</td>
+                            <td>{{ $apartment->mq }}</td>
+                            <td>
+                                <!-- show -->
+                                <a href="">
+                                    <i class="fas fa-eye fa-sm fa-fw"></i>
+                                </a>
+                                <!-- edit -->
+                                <a href="">
+                                    <i class="fas fa-pencil fa-sm fa-fw"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                    @endforelse
                 </tbody>
             </table>
 

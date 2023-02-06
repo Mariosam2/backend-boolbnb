@@ -18,6 +18,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard') }}">{{ __('Home') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('apartments.index') }}">{{ __('Apartments') }}</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
