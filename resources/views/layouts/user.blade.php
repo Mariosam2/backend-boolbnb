@@ -28,7 +28,7 @@
     <div id="app">
 
 
-        @include('partials.header')
+
         <main class="">
             <div class="container-fluid">
                 <div class="row">
