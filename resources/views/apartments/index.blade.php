@@ -3,7 +3,7 @@
     <div class="col d-flex flex-column justify-content-center">
         <div class="container apartments ms-xxl-2 p-xxl-5">
             <h1>Apartments</h1>
-            <a name="" id="" class="btn btn-primary" href="" role="button">New
+            <a name="" id="" class="btn btn-primary" href="{{ route('apartments.create') }}" role="button">New
                 Apartments
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </a>
