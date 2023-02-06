@@ -1,4 +1,4 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse min-vh-100 ms_sidebar ps-5 py-5">
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ms_sidebar p-2 p-md-3 p-xxl-5">
     <div class="position-sticky pt-3 sidebar-sticky h-100 d-flex flex-column">
         <h1 class="text-uppercase text_lighter font_secondary mb-5">
             B<svg class="infinite_logo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt"
