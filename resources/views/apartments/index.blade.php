@@ -7,6 +7,11 @@
                 Apartments
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </a>
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="row row-cols-1">
                 @forelse($apartments as $apartment)
                     <div class="col">
@@ -15,6 +20,16 @@
                             <div class="card-body">
                                 <h4 class="card-title">{{ $apartment->title }}</h4>
                                 <p class="card-text">{{ $apartment->description }}</p>
+                                <a href="">
+                                    <i class="fas fa-eye fa-sm fa-fw"></i>
+                                </a>
+                                <!-- edit -->
+                                <a href="">
+                                    <i class="fas fa-pencil fa-sm fa-fw"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

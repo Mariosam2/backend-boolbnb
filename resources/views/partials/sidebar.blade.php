@@ -28,6 +28,12 @@
                     <i class="fa-solid fa-house fa-fw"></i></i>Appartamenti
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <span class="align-text-bottom"></span>
+                    <i class="fa-solid fa-envelope fa-fw"></i></i></i>Messaggi
+                </a>
+            </li>
         </ul>
         <ul class="nav flex-column mt-auto">
             <li class="nav-item">
