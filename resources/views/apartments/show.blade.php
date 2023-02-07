@@ -9,11 +9,15 @@
             <h3>{{ $apartment->slug }}</h3>
             <p>{{ $apartment->description }}</p>
             <ul class="list-unstyled">
-                <li><strong>Address: </strong>{{ $apartment->address }}</li>
-                <li><strong>Squar meters: </strong>{{ $apartment->mq }}</li>
-                <li><strong>Total rooms: </strong>{{ $apartment->total_rooms }}</li>
-                <li><strong>Beds: </strong>{{ $apartment->beds }}</li>
-                <li><strong>Baths</strong> {{ $apartment->baths }}</li>
+                <li><strong>Indirizzo: </strong>{{ $apartment->address }}</li>
+                <li><strong>Metri quadrati: </strong>{{ $apartment->mq }}m²</li>
+                <li><strong>Camere: </strong>{{ $apartment->total_rooms }}</li>
+                <li><strong>Letti: </strong>{{ $apartment->beds }}</li>
+                <li><strong>Bagni: </strong> {{ $apartment->baths }}</li>
+                <li><strong>Ospiti: </strong> {{ $apartment->guests }}</li>
+                <li><strong>Prezzo: </strong> {{ $apartment->price }}$</li>
+                <li><strong>Check_in: </strong> {{ $apartment->Check_in }} </li>
+                <li><strong>Check_out: </strong> {{ $apartment->Check_out }} </li>
             </ul>
         </div>
     </div>
