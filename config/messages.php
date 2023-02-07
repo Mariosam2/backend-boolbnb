@@ -40,7 +40,7 @@ return [
         [
             'apartment_id' => 51,
             'name' => 'Paglietta',
-            'surname' => 'Paglietta',
+            'surname' => 'Pagliettini',
             'email' => 'example6@mail.com',
             'body' => 'Ciao, vorrei prenotare il tuo appartamento'
         ],
