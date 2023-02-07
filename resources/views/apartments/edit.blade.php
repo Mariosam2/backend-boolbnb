@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="col">
-        <h1 class="mt-5 ps-5">Aggiungi un nuovo appartamento</h1>
+        <h1 class="mt-5 ps-5">Modifica questo appartamento</h1>
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">
                 <ul>
@@ -18,25 +18,26 @@
             @csrf
             @method('PUT')
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">Titolo:*</label>
                 <input type="text" name="title" id="title" class="form-control" placeholder=""
-                    aria-describedby="helpId" value="{{ old('title', $apartment->title) }}">
-                <small id="helpId" class="text-muted">Help text</small>
+                    aria-describedby="helpId" value="{{ old('title', $apartment->title) }}" required>
+                <small id="helpId" class="text-muted">Modificare il titolo</small>
             </div>
             <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
+                <label for="address" class="form-label">Indirizzo:*</label>
                 <input type="text" name="address" id="address" class="form-control" placeholder=""
-                    aria-describedby="helpId" value="{{ old('address', $apartment->address) }}">
-                <small id="helpId" class="text-muted">Help text</small>
+                    aria-describedby="helpId" value="{{ old('address', $apartment->address) }}" required>
+                <small id="helpId" class="text-muted">Modificare l'indirizzo</small>
             </div>
             <div class="mb-3">
-                <label for="mq" class="form-label">Square meters</label>
+                <label for="mq" class="form-label">Metri quadrati:*</label>
                 <input type="number" name="mq" id="mq" class="form-control" placeholder=""
-                    aria-describedby="helpId" min="1" max="32767" value="{{ old('mq', $apartment->mq) }}">
-                <small id="helpId" class="text-muted">Help text</small>
+                    aria-describedby="helpId" min="1" max="32767" value="{{ old('mq', $apartment->mq) }}"
+                    required>
+                <small id="helpId" class="text-muted">Modificare i Metri quadrati</small>
             </div>
             <div class="mb-3">
-                <label for="apartment_category_id" class="form-label">Categories</label>
+                <label for="apartment_category_id" class="form-label">Categorie:*</label>
                 <select class="form-select form-select-md" name="apartment_category_id" id="apartment_category_id">
                     <option selected value="[]">None</option>
                     @foreach ($categories as $apartment_category)
@@ -55,43 +56,62 @@
 
 
                     <div class="mx-3">
-                        <label for="media" class="form-label">Media</label>
+                        <label for="media" class="form-label">Immagine:*</label>
                         <input type="file" class="form-control" name="media" id="media" placeholder=""
                             aria-describedby="fileHelpId"
                             value="{{ storage_path('uploads\D5brKTH0mrz7dgFRutQLSGvPyL6aubA5HKjEUFj8.jpg') }}">
-                        <div id="fileHelpId" class="form-text">Help text</div>
                     </div>
 
 
                 </div>
                 <div class="mb-3 mx-2">
-                    <label for="beds" class="form-label">Beds</label>
+                    <label for="beds" class="form-label">Letti:*</label>
                     <input type="number" name="beds" id="beds" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127"
-                        value="{{ old('beds', $apartment->beds) }}">
-                    <small id="helpId" class="text-muted">Help text</small>
+                        aria-describedby="helpId" min="1" max="127" value="{{ old('beds', $apartment->beds) }}"
+                        required>
                 </div>
                 <div class="mb-3 mx-2">
-                    <label for="total_rooms" class="form-label">Total rooms</label>
+                    <label for="total_rooms" class="form-label">Camere:*</label>
                     <input type="number" name="total_rooms" id="total_rooms" class="form-control" placeholder=""
                         aria-describedby="helpId" min="1" max="127"
-                        value="{{ old('total_rooms', $apartment->total_rooms) }}">
-                    <small id="helpId" class="text-muted">Help text</small>
+                        value="{{ old('total_rooms', $apartment->total_rooms) }}" required>
                 </div>
                 <div class="mb-3 mx-2">
-                    <label for="baths" class="form-label">Baths</label>
+                    <label for="baths" class="form-label">Bagni:*</label>
                     <input type="number" name="baths" id="baths" class="form-control" placeholder=""
                         aria-describedby="helpId" min="1" max="127"
-                        value="{{ old('baths', $apartment->baths) }}">
-                    <small id="helpId" class="text-muted">Help text</small>
+                        value="{{ old('baths', $apartment->baths) }}" required>
                 </div>
-
+                <div class="mb-3 mx-2">
+                    <label for="guests" class="form-label">Ospiti:</label>
+                    <input type="number" name="guests" id="guests" class="form-control" placeholder=""
+                        aria-describedby="helpId" min="1" max="127"
+                        value="{{ old('guests', $apartment->guests) }}">
+                </div>
+                <div class="mb-3 mx-2">
+                    <label for="price" class="form-label">Prezzo:</label>
+                    <input type="text" name="price" id="price" class="form-control" placeholder=""
+                        aria-describedby="helpId" value="{{ old('price', $apartment->price) }}">
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="mb-3 mx-2">
+                    <label for="check_in" class="form-label">Check_in:</label>
+                    <input type="text" name="check_in" id="check_in" class="form-control" placeholder=""
+                        aria-describedby="helpId" value="{{ old('check_in', $apartment->check_in) }}">
+                </div>
+                <div class="mb-3 mx-2">
+                    <label for="check_out" class="form-label">Check_out:</label>
+                    <input type="text" name="check_out" id="check_out" class="form-control" placeholder=""
+                        aria-describedby="helpId" value="{{ old('check_out', $apartment->check_out) }}">
+                </div>
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label"></label>
+                <label for="description" class="form-label">Descrizione:*</label>
                 <textarea class="form-control" name="description" id="description" rows="3">{{ old('description', $apartment->description) }}</textarea>
+                <small id="helpId" class="text-muted">Modifica la descrizione</small>
             </div>
-            <button type="submit" class="btn button">Edit</button>
+            <button type="submit" class="btn button">Modifica</button>
 
         </form>
     </div>
