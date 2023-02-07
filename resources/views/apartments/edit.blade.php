@@ -57,7 +57,8 @@
                     <div class="mx-3">
                         <label for="media" class="form-label">Media</label>
                         <input type="file" class="form-control" name="media" id="media" placeholder=""
-                            aria-describedby="fileHelpId" value="{{ $apartment->media }}">
+                            aria-describedby="fileHelpId"
+                            value="{{ storage_path('uploads\D5brKTH0mrz7dgFRutQLSGvPyL6aubA5HKjEUFj8.jpg') }}">
                         <div id="fileHelpId" class="form-text">Help text</div>
                     </div>
 
