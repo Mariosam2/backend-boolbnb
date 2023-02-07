@@ -89,9 +89,13 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
-        $categories = ApartmentCategory::all();
-        return view('apartments.edit', compact('apartment', 'categories'));
+        $user = Auth::user();
+        if ($user->id === $apartment->user_id) {
+            $categories = ApartmentCategory::all();
+            return view('apartments.edit', compact('apartment', 'categories'));
+        } else {
+            return view('dashboard');
+        }
     }
 
     /**
