@@ -48,51 +48,57 @@
                     @endforeach
                 </select>
             </div>
-            <div class="d-flex align-items-center">
-                <div class="mb-3 mx-2 me-auto d-flex align-items-center">
-                    <img width="160" height="120"style="object-fit: cover"
-                        src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
-                        alt="">
-
-
-                    <div class="mx-3">
-                        <label for="media" class="form-label">Immagine:*</label>
-                        <input type="file" class="form-control" name="media" id="media" placeholder=""
-                            aria-describedby="fileHelpId"
-                            value="{{ storage_path('uploads\D5brKTH0mrz7dgFRutQLSGvPyL6aubA5HKjEUFj8.jpg') }}">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center col-6">
+                    <div class="mb-3 mx-2">
+                        <label for="beds" class="form-label">Letti:*</label>
+                        <input type="number" name="beds" id="beds" class="form-control" placeholder=""
+                            aria-describedby="helpId" min="1" max="127"
+                            value="{{ old('beds', $apartment->beds) }}" required>
+                    </div>
+                    <div class="mb-3 mx-2">
+                        <label for="total_rooms" class="form-label">Camere:*</label>
+                        <input type="number" name="total_rooms" id="total_rooms" class="form-control" placeholder=""
+                            aria-describedby="helpId" min="1" max="127"
+                            value="{{ old('total_rooms', $apartment->total_rooms) }}" required>
+                    </div>
+                    <div class="mb-3 mx-2">
+                        <label for="baths" class="form-label">Bagni:*</label>
+                        <input type="number" name="baths" id="baths" class="form-control" placeholder=""
+                            aria-describedby="helpId" min="1" max="127"
+                            value="{{ old('baths', $apartment->baths) }}" required>
+                    </div>
+                    <div class="mb-3 mx-2">
+                        <label for="guests" class="form-label">Ospiti:</label>
+                        <input type="number" name="guests" id="guests" class="form-control" placeholder=""
+                            aria-describedby="helpId" min="1" max="127"
+                            value="{{ old('guests', $apartment->guests) }}">
+                    </div>
+                    <div class="mb-3 mx-2">
+                        <label for="price" class="form-label">Prezzo:</label>
+                        <input type="text" name="price" id="price" class="form-control" placeholder=""
+                            aria-describedby="helpId" value="{{ old('price', $apartment->price) }}">
                     </div>
 
+                </div>
+                <div class="col-6">
+                    <div class="mb-3 mx-2 me-auto d-flex align-items-center justify-content-end">
 
+
+                        <div class="mx-3">
+                            <label for="media" class="form-label">Immagine:*</label>
+                            <input type="file" class="form-control" name="media" id="media" placeholder=""
+                                aria-describedby="fileHelpId"
+                                value="{{ storage_path('uploads\D5brKTH0mrz7dgFRutQLSGvPyL6aubA5HKjEUFj8.jpg') }}">
+                        </div>
+                        <img width="160" height="120"style="object-fit: cover"
+                            src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
+                            alt="">
+
+
+                    </div>
                 </div>
-                <div class="mb-3 mx-2">
-                    <label for="beds" class="form-label">Letti:*</label>
-                    <input type="number" name="beds" id="beds" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127" value="{{ old('beds', $apartment->beds) }}"
-                        required>
-                </div>
-                <div class="mb-3 mx-2">
-                    <label for="total_rooms" class="form-label">Camere:*</label>
-                    <input type="number" name="total_rooms" id="total_rooms" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127"
-                        value="{{ old('total_rooms', $apartment->total_rooms) }}" required>
-                </div>
-                <div class="mb-3 mx-2">
-                    <label for="baths" class="form-label">Bagni:*</label>
-                    <input type="number" name="baths" id="baths" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127"
-                        value="{{ old('baths', $apartment->baths) }}" required>
-                </div>
-                <div class="mb-3 mx-2">
-                    <label for="guests" class="form-label">Ospiti:</label>
-                    <input type="number" name="guests" id="guests" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127"
-                        value="{{ old('guests', $apartment->guests) }}">
-                </div>
-                <div class="mb-3 mx-2">
-                    <label for="price" class="form-label">Prezzo:</label>
-                    <input type="text" name="price" id="price" class="form-control" placeholder=""
-                        aria-describedby="helpId" value="{{ old('price', $apartment->price) }}">
-                </div>
+
             </div>
             <div class="d-flex">
                 <div class="mb-3 mx-2">
