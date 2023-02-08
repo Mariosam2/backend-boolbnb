@@ -8,7 +8,7 @@
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </a>
             @if (session('message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success my-2">
                     {{ session('message') }}
                 </div>
             @endif
