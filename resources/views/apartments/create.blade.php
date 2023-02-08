@@ -1,6 +1,7 @@
 @extends('layouts.user')
 
 
+
 @section('content')
     <div class="col">
         <h1 class="mt-5 ps-5">Aggiungi un nuovo appartamento</h1>
@@ -83,17 +84,41 @@
                 </div>
             </div>
             <div class="d-flex">
-                <div class="mb-3 mx-2">
-                    <label for="check_in" class="form-label">Check_in:</label>
-                    <input type="text" name="check_in" id="check_in" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127" value="{{ old('check_in') }}">
+                <div class="col-6 d-flex">
+                    <div class="mb-3 mx-2">
+                        <label for="check_in" class="form-label">Check in:</label>
+                        <input type="text" name="check_in" id="check_in" class="form-control" placeholder=""
+                            aria-describedby="helpId" min="1" max="127" value="{{ old('check_in') }}">
+                    </div>
+
+                    <div class="mb-3 mx-2">
+                        <label for="check_out" class="form-label">Check out:</label>
+                        <input type="text" name="check_out" id="check_out" class="form-control" placeholder=""
+                            aria-describedby="helpId" min="1" max="127" value="{{ old('check_out') }}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="services">Servizi</label>
+                        <select multiple class="custom-select" name="services[]" id="services">
+                            <option value="" disabled>Seleziona i Servizi</option>
+
+                            @foreach ($services as $service)
+                                <option value="{{ $service->id }}"
+                                    {{ in_array($service->id, old('service', [])) ? 'selected' : '' }}>
+                                    {{ $service->name }}
+                                </option>
+                            @endforeach
+
+
+                        </select>
+                        @error('services')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                 </div>
 
-                <div class="mb-3 mx-2">
-                    <label for="check_out" class="form-label">Check_out:</label>
-                    <input type="text" name="check_out" id="check_out" class="form-control" placeholder=""
-                        aria-describedby="helpId" min="1" max="127" value="{{ old('check_out') }}">
-                </div>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione:*</label>

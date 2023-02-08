@@ -3,9 +3,9 @@
 
 @section('content')
     <div class="col">
-        <h1 class="mt-5 ps-5">Modifica questo appartamento</h1>
+        <h1 class="mt-5  ps-5">Modifica questo appartamento</h1>
         @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger " role="alert">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -101,16 +101,41 @@
 
             </div>
             <div class="d-flex">
-                <div class="mb-3 mx-2">
-                    <label for="check_in" class="form-label">Check_in:</label>
-                    <input type="text" name="check_in" id="check_in" class="form-control" placeholder=""
-                        aria-describedby="helpId" value="{{ old('check_in', $apartment->check_in) }}">
+                <div class="col-6 d-flex">
+                    <div class="mb-3 mx-2">
+                        <label for="check_in" class="form-label">Check in:</label>
+                        <input type="text" name="check_in" id="check_in" class="form-control" placeholder=""
+                            aria-describedby="helpId" value="{{ old('check_in', $apartment->check_in) }}">
+                    </div>
+                    <div class="mb-3 mx-2">
+                        <label for="check_out" class="form-label">Check out:</label>
+                        <input type="text" name="check_out" id="check_out" class="form-control" placeholder=""
+                            aria-describedby="helpId" value="{{ old('check_out', $apartment->check_out) }}">
+                    </div>
                 </div>
-                <div class="mb-3 mx-2">
-                    <label for="check_out" class="form-label">Check_out:</label>
-                    <input type="text" name="check_out" id="check_out" class="form-control" placeholder=""
-                        aria-describedby="helpId" value="{{ old('check_out', $apartment->check_out) }}">
+                <div class="col-6">
+                    <label for="services" class="form-label">Servizi</label>
+                    <select multiple class="form-select form-select-sm" name="services[]" id="services">
+                        <option value="" disabled>Select a service</option>
+                        @forelse ($services as $service)
+                            @if ($errors->any())
+                                <!-- Pagina con errori di validazione, deve usare old per verificare quale id di service preselezionare -->
+                                <option value="{{ $service->id }}"
+                                    {{ in_array($service->id, old('services', [])) ? 'selected' : '' }}>
+                                    {{ $service->name }}</option>
+                            @else
+                                <!-- Pagina caricate per la prima volta: deve mostrarare i service preseleziononati dal db -->
+                                <option value="{{ $service->id }}"
+                                    {{ $apartment->services->contains($service->id) ? 'selected' : '' }}>
+                                    {{ $service->name }}</option>
+                            @endif
+                        @empty
+                            <option value="" disabled>Sorry 😥 no services in the system</option>
+                        @endforelse
+
+                    </select>
                 </div>
+
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione:*</label>

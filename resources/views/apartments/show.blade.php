@@ -18,6 +18,18 @@
                 <li><strong>Prezzo: </strong> {{ $apartment->price }}$</li>
                 <li><strong>Check_in: </strong> {{ $apartment->Check_in }} </li>
                 <li><strong>Check_out: </strong> {{ $apartment->Check_out }} </li>
+                <li><strong>Services:</strong> <br>
+                    @if (count($apartment->services) > 0)
+                        @foreach ($apartment->services as $service)
+                <li>{{ $service->name }}</li>
+                <ul class="list-unstyled">
+                    @endforeach
+                @else
+                    <li>Non ci sono servizi associati a questo appartamento</li>
+                    @endif
+
+                </ul>
+                </li>
             </ul>
         </div>
     </div>
