@@ -66,7 +66,7 @@ class ApartmentController extends Controller
 
         // redirect
 
-        return to_route('apartments.index')->with('message', "You add a new Apartment: $apartment->title");
+        return to_route('apartments.index')->with('message', "Hai aggiunto un nuovo appartamento: $apartment->title");
     }
 
     /**
@@ -122,7 +122,7 @@ class ApartmentController extends Controller
 
         $apartment->update($val_data);
 
-        return to_route('apartments.index')->with('message', "You edit Apartment: $apartment->title");
+        return to_route('apartments.index')->with('message', "Hai modificato questo appartamento: $apartment->title");
     }
 
     /**
@@ -137,6 +137,6 @@ class ApartmentController extends Controller
             Storage::delete($apartment->media);
         }
         $apartment->delete();
-        return to_route('apartments.index')->with('message', "You delete this Apartment: $apartment->title");
+        return to_route('apartments.index')->with('message', "Hai cancellato questo appartamento: $apartment->title");
     }
 }

@@ -25,7 +25,7 @@ class UpdateApartmentRequest extends FormRequest
     {
         return [
             'title' => 'required:songs,title|max:100',
-            'media' => 'nullable|image|size:5000',
+            'media' => 'nullable|image',
             'apartment_category_id' => 'nullable|exists:apartment_categories,id',
             'description' => 'required',
             'mq' => 'required',
