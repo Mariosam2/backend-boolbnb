@@ -65,7 +65,7 @@ class ApartmentController extends Controller
 
         $apartment = Apartment::create($val_data);
 
-        // dd($val_data);
+        // dd($request);
         
 
         if($request->has('services')){
