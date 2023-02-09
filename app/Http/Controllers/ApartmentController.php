@@ -9,6 +9,8 @@ use App\Models\ApartmentCategory;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use JavaScript;
+use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 
 class ApartmentController extends Controller
 {
@@ -32,10 +34,11 @@ class ApartmentController extends Controller
     public function create()
     {
 
-        $categories = ApartmentCategory::all();
-        $services= Service::all();
 
-        return view('apartments.create', compact('categories','services'));
+        $categories = ApartmentCategory::all();
+        $services = Service::all();
+
+        return view('apartments.create', compact('categories', 'services'));
     }
 
     /**
@@ -66,12 +69,12 @@ class ApartmentController extends Controller
         $apartment = Apartment::create($val_data);
 
         // dd($request);
-        
 
-        if($request->has('services')){
+
+        if ($request->has('services')) {
             $apartment->services()->attach($val_data['services']);
         }
-        
+
 
         // redirect
 
@@ -98,11 +101,12 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+
         $user = Auth::user();
         if ($user->id === $apartment->user_id) {
             $categories = ApartmentCategory::all();
-            $services= Service::all();
-            return view('apartments.edit', compact('apartment', 'categories','services'));
+            $services = Service::all();
+            return view('apartments.edit', compact('apartment', 'categories', 'services'));
         } else {
             return view('dashboard');
         }
@@ -132,10 +136,9 @@ class ApartmentController extends Controller
 
         $apartment->update($val_data);
 
-        if ($request->has('services')){
+        if ($request->has('services')) {
             $apartment->services()->sync($val_data['services']);
-
-        } else{
+        } else {
             $apartment->services()->sync([]);
         }
         return to_route('apartments.index')->with('message', "Hai modificato questo appartamento: $apartment->title");

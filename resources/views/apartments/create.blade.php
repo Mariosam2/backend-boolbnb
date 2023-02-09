@@ -23,11 +23,9 @@
                     aria-describedby="helpId" value="{{ old('title') }}" required>
                 <small id="helpId" class="text-muted">Aggiungi il titolo dell'appartamento</small>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" id="searchBoxWrapper">
                 <label for="address" class="form-label">Indirizzo:*</label>
-                <input type="text" name="address" id="address" class="form-control" placeholder=""
-                    aria-describedby="helpId" value="{{ old('address') }}" required>
-                <small id="helpId" class="text-muted">Aggiungi l'indirizzo dell'appartamento</small>
+
             </div>
             <div class="mb-3">
                 <label for="mq" class="form-label">Metri quadrati:*</label>
@@ -129,4 +127,7 @@
 
         </form>
     </div>
+
+
+
 @endsection
