@@ -9,8 +9,6 @@ use App\Models\ApartmentCategory;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use JavaScript;
-use Laracasts\Utilities\JavaScript\JavaScriptFacade;
 
 class ApartmentController extends Controller
 {
