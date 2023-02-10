@@ -10,9 +10,6 @@
 
     <title>{{ config('app.name', 'BoolBnb') }}</title>
 
-    <!-- Styles -->
-    @stack('styles')
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -23,14 +20,7 @@
 
 <body>
     <div id="app">
-
-        @include('partials.header')
-        {{-- @include('partials.leftmenu') --}}
-
-
-        <main class="">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
 </body>
 
