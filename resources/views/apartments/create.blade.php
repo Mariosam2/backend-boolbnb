@@ -21,13 +21,10 @@
                 <label for="title" class="form-label">Titolo:*</label>
                 <input type="text" name="title" id="title" class="form-control" placeholder=""
                     aria-describedby="helpId" value="{{ old('title') }}" required>
-            </div>
-            <div class="mb-3">
+            </div> 
+            <div class="mb-3" id="searchBoxWrapper">
                 <label for="address" class="form-label">Indirizzo:*</label>
-                <input type="text" name="address" id="address" class="form-control" placeholder=""
-                    aria-describedby="helpId" value="{{ old('address') }}" required>
             </div>
-
             <div class="d-flex justify-content-between">
                 <div class="col-auto d-flex ">
 
@@ -127,4 +124,7 @@
 
         </form>
     </div>
+
+
+
 @endsection

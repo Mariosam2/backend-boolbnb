@@ -25,11 +25,8 @@
                         aria-describedby="helpId" value="{{ old('title', $apartment->title) }}" required>
 
                 </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Indirizzo:*</label>
-                    <input type="text" name="address" id="address" class="form-control" placeholder=""
-                        aria-describedby="helpId" value="{{ old('address', $apartment->address) }}" required>
-
+                 <div class="mb-3" id="searchBoxWrapper">
+                <label for="address" class="form-label">Indirizzo:*</label>
                 </div>
                 <div class="mb-3 row justify-content-between">
                     <div class="col-6">
@@ -65,6 +62,7 @@
 
                     </div>
                     <div class="mb-3 mx-2 col-auto">
+
 
 
                         <label for="beds" class="form-label">Letti:*</label>
@@ -167,4 +165,6 @@
 
         </form>
     </div>
+
+
 @endsection
