@@ -22,12 +22,10 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Titolo:*</label>
                     <input type="text" name="title" id="title" class="form-control" placeholder=""
-                        aria-describedby="helpId" value="{{ old('title', $apartment->title) }}" required>
+                        aria-describedby="helpId" value="{{ old('title', $apartment->title) }}">
 
                 </div>
-                 <div class="mb-3" id="searchBoxWrapper">
-                <label for="address" class="form-label">Indirizzo:*</label>
-                </div>
+                <div class="searchBoxWrapper"></div>
                 <div class="mb-3 row justify-content-between">
                     <div class="col-6">
 
