@@ -9,10 +9,12 @@ use App\Models\ApartmentCategory;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
+
 
 class ApartmentController extends Controller
 {
-    //TODO: Implement methods
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +49,13 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
+        $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+
         $val_data = $request->validated();
+        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
+        $latitude = $response->json()['results'][0]['position']['lat'];
+        $longitude = $response->json()['results'][0]['position']['lon'];
+
 
         // image
         if ($request->hasFile('media')) {
@@ -59,8 +67,8 @@ class ApartmentController extends Controller
         $user_id = Auth::user()->id;
         $val_data['user_id'] = $user_id;
         $val_data['slug'] = $apartment_slug;
-        $val_data['longitude'] = 40;
-        $val_data['latitude'] = 40;
+        $val_data['longitude'] = $longitude;
+        $val_data['latitude'] = $latitude;
 
 
 
