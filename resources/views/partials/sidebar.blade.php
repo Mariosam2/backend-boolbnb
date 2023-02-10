@@ -39,7 +39,7 @@
             <li class="nav-item">
                 <a href="#" class="nav-link active">
                     <span class="align-text-bottom"></span>
-                    <i class="fa-solid fa-gear fa-fw"></i></i>Settings
+                    <i class="fa-solid fa-gear fa-fw"></i></i>Impostazioni
                 </a>
             </li>
             <li class="nav-item">
@@ -47,7 +47,7 @@
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                     class="nav-link active">
                     <span class="align-text-bottom"></span>
-                    <i class="fa-solid fa-arrow-right-from-bracket fa-fw"></i></i>Sign out
+                    <i class="fa-solid fa-arrow-right-from-bracket fa-fw"></i></i>Log out
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
