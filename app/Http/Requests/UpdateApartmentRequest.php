@@ -30,9 +30,6 @@ class UpdateApartmentRequest extends FormRequest
             'description' => 'required',
             'mq' => 'required',
             'address' => 'required',
-            //TODO: geolocalization
-            //'latitude' => 'required',
-            //'longitude' => 'required',
             'beds' => 'required',
             'total_rooms' => 'required',
             'baths' => 'required',
@@ -40,7 +37,7 @@ class UpdateApartmentRequest extends FormRequest
             'check_in' => 'nullable',
             'check_out' => 'nullable',
             'price' => 'nullable|numeric',
-            'services'=>'nullable|exists:services,id'
+            'services' => 'nullable|exists:services,id'
 
         ];
     }

@@ -30,8 +30,6 @@ class StoreApartmentRequest extends FormRequest
             'description' => 'required',
             'mq' => 'required',
             'address' => 'required',
-            /* 'latitude' => 'required',
-            'longitude' => 'required', */
             'beds' => 'required',
             'total_rooms' => 'required',
             'baths' => 'required',
