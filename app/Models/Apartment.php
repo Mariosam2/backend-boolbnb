@@ -16,8 +16,8 @@ class Apartment extends Model
 
     public static function slugGenerator($title)
     {
-        $projectSlug = Str::slug($title);
-        return $projectSlug;
+        $apartmentSlug = Str::slug($title);
+        return $apartmentSlug;
     }
 
     /**
