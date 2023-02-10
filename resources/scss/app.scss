@@ -1,6 +1,8 @@
 // Import variables
 @use './partials/variables.scss' as *;
 @use './partials/sidebar';
+@use './partials/loginpage';
+
 // Import all of Bootstrap's CSS
 @import '~bootstrap/scss/bootstrap';
 @import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';

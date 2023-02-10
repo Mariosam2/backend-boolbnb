@@ -21,20 +21,12 @@
                 <label for="title" class="form-label">Titolo:*</label>
                 <input type="text" name="title" id="title" class="form-control" placeholder=""
                     aria-describedby="helpId" value="{{ old('title') }}" required>
-                <small id="helpId" class="text-muted">Aggiungi il titolo dell'appartamento</small>
-            </div>
+            </div> 
             <div class="mb-3" id="searchBoxWrapper">
                 <label for="address" class="form-label">Indirizzo:*</label>
-
-            </div>
-            <div class="mb-3">
-                <label for="mq" class="form-label">Metri quadrati:*</label>
-                <input type="number" name="mq" id="mq" class="form-control" placeholder=""
-                    aria-describedby="helpId" min="1" max="32767" value="{{ old('mq') }}" required>
-                <small id="helpId" class="text-muted">Aggiungi i metri quadrati dell'appartamento</small>
             </div>
             <div class="d-flex justify-content-between">
-                <div class="col-8 d-flex ">
+                <div class="col-auto d-flex ">
 
                     <div class="mb-3">
                         <label for="apartment_category_id" class="form-label">Categorie:*</label>
@@ -46,6 +38,11 @@
                                 </option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="mb-3 mx-2">
+                        <label for="mq" class="form-label">Metri quadrati:*</label>
+                        <input type="number" name="mq" id="mq" class="form-control" placeholder=""
+                            aria-describedby="helpId" min="1" max="32767" value="{{ old('mq') }}" required>
                     </div>
                     <div class="mb-3 mx-2">
                         <label for="beds" class="form-label">Letti:*</label>
@@ -73,13 +70,14 @@
                         <input type="text" name="price" id="price" class="form-control" placeholder=""
                             aria-describedby="helpId" min="1" max="127" value="{{ old('price') }}">
                     </div>
+
+                    <div class="mb-3 mx-2 me-auto ">
+                        <label for="media" class="form-label">Immagine:*</label>
+                        <input type="file" class="form-control" name="media" id="media" placeholder=""
+                            aria-describedby="fileHelpId" required>
+                    </div>
                 </div>
 
-                <div class="mb-3 mx-2 me-auto col-4">
-                    <label for="media" class="form-label">Immagine:*</label>
-                    <input type="file" class="form-control" name="media" id="media" placeholder=""
-                        aria-describedby="fileHelpId" required>
-                </div>
             </div>
             <div class="d-flex">
                 <div class="col-6 d-flex">
@@ -95,8 +93,8 @@
                             aria-describedby="helpId" min="1" max="127" value="{{ old('check_out') }}">
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
+                <div class="col-6 d-flex">
+                    <div class="form-group mx-3">
                         <label for="services">Servizi</label>
                         <select multiple class="custom-select" name="services[]" id="services">
                             <option value="" disabled>Seleziona i Servizi</option>
@@ -121,7 +119,6 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione:*</label>
                 <textarea class="form-control" name="description" id="description" rows="3" required>{{ old('description') }}</textarea>
-                <small id="helpId" class="text-muted">Aggiungi una descrizione dell'appartamento</small>
             </div>
             <button type="submit" class="btn button">Crea</button>
 
