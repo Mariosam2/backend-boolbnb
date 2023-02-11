@@ -106,7 +106,7 @@ class ApartmentController extends Controller
             $services = Service::all();
             return view('apartments.edit', compact('apartment', 'categories', 'services'));
         } else {
-            return view('dashboard');
+            return view('not-found');
         }
     }
 
