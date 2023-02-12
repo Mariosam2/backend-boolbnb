@@ -6,6 +6,7 @@ use App\Models\Apartment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentSeeder extends Seeder
 {
@@ -18,11 +19,30 @@ class ApartmentSeeder extends Seeder
     public function run()
     {
         $apartments = config('apartments.apartments');
+        $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
         foreach ($apartments as $apartment) {
-            $apartment['price'] = 39.99;
+            $apartment['price'] = floatval(number_format($apartment['price'], 2));
+            //dd($apartment['price']);
             $apartment['slug'] = Str::slug($apartment['title']);
-            $new_apartment = Apartment::make($apartment);
-            $new_apartment->save();
+            try {
+                $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $apartment['address'] . '.json?key=' . $tomtom_key);
+                $json = $response->json();
+
+                if (isset($json['results']) && count($json['results']) > 0) {
+                    if (isset($json['results'][0]['address']['freeformAddress'])) {
+                        $apartment['free_form_address'] = $json['results'][0]['address']['freeformAddress'];
+                    } else {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+
+                $new_apartment = Apartment::make($apartment);
+                $new_apartment->save();
+            } catch (\Exception $e) {
+                var_dump($e->getMessage());
+            }
         }
     }
 }

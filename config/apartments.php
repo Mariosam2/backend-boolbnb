@@ -102,7 +102,7 @@ return [
         [
             "user_id" => 1,
             "apartment_category_id" => 1,
-            "address" => "Chies d´Alpago, Province of Belluno, Italia",
+            "address" => "Chiesa d\´Alpago, Province of Belluno, Italia",
             "check_in" => "14:00-22:00",
             "check_out" => "00:00-10:00",
             "price" => 132,
@@ -160,7 +160,7 @@ return [
         [
             "user_id" => 1,
             "apartment_category_id" => 1,
-            "address" => "Castagneto Carducci, Toscana, Italia",
+            "address" => "Castagneto Carducci, Italia",
             "check_in" => "14:00-22:00",
             "check_out" => "00:00-10:00",
             "price" => 90,
@@ -179,7 +179,7 @@ return [
         [
             "user_id" => 1,
             "apartment_category_id" => 1,
-            "address" => "San Maurizio D'opaglio, Piemonte, Italia",
+            "address" => "San Maurizio D\' opaglio, Piemonte",
             "check_in" => "14:00-22:00",
             "check_out" => "00:00-10:00",
             "price" => 86,

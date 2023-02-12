@@ -17,8 +17,10 @@ class SearchMiddleware
     public function handle(Request $request, Closure $next)
     {
         $services = $request->query('services');
+        $category = $request->query('category');
         $address = $request->query('address');
         $request->services = json_decode($services);
+        $request->category = $category;
         $request->address = $address;
 
         return $next($request);

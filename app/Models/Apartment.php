@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class Apartment extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'apartment_category_id', 'title', 'slug', 'description', 'visible', 'mq', 'address', 'latitude', 'longitude', 'beds', 'total_rooms', 'baths', 'media', 'guests', 'check_in', 'check_out', 'price',];
+    protected $fillable = ['user_id', 'apartment_category_id', 'title', 'slug', 'description', 'visible', 'mq', 'address', 'free_form_address', 'latitude', 'longitude', 'beds', 'total_rooms', 'baths', 'media', 'guests', 'check_in', 'check_out', 'price',];
 
     public static function slugGenerator($title)
     {

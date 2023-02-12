@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchApartmentRequest;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class ApartmentController extends Controller
@@ -39,13 +40,15 @@ class ApartmentController extends Controller
         //dd($request->services);
         $data = [
             'address' => $request->address,
+            'category' => $request->category,
             'services' => $request->services
         ];
 
         //dd($data);
 
         $validator = Validator::make($data, [
-            'address' => 'required|max:255',
+            'address' => 'nullable|max:255',
+            'category' => 'nullable|exists:apartment_categories,id',
             'services' => 'nullable|array|exists:services,id'
 
         ]);
@@ -56,11 +59,87 @@ class ApartmentController extends Controller
                 'results' => 'invalid request'
             ]);
         } else {
-            //filter data
-            $val_data = $validator->validate();
-            dd($val_data);
-            if (isset($val_data['services'])) {
-            } else {
+            try {
+                $tomtomKey = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+                $val_data = $validator->validate();
+                //dd($val_data);
+                //genero dei poi utilizzabili nella richiesta all'API di tomtom
+                $apartments = Apartment::where('id', '>', 53)->get();
+                //dd($apartments);
+                $poiList = [];
+                foreach ($apartments as $apartment) {
+                    $poiObj = [
+                        "poi" => [
+                            "name" => $apartment->title,
+                        ],
+                        "address" => [
+                            "freeformAddress" => $apartment->free_form_address
+                        ],
+                        "position" => [
+                            "lat" => $apartment->latitude,
+                            "lon" => $apartment->longitude
+                        ]
+                    ];
+                    //dd($poiObj);
+                    array_push($poiList, $poiObj);
+                }
+
+                $poiList = json_encode($poiList);
+                //dd($poi_list);
+                if (isset($val_data['address'])) {
+                    $geocodeURL = 'https://api.tomtom.com/search/2/geocode/';
+                    $searchURL = 'https://api.tomtom.com/search/2/geometrySearch/';
+                    $ext = '.json';
+                    //ricerca delle coordinate trai i POIs(i nostri appartamenti)
+                    $coordinates = Http::get($geocodeURL . $val_data['address'] . '.json?key=' . $tomtomKey);
+
+                    //dd($coordinates->json());
+                    $latitude = $coordinates->json()['results'][0]['position']['lat'];
+                    $longitude = $coordinates->json()['results'][0]['position']['lon'];
+                    //dd($latitude, $longitude);
+                    $apartments = Apartment::where('id', '>', 53)->get();
+
+
+                    if (isset($val_data['radius'])) {
+                        $geometryList = [
+                            [
+                                "type" => "CIRCLE",
+                                "position" => $latitude . "," . $longitude,
+                                "radius" => $val_data['radius']
+                            ]
+                        ];
+                    } else {
+                        $defaultRadius = 5000000000000000000;
+                        $geometryList = json_encode(
+                            [
+                                [
+                                    "type" => "CIRCLE",
+                                    "position" => $latitude . "," . $longitude,
+                                    "radius" => $defaultRadius
+                                ],
+
+                            ]
+
+                        );
+                    }
+                    //dd($poiList, $latitude, $longitude);
+                    $response = Http::post($searchURL . $val_data['address'] . $ext . "?key=$tomtomKey" . "&geometryList=$geometryList" . "&poiList=$poiList");
+                    dd($response->json());
+                }
+                if (isset($val_data['category'])) {
+                    //ricerca in base alla categoria
+                }
+                if (isset($val_data['services'])) {
+                    //filtraggio della ricerca in base ai servizi
+                } else {
+                }
+            } catch (\Exception $e) {
+                /* return response()->json([
+                    'success' => false,
+                    'results' => 'invalid request'
+                ]); */
+
+                dd($e);
             }
         }
     }
