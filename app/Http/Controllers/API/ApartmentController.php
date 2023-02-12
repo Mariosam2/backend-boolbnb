@@ -88,7 +88,7 @@ class ApartmentController extends Controller
                 //dd($poi_list);
                 if (isset($val_data['address'])) {
                     $geocodeURL = 'https://api.tomtom.com/search/2/geocode/';
-                    $searchURL = 'https://api.tomtom.com/search/2/geometrySearch/';
+                    $searchURL = 'https://api.tomtom.com/search/2/';
                     $ext = '.json';
                     //ricerca delle coordinate trai i POIs(i nostri appartamenti)
                     $coordinates = Http::get($geocodeURL . $val_data['address'] . '.json?key=' . $tomtomKey);
@@ -122,9 +122,53 @@ class ApartmentController extends Controller
 
                         );
                     }
-                    //dd($poiList, $latitude, $longitude);
-                    $response = Http::post($searchURL . $val_data['address'] . $ext . "?key=$tomtomKey" . "&geometryList=$geometryList" . "&poiList=$poiList");
-                    dd($response->json());
+                    //dd($searchURL . $val_data['address'] . $ext . "?key=$tomtomKey" . "&geometryList=$geometryList" . "&poiList=$poiList");
+                    $response = Http::withHeaders([
+                        'Content-Type' => 'application/json',
+                    ])->get($searchURL . $val_data['address'] . $ext . "?key=$tomtomKey" . "&geometryList=$geometryList" . "&poiList=$poiList");
+                    dd($response);
+                    'https://api.tomtom.com/search/2/geometryFilter.json?key=YGPPPcjrCpANYtSn288ooufuEQbCob9Y&geometryList=[
+                        {
+                          "type": "CIRCLE",
+                          "position": "40.80558, -73.96548",
+                          "radius": 100
+                        },
+                        {
+                          "type": "POLYGON",
+                          "vertices": [
+                            "37.7524152343544, -122.43576049804686",
+                            "37.70660472542312, -122.43301391601562",
+                            "37.712059855877314, -122.36434936523438",
+                            "37.75350561243041, -122.37396240234374"
+                          ]
+                        }
+                      ]
+                      &poiList=[
+                        {
+                          "poi": {
+                            "name": "S Restaurant Toms"
+                          },
+                          "address": {
+                            "freeformAddress": "2880 Broadway, New York, NY 10025"
+                          },
+                          "position": {
+                            "lat": 40.80558,
+                            "lon": -73.96548
+                          }
+                        },
+                        {
+                          "poi": {
+                            "name": "Yasha Raman Corporation"
+                          },
+                          "address": {
+                            "freeformAddress": "940 Amsterdam Ave, New York, NY 10025"
+                          },
+                          "position": {
+                            "lat": 40.80076,
+                            "lon": -73.96556
+                          }
+                        }
+                      ]'
                 }
                 if (isset($val_data['category'])) {
                     //ricerca in base alla categoria
