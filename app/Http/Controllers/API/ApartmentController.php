@@ -110,7 +110,7 @@ class ApartmentController extends Controller
                             ]
                         ];
                     } else {
-                        $defaultRadius = 1000000;
+                        $defaultRadius = 50000;
                         $geometryList =
                             [
                                 [
