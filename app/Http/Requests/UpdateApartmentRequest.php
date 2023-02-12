@@ -24,7 +24,7 @@ class UpdateApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required:songs,title|max:100',
+            'title' => 'required|max:100',
             'media' => 'nullable|image',
             'apartment_category_id' => 'nullable|exists:apartment_categories,id',
             'description' => 'required',

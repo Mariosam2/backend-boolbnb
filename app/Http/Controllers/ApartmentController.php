@@ -49,42 +49,60 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+        try {
+            $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
 
-        $val_data = $request->validated();
-        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
-        $latitude = $response->json()['results'][0]['position']['lat'];
-        $longitude = $response->json()['results'][0]['position']['lon'];
+            $val_data = $request->validated();
+            $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
+            $json = $response->json();
+            $latitude = $json['results'][0]['position']['lat'];
+            $longitude = $json['results'][0]['position']['lon'];
+            $freeFormAddress = $json['results'][0]['address']['freeformAddress'];
 
 
-        // image
-        if ($request->hasFile('media')) {
-            $media = Storage::put('uploads', $val_data['media']);
-            $val_data['media'] = $media;
+            // image
+            if ($request->hasFile('media')) {
+                $media = Storage::put('uploads', $val_data['media']);
+                $val_data['media'] = $media;
+            }
+
+            $apartment_slug = Apartment::slugGenerator($val_data['title']);
+            $user_id = Auth::user()->id;
+            $val_data['user_id'] = $user_id;
+            $val_data['slug'] = $apartment_slug;
+            if (isset($json['results']) && count($json['results'])) {
+                if (isset($longitude)) {
+                    $val_data['longitude'] = $longitude;
+                }
+                if (isset($latitude)) {
+                    $val_data['latitude'] = $latitude;
+                }
+                if (isset($freeFormAddress)) {
+                    $val_data['free_form_address'] = $freeFormAddress;
+                }
+            }
+
+
+
+
+
+            //dd($val_data);
+            $apartment = Apartment::create($val_data);
+
+            // dd($request);
+
+
+            if ($request->has('services')) {
+                $apartment->services()->attach($val_data['services']);
+            }
+
+
+            // redirect
+
+            return to_route('apartments.index')->with('message', "Hai aggiunto un nuovo appartamento: $apartment->title");
+        } catch (\Exception $e) {
+            return view('not-found');
         }
-
-        $apartment_slug = Apartment::slugGenerator($val_data['title']);
-        $user_id = Auth::user()->id;
-        $val_data['user_id'] = $user_id;
-        $val_data['slug'] = $apartment_slug;
-        $val_data['longitude'] = $longitude;
-        $val_data['latitude'] = $latitude;
-
-
-
-        $apartment = Apartment::create($val_data);
-
-        // dd($request);
-
-
-        if ($request->has('services')) {
-            $apartment->services()->attach($val_data['services']);
-        }
-
-
-        // redirect
-
-        return to_route('apartments.index')->with('message', "Hai aggiunto un nuovo appartamento: $apartment->title");
     }
 
     /**
@@ -108,6 +126,8 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
 
+
+
         $user = Auth::user();
         if ($user->id === $apartment->user_id) {
             $categories = ApartmentCategory::all();
@@ -127,27 +147,48 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $val_data = $request->validated();
+        try {
+            $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+            $val_data = $request->validated();
+            $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
+            $json = $response->json();
+            $latitude = $json['results'][0]['position']['lat'];
+            $longitude = $json['results'][0]['position']['lon'];
+            $freeFormAddress = $json['results'][0]['address']['freeformAddress'];
 
-        if ($request->hasFile('media')) {
-            if ($apartment->media) {
-                Storage::delete($apartment->media);
+            if ($request->hasFile('media')) {
+                if ($apartment->media) {
+                    Storage::delete($apartment->media);
+                }
+                $media = Storage::put('uploads', $val_data['media']);
+                $val_data['media'] = $media;
             }
-            $media = Storage::put('uploads', $val_data['media']);
-            $val_data['media'] = $media;
+
+            $apartment_slug = Apartment::slugGenerator($val_data['title']);
+            $val_data['slug'] = $apartment_slug;
+            if (isset($json['results']) && count($json['results'])) {
+                if (isset($longitude)) {
+                    $val_data['longitude'] = $longitude;
+                }
+                if (isset($latitude)) {
+                    $val_data['latitude'] = $latitude;
+                }
+                if (isset($freeFormAddress)) {
+                    $val_data['free_form_address'] = $freeFormAddress;
+                }
+            }
+
+            $apartment->update($val_data);
+
+            if ($request->has('services')) {
+                $apartment->services()->sync($val_data['services']);
+            } else {
+                $apartment->services()->sync([]);
+            }
+            return to_route('apartments.index')->with('message', "Hai modificato questo appartamento: $apartment->title");
+        } catch (\Exception $e) {
+            return view('not-found');
         }
-
-        $apartment_slug = Apartment::slugGenerator($val_data['title']);
-        $val_data['slug'] = $apartment_slug;
-
-        $apartment->update($val_data);
-
-        if ($request->has('services')) {
-            $apartment->services()->sync($val_data['services']);
-        } else {
-            $apartment->services()->sync([]);
-        }
-        return to_route('apartments.index')->with('message', "Hai modificato questo appartamento: $apartment->title");
     }
 
     /**
