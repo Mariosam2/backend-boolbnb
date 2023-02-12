@@ -29,7 +29,9 @@ class ApartmentSeeder extends Seeder
                 $json = $response->json();
 
                 if (isset($json['results']) && count($json['results']) > 0) {
-                    if (isset($json['results'][0]['address']['freeformAddress'])) {
+                    if (isset($json['results'][0]['position']['lat']) && isset($json['results'][0]['position']['lon']) && isset($json['results'][0]['address']['freeformAddress'])) {
+                        $apartment['latitude'] = $json['results'][0]['position']['lat'];
+                        $apartment['longitude'] =  $json['results'][0]['position']['lon'];
                         $apartment['free_form_address'] = $json['results'][0]['address']['freeformAddress'];
                     } else {
                         continue;

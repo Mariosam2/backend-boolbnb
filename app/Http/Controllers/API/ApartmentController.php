@@ -60,11 +60,11 @@ class ApartmentController extends Controller
             ]);
         } else {
             try {
-                $tomtomKey = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+                $tomtomKey = '2oYOFMUxTa7zG8bZAccJS6LcDFhFLr37';
                 $val_data = $validator->validate();
                 //dd($val_data);
                 //genero dei poi utilizzabili nella richiesta all'API di tomtom
-                $apartments = Apartment::where('id', '>', 53)->get();
+                $apartments = Apartment::all();
                 //dd($apartments);
                 $poiList = [];
                 foreach ($apartments as $apartment) {
@@ -84,7 +84,8 @@ class ApartmentController extends Controller
                     array_push($poiList, $poiObj);
                 }
 
-                $poiList = json_encode($poiList);
+
+
                 //dd($poi_list);
                 if (isset($val_data['address'])) {
                     $geocodeURL = 'https://api.tomtom.com/search/2/geocode/';
@@ -97,7 +98,7 @@ class ApartmentController extends Controller
                     $latitude = $coordinates->json()['results'][0]['position']['lat'];
                     $longitude = $coordinates->json()['results'][0]['position']['lon'];
                     //dd($latitude, $longitude);
-                    $apartments = Apartment::where('id', '>', 53)->get();
+
 
 
                     if (isset($val_data['radius'])) {
@@ -109,8 +110,8 @@ class ApartmentController extends Controller
                             ]
                         ];
                     } else {
-                        $defaultRadius = 5000000000000000000;
-                        $geometryList = json_encode(
+                        $defaultRadius = 1000000;
+                        $geometryList =
                             [
                                 [
                                     "type" => "CIRCLE",
@@ -118,65 +119,27 @@ class ApartmentController extends Controller
                                     "radius" => $defaultRadius
                                 ],
 
-                            ]
-
-                        );
+                            ];
                     }
-                    //dd($searchURL . $val_data['address'] . $ext . "?key=$tomtomKey" . "&geometryList=$geometryList" . "&poiList=$poiList");
-                    $response = Http::withHeaders([
-                        'Content-Type' => 'application/json',
-                    ])->get($searchURL . $val_data['address'] . $ext . "?key=$tomtomKey" . "&geometryList=$geometryList" . "&poiList=$poiList");
-                    dd($response);
-                    'https://api.tomtom.com/search/2/geometryFilter.json?key=YGPPPcjrCpANYtSn288ooufuEQbCob9Y&geometryList=[
-                        {
-                          "type": "CIRCLE",
-                          "position": "40.80558, -73.96548",
-                          "radius": 100
-                        },
-                        {
-                          "type": "POLYGON",
-                          "vertices": [
-                            "37.7524152343544, -122.43576049804686",
-                            "37.70660472542312, -122.43301391601562",
-                            "37.712059855877314, -122.36434936523438",
-                            "37.75350561243041, -122.37396240234374"
-                          ]
-                        }
-                      ]
-                      &poiList=[
-                        {
-                          "poi": {
-                            "name": "S Restaurant Toms"
-                          },
-                          "address": {
-                            "freeformAddress": "2880 Broadway, New York, NY 10025"
-                          },
-                          "position": {
-                            "lat": 40.80558,
-                            "lon": -73.96548
-                          }
-                        },
-                        {
-                          "poi": {
-                            "name": "Yasha Raman Corporation"
-                          },
-                          "address": {
-                            "freeformAddress": "940 Amsterdam Ave, New York, NY 10025"
-                          },
-                          "position": {
-                            "lat": 40.80076,
-                            "lon": -73.96556
-                          }
-                        }
-                      ]'
+                    //dd($searchURL . 'geometryFilter' . $ext . "?key=$tomtomKey" . "&geometryList=$geometryList" . "&poiList=$poiList");
+                    //dd($poiList);
+                    $response = Http::post($searchURL . 'geometryFilter' . $ext . "?key=$tomtomKey", [
+                        'poiList' => $poiList,
+                        'geometryList' => $geometryList,
+
+                    ]);
+                    return response()->json([
+                        'success' => false,
+                        'results' => $response->json()
+                    ]);
                 }
-                if (isset($val_data['category'])) {
+                /* if (isset($val_data['category'])) {
                     //ricerca in base alla categoria
                 }
                 if (isset($val_data['services'])) {
                     //filtraggio della ricerca in base ai servizi
                 } else {
-                }
+                } */
             } catch (\Exception $e) {
                 /* return response()->json([
                     'success' => false,
