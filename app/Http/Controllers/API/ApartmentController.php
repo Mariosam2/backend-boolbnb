@@ -129,7 +129,7 @@ class ApartmentController extends Controller
 
                     ]);
                     return response()->json([
-                        'success' => false,
+                        'success' => true,
                         'results' => $response->json()
                     ]);
                 }
