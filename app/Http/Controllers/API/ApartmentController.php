@@ -157,8 +157,23 @@ class ApartmentController extends Controller
 
                         ]);
                         //var_dump($response->json()['results']);
-                        $results = array_merge($results, $response->json()['results']);
+                        if (isset($response->json()['results'])) {
+                            $results = array_merge($results, $response->json()['results']);
+                        }
                     }
+                    //dd($results);
+
+                    $searchedApartments = [];
+                    foreach ($results as $result) {
+                        $searchedApartment = Apartment::where([
+                            ['latitude', '=', $result['position']['lat']],
+                            ['longitude', '=', $result['position']['lon']],
+                        ])->get();
+                        //dd($searchedApartment);
+                        $searchedApartments = $searchedApartment->merge($searchedApartments);
+                    }
+
+                    dd($searchedApartments);
 
 
                     return response()->json([
@@ -174,10 +189,11 @@ class ApartmentController extends Controller
                 } else {
                 } */
             } catch (\Exception $e) {
-                return response()->json([
+                /* return response()->json([
                     'success' => false,
                     'results' => 'not found'
-                ]);
+                ]); */
+                dd($e);
             }
         }
     }
