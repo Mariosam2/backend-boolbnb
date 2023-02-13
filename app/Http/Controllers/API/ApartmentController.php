@@ -180,12 +180,7 @@ class ApartmentController extends Controller
                     }
 
 
-
-                    $apartmentsCollection = collect($searchedApartments);
-                    dd($apartmentsCollection);
-
-                    dd($searchedApartments);
-
+                    //dd($searchedApartments);
 
                     return response()->json([
                         'success' => true,
