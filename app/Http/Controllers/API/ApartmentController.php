@@ -165,14 +165,14 @@ class ApartmentController extends Controller
 
                     $searchedApartments = [];
                     foreach ($results as $result) {
-                        $searchedApartment = Apartment::where([
+                        $apartmentsCollection = Apartment::where([
                             ['latitude', '=', $result['position']['lat']],
                             ['longitude', '=', $result['position']['lon']],
                         ])->get();
-                        //dd($searchedApartment);
                         //$searchedApartments = $searchedApartment->merge($searchedApartments);
-                        $searchedApartments = collect($searchedApartments)->merge($searchedApartment);
+
                     }
+                    $searchedApartments = collect($searchedApartments)->merge($apartmentsCollection);
 
                     //dd($searchedApartments);
 
