@@ -170,15 +170,16 @@ class ApartmentController extends Controller
                             ['longitude', '=', $result['position']['lon']],
                         ])->get();
                         //dd($searchedApartment);
-                        $searchedApartments = $searchedApartment->merge($searchedApartments);
+                        //$searchedApartments = $searchedApartment->merge($searchedApartments);
+                        $searchedApartments = collect($searchedApartments)->merge($searchedApartment);
                     }
 
-                    dd($searchedApartments);
+                    //dd($searchedApartments);
 
 
                     return response()->json([
                         'success' => true,
-                        'results' => $results
+                        'results' => $searchedApartments
                     ]);
                 }
                 /* if (isset($val_data['category'])) {
