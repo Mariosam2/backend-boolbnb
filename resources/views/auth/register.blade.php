@@ -7,7 +7,7 @@
 
         <div class="content">
             <!-- TODO add link correct -->
-            <a href="#" class="close"></a>
+            <a href="http://localhost:5174" class="close"></a>
 
             <div class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 162.89 25.84">
