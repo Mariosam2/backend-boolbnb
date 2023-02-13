@@ -161,6 +161,7 @@ class ApartmentController extends Controller
                             $results = array_merge($results, $response->json()['results']);
                         }
                     }
+
                     //dd($results);
                     $coordinates = [];
                     foreach ($results as $result) {
@@ -179,7 +180,11 @@ class ApartmentController extends Controller
                     }
 
 
-                    //dd($searchedApartments);
+
+                    $apartmentsCollection = collect($searchedApartments);
+                    dd($apartmentsCollection);
+
+                    dd($searchedApartments);
 
 
                     return response()->json([

@@ -14,10 +14,10 @@ class MessageController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'apartment_id' => 'required|numeric',
+            'apartment_id' => 'required',
             'name' => 'required',
             'surname' => 'required',
-            'email' => 'required|email',
+            'email' => 'required',
             'body' => 'required'
         ]);
         if ($validator->fails()) {
