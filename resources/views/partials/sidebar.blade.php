@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{ route('apartments.messages') }}" class="nav-link active">
                     <span class="align-text-bottom"></span>
                     <i class="fa-solid fa-envelope fa-fw"></i></i></i>Messaggi
                 </a>
