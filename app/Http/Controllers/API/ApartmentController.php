@@ -162,17 +162,22 @@ class ApartmentController extends Controller
                         }
                     }
                     //dd($results);
+                    $coordinates = [];
+                    foreach ($results as $result) {
+                        if (!in_array($result['position'], $coordinates)) {
+                            array_push($coordinates, $result['position']);
+                        }
+                    }
+                    //dd($coordinates, $results);
 
                     $searchedApartments = [];
-                    foreach ($results as $result) {
-                        $apartmentsCollection = Apartment::where([
-                            ['latitude', '=', $result['position']['lat']],
-                            ['longitude', '=', $result['position']['lon']],
-                        ])->get();
-                        //$searchedApartments = $searchedApartment->merge($searchedApartments);
-
+                    foreach ($coordinates as $coordinate) {
+                        $searchedApartments = collect($searchedApartments)->merge(Apartment::where([
+                            ['latitude', '=', $coordinate['lat']],
+                            ['longitude', '=', $coordinate['lon']],
+                        ])->get());
                     }
-                    $searchedApartments = collect($searchedApartments)->merge($apartmentsCollection);
+
 
                     //dd($searchedApartments);
 
