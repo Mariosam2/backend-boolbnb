@@ -113,8 +113,9 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
-        return view('apartments.show', compact('apartment'));
+        $apartmentSlug = $apartment->slug;
+        dd($apartmentSlug);
+        return view("http://localhost:5174/blog/$apartmentSlug", compact('apartment'));
     }
 
     /**
