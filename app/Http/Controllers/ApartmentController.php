@@ -6,6 +6,7 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Models\ApartmentCategory;
+use App\Models\Message;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -47,6 +48,11 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function messages()
+    {
+        $apartments = Auth::user()->apartments()->get();
+        return view('apartments.messages', compact('apartments'));
+    }
     public function store(StoreApartmentRequest $request)
     {
         try {
@@ -113,8 +119,9 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
-        return view('apartments.show', compact('apartment'));
+        $apartmentSlug = $apartment->slug;
+        dd($apartmentSlug);
+        return view("http://localhost:5174/blog/$apartmentSlug", compact('apartment'));
     }
 
     /**

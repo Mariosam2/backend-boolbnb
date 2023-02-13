@@ -195,7 +195,7 @@ class ApartmentController extends Controller
                     }
 
 
-
+                    //dd($searchedApartments);
 
 
                     return response()->json([

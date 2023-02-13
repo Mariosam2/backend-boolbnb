@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('apartments', ApartmentController::class)->parameters([
             'apartments' => 'apartment:slug',
         ]);
+        Route::get('messages', [ApartmentController::class, 'messages'])->prefix('apartements')->name('apartments.messages');
     });
 
 Route::middleware('auth')->group(function () {
@@ -36,5 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';
