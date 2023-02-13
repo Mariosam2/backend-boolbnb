@@ -56,7 +56,7 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         try {
-            $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+            $tomtom_key = 'h0FDAudCcFnS8TK5dT1mvgXYkqCGc1CW';
 
             $val_data = $request->validated();
             $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
@@ -155,7 +155,7 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         try {
-            $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+            $tomtom_key = 'h0FDAudCcFnS8TK5dT1mvgXYkqCGc1CW';
             $val_data = $request->validated();
             $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
             $json = $response->json();
