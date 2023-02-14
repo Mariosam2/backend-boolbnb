@@ -37,6 +37,29 @@ class ApartmentController extends Controller
         }
     }
 
+    /**
+     * Takes an array or a collection of apartments, and creates a poi list
+     */
+    public function generatePois($apartments)
+    {
+        $poiLists = [];
+        foreach ($apartments as $apartment) {
+            $poiObj = [
+                "poi" => [
+                    "name" => $apartment->title,
+                ],
+                "address" => [
+                    "freeformAddress" => $apartment->free_form_address
+                ],
+                "position" => [
+                    "lat" => $apartment->latitude,
+                    "lon" => $apartment->longitude
+                ]
+            ];
+            array_push($poiLists, $poiObj);
+        }
+        return $poiLists = array_chunk($poiLists, 20);
+    }
 
 
     public function search(Request $request)
@@ -69,23 +92,7 @@ class ApartmentController extends Controller
 
                 //genero dei poi utilizzabili nella richiesta all'API di tomtom
                 $apartments = Apartment::all();
-                $poiLists = [];
-                foreach ($apartments as $apartment) {
-                    $poiObj = [
-                        "poi" => [
-                            "name" => $apartment->title,
-                        ],
-                        "address" => [
-                            "freeformAddress" => $apartment->free_form_address
-                        ],
-                        "position" => [
-                            "lat" => $apartment->latitude,
-                            "lon" => $apartment->longitude
-                        ]
-                    ];
-                    array_push($poiLists, $poiObj);
-                }
-                $poiLists = array_chunk($poiLists, 20);
+
 
 
                 //dd($poiLists);
