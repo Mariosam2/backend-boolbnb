@@ -4,7 +4,13 @@
 
 @section('content')
     <div class="col">
-        <h1 class="mt-5 ps-5">Aggiungi un nuovo appartamento</h1>
+        <div class="mt-5 ps-5">
+            <h1>Aggiungi un nuovo appartamento</h1>
+            <a href="{{ route('apartments.index') }}" class="torna">
+                <i class="fa-solid fa-chevron-left"></i>
+                Torna alla pagina dei tuoi appartamenti
+            </a>
+        </div>
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">
                 <ul>
@@ -14,8 +20,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('apartments.store') }}" method="POST" class=" ms_form m-5 p-5 rounded-3"
-            enctype="multipart/form-data">
+        <form action="{{ route('apartments.store') }}" method="POST" class=" m-5 rounded-3" enctype="multipart/form-data">
             @csrf
             <div class="row d-flex ">
                 <div class="col-7">
