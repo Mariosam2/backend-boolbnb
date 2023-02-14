@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchApartmentRequest;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Client\Factory;
+use GuzzleHttp\Client;
+
+
 
 class ApartmentController extends Controller
 {
@@ -36,6 +37,103 @@ class ApartmentController extends Controller
         }
     }
 
+    /**
+     * Takes an array or a collection of apartments, and creates a poi list
+     * @param mixed $apartments 
+     * @return array $poiLists
+     */
+    public function generatePois($apartments)
+    {
+        $poiLists = [];
+        foreach ($apartments as $apartment) {
+            $poiObj = [
+                "poi" => [
+                    "name" => $apartment->title,
+                ],
+                "address" => [
+                    "freeformAddress" => $apartment->free_form_address
+                ],
+                "position" => [
+                    "lat" => $apartment->latitude,
+                    "lon" => $apartment->longitude
+                ]
+            ];
+            array_push($poiLists, $poiObj);
+        }
+        return $poiLists = array_chunk($poiLists, 20);
+    }
+
+    /**
+     * Takes the results from tomtom and get the coordinates of the poi without duplication
+     * @param array $results
+     * @return array $coordinates
+     */
+    public function getCoordinates(array $results)
+    {
+        $coordinates = [];
+        foreach ($results as $result) {
+            if (count($result) > 0) {
+                foreach ($result as $poi) {
+                    if (!in_array($poi['position'], $coordinates)) {
+                        array_push($coordinates, $poi['position']);
+                    }
+                };
+            }
+        }
+        return $coordinates;
+    }
+    /**
+     * Takes an array of apartments and services(ids) and returns only the apartments that contain the services
+     * @param mixed $searchedApartments
+     * @param array $services
+     * @return array $filteredApartments the apartments filtered by the given services
+     */
+    public function filterApartments(mixed $searchedApartments, array $services)
+    {
+        $filteredApartaments = [];
+        foreach ($searchedApartments as $searchedApartment) {
+
+            $isInArray = true;
+            foreach ($services as $service) {
+                if (in_array($service, $searchedApartment->services()->pluck('id')->toArray())) {
+                    continue;
+                } else {
+                    $isInArray = false;
+                }
+            }
+            if ($isInArray) {
+                array_push($filteredApartaments, $searchedApartment);
+            }
+        }
+
+        return $filteredApartaments;
+    }
+    /**
+     * Takes an array of apartments and a category and filters the apartments by the given category
+     * @param mixed $searchedApartments
+     * @param string $category
+     * @return array $filteredApartments
+     */
+    public function filterApartmentsByCategory(mixed $searchedApartments, string $category)
+    {
+        $filteredApartaments = [];
+        foreach ($searchedApartments as $searchedApartment) {
+            //dd($searchedApartment->apartment_category->id);
+            if ($searchedApartment->apartment_category->id == $category) {
+                array_push($filteredApartaments, $searchedApartment);
+            }
+        }
+
+        return $filteredApartaments;
+    }
+
+
+
+    /**
+     * Searches for the apartments
+     * @param Illuminate\Http\Request $request
+     * @return Response
+     */
     public function search(Request $request)
     {
         //dd($request->services);
@@ -61,65 +159,33 @@ class ApartmentController extends Controller
             ]);
         } else {
             try {
-                $tomtomKey = '2oYOFMUxTa7zG8bZAccJS6LcDFhFLr37';
-                $maxSize = 3000;
+
+
                 $val_data = $validator->validate();
-
-                //genero dei poi utilizzabili nella richiesta all'API di tomtom
-                $apartments = Apartment::all();
-                $poiLists = [];
-                $tempArray = [];
-                $checkArray = [];
-                foreach ($apartments as $key => $apartment) {
-                    $poiObj = [
-                        "poi" => [
-                            "name" => $apartment->title,
-                        ],
-                        "address" => [
-                            "freeformAddress" => $apartment->free_form_address
-                        ],
-                        "position" => [
-                            "lat" => $apartment->latitude,
-                            "lon" => $apartment->longitude
-                        ]
-                    ];
-                    //creo dei subArray che rispettino le dimensioni gestibili dal server di tomtom
-                    if ($key + 1 <= count($apartments) - 1) {
-                        //utilizzo checkArray per controllare la size dell'array da usare per la richiesta a tomtom
-                        $checkArray = array_merge($tempArray, [$apartments[$key + 1]]);
-                        if (strlen(json_encode($checkArray)) < $maxSize) {
-                            //continuo a pushare nella tempArray
-                            array_push($tempArray, $poiObj);
-                        } else {
-                            //pusho la tempArray dentro la mia list di pois
-                            array_push($tempArray, $poiObj);
-                            array_push($poiLists, $tempArray);
-                            $tempArray = [];
-                        }
-                    } else {
-                        //pusho anche gli elementi alle ultime posizioni
-                        array_push($tempArray, $poiObj);
-                        array_push($poiLists, $tempArray);
-                    }
-                }
-
-                //dd($poiLists);
-
-
-
-
-
+                $searchedApartments = [];
+                $poi = [];
 
                 if (isset($val_data['address'])) {
+                    $tomtomKey = 'FiLLCEGWt31cQ9ECIWAD6zYjczzeC6zn';
+                    //genero dei poi utilizzabili nella richiesta all'API di tomtom
+                    $apartments = Apartment::all();
+
+                    $poiLists = $this->generatePois($apartments);
+
+                    //dd($poiLists);
+
                     $geocodeURL = 'https://api.tomtom.com/search/2/geocode/';
                     $searchURL = 'https://api.tomtom.com/search/2/';
                     $ext = '.json';
 
                     //ricerca delle coordinate trai i POIs(i nostri appartamenti)
-                    $coordinates = Http::get($geocodeURL . $val_data['address'] . '.json?key=' . $tomtomKey);
+                    $client = new Client();
+                    $promise = $client->getAsync($geocodeURL . $val_data['address'] . $ext . '?key=' . $tomtomKey);
 
-                    $latitude = $coordinates->json()['results'][0]['position']['lat'];
-                    $longitude = $coordinates->json()['results'][0]['position']['lon'];
+                    $response = $promise->wait();
+                    $coordinates = json_decode($response->getBody()->getContents(), true)['results'][0]['position'];
+                    $latitude = $coordinates['lat'];
+                    $longitude =  $coordinates['lon'];
 
 
 
@@ -144,56 +210,71 @@ class ApartmentController extends Controller
 
                             ];
                     }
+
                     // prendo i risultati delle chiamate e li metto insieme
+
                     $results = [];
                     foreach ($poiLists as $poiList) {
-                        $response = Http::withHeaders([
-
-                            'Content-Type' => 'application/json',
-
-                        ])->post($searchURL . 'geometryFilter' . $ext . "?key=$tomtomKey", [
-                            'poiList' => $poiList,
-                            'geometryList' => $geometryList,
-
+                        $client = new Client();
+                        $promise = $client->postAsync($searchURL . 'geometryFilter' . $ext . "?key=$tomtomKey", [
+                            'json' => [
+                                'poiList' => $poiList,
+                                'geometryList' => $geometryList,
+                            ]
                         ]);
-                        //var_dump($response->json()['results']);
-                        if (isset($response->json()['results'])) {
-                            $results = array_merge($results, $response->json()['results']);
-                        }
+
+                        $response = $promise->wait();
+
+                        array_push($results, json_decode($response->getBody()->getContents(), true)['results']);
                     }
 
                     //dd($results);
-                    $coordinates = [];
-                    foreach ($results as $result) {
-                        if (!in_array($result['position'], $coordinates)) {
-                            array_push($coordinates, $result['position']);
-                        }
-                    }
-                    //dd($coordinates, $results);
+                    $coordinates = $this->getCoordinates($results);
+                    //dd($coordinates);
 
-                    $searchedApartments = [];
+
                     foreach ($coordinates as $coordinate) {
-                        $searchedApartments = collect($searchedApartments)->merge(Apartment::where([
+                        $searchedApartment = Apartment::with(['user', 'services', 'views', 'promotions', 'apartment_category'])->where([
                             ['latitude', '=', $coordinate['lat']],
                             ['longitude', '=', $coordinate['lon']],
-                        ])->get());
+                        ])->get();
+                        $searchedApartments = collect($searchedApartments)->merge($searchedApartment);
                     }
 
-
                     //dd($searchedApartments);
-
-                    return response()->json([
-                        'success' => true,
-                        'results' => $searchedApartments
-                    ]);
-                }
-                /* if (isset($val_data['category'])) {
-                    //ricerca in base alla categoria
+                    $poi = [
+                        "lat" => $latitude,
+                        "lon" => $longitude
+                    ];
+                } else if (!isset($val_data['address'])) {
+                    $searchedApartments = Apartment::with(['user', 'services', 'views', 'promotions', 'apartment_category'])->get();
+                    //dd($searchedApartments);
                 }
                 if (isset($val_data['services'])) {
-                    //filtraggio della ricerca in base ai servizi
-                } else {
-                } */
+                    //dd($val_data['services']);
+                    $services = $val_data['services'];
+                    //dd($searchedApartments);
+
+                    $filteredApartaments = $this->filterApartments($searchedApartments, $services);
+
+                    $searchedApartments = $filteredApartaments;
+                }
+
+                if (isset($val_data['category'])) {
+                    $category = $val_data['category'];
+                    $filteredApartaments = $this->filterApartmentsByCategory($searchedApartments, $category);
+                    //dd($searchedApartments);
+                    $searchedApartments = $filteredApartaments;
+                }
+
+
+                //dd($searchedApartments);
+
+                return response()->json([
+                    'success' => true,
+                    'poi' => $poi,
+                    'results' => $searchedApartments
+                ]);
             } catch (\Exception $e) {
                 /* return response()->json([
                     'success' => false,

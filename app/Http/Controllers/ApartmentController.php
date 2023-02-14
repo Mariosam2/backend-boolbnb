@@ -10,11 +10,17 @@ use App\Models\Message;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 
 class ApartmentController extends Controller
 {
+    protected $tomtomKey = "FiLLCEGWt31cQ9ECIWAD6zYjczzeC6zn";
+
+    public function getKey()
+    {
+        return $this->tomtomKey;
+    }
 
     /**
      * Display a listing of the resource.
@@ -53,17 +59,22 @@ class ApartmentController extends Controller
         $apartments = Auth::user()->apartments()->get();
         return view('apartments.messages', compact('apartments'));
     }
+
     public function store(StoreApartmentRequest $request)
     {
         try {
-            $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
 
             $val_data = $request->validated();
-            $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
-            $json = $response->json();
-            $latitude = $json['results'][0]['position']['lat'];
-            $longitude = $json['results'][0]['position']['lon'];
-            $freeFormAddress = $json['results'][0]['address']['freeformAddress'];
+            $client = new Client();
+            $promise = $client->getAsync('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $this->getKey());
+
+            $response = $promise->wait();
+            $result = json_decode($response->getBody()->getContents(), true);
+            $latitude = $result['results'][0]['position']['lat'];
+            $longitude = $result['results'][0]['position']['lon'];
+            $freeFormAddress = $result['results'][0]['address']['freeformAddress'];
+
+
 
 
             // image
@@ -76,7 +87,7 @@ class ApartmentController extends Controller
             $user_id = Auth::user()->id;
             $val_data['user_id'] = $user_id;
             $val_data['slug'] = $apartment_slug;
-            if (isset($json['results']) && count($json['results'])) {
+            if (isset($result['results']) && count($result['results'])) {
                 if (isset($longitude)) {
                     $val_data['longitude'] = $longitude;
                 }
@@ -155,13 +166,17 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         try {
-            $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+
             $val_data = $request->validated();
-            $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $tomtom_key);
-            $json = $response->json();
-            $latitude = $json['results'][0]['position']['lat'];
-            $longitude = $json['results'][0]['position']['lon'];
-            $freeFormAddress = $json['results'][0]['address']['freeformAddress'];
+            $client = new Client();
+            $promise = $client->getAsync('https://api.tomtom.com/search/2/geocode/' . $val_data['address'] . '.json?key=' . $this->getKey());
+
+            $response = $promise->wait();
+            $result = json_decode($response->getBody()->getContents(), true);
+            $latitude = $result['results'][0]['position']['lat'];
+            $longitude = $result['results'][0]['position']['lon'];
+            $freeFormAddress = $result['results'][0]['address']['freeformAddress'];
+
 
             if ($request->hasFile('media')) {
                 if ($apartment->media) {
@@ -173,7 +188,7 @@ class ApartmentController extends Controller
 
             $apartment_slug = Apartment::slugGenerator($val_data['title']);
             $val_data['slug'] = $apartment_slug;
-            if (isset($json['results']) && count($json['results'])) {
+            if (isset($result['results']) && count($result['results'])) {
                 if (isset($longitude)) {
                     $val_data['longitude'] = $longitude;
                 }

@@ -28,6 +28,7 @@ class ApartmentSeeder extends Seeder
                 $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $apartment['address'] . '.json?key=' . $tomtom_key);
                 $json = $response->json();
 
+
                 if (isset($json['results']) && count($json['results']) > 0) {
                     if (isset($json['results'][0]['position']['lat']) && isset($json['results'][0]['position']['lon']) && isset($json['results'][0]['address']['freeformAddress'])) {
                         $apartment['latitude'] = $json['results'][0]['position']['lat'];
