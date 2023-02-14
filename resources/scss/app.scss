@@ -154,9 +154,8 @@ span {
 
 .torna {
     color: $bb-light;
-}
 
-
-.ms_form {
-    background: #efefef;
+    &:hover {
+        color: $bb-light;
+    }
 }
