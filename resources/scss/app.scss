@@ -82,12 +82,19 @@ span {
 }
 
 .create_btn {
-    background: linear-gradient($bb-primary, $bb-secondary);
+    background-color: $bb-success-soft;
+    color: $bb-success;
+    padding: 1.25rem 2.25rem;
+    font-size: 20px;
+    border-radius: 0.5rem;
+
+    &:hover {
+        background-color: $bb-success-soft;
+        color: $bb-success;
+    }
 }
 
 .apartments {
-    margin: auto;
-    width: 90%;
     height: 100vh;
     overflow-y: auto;
 
@@ -96,38 +103,51 @@ span {
         display: none;
     }
 
-    .my_card {
-        height: 370px;
-        background-color: #EEEEEE;
+    .card-body {
+        padding: 1.6rem;
+        background-color: $bb-background;
+        border-radius: 0 0 1.25rem 1.25rem;
+    }
 
-        /* &:hover {
-            background-color: rgba($color: #000000, $alpha: 0.5);
-            color: #EEEEEE;
-        }
- */
-        .my-img {
-            width: 100%;
-            height: 200px;
+    .card_img {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        img {
+            border-radius: 1.25rem 1.25rem 0 0;
+            max-width: 100%;
+            height: 23.5rem;
+            max-height: 100%;
             object-fit: cover;
         }
+    }
 
-        .show_btn {
-            background: linear-gradient($bb-secondary-background, $bb-success);
+    .sponsor_btn {
+        background: linear-gradient(to right, $bb-primary, $bb-secondary);
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+    }
 
-
-        }
-
-        .edit_btn {
-            background: linear-gradient($bb-primary, $bb-primary-dark);
-        }
-
-        .delete_btn {
-            background: linear-gradient($bb-danger-light, $bb-danger-dark);
-        }
-
+    .show_btn {
+        background-color: $bb-success;
 
 
     }
+
+    .edit_btn {
+        background-color: $bb-primary;
+    }
+
+    .delete_btn {
+        background-color: $bb-danger-light;
+    }
+
+
+
 }
 
 .ms_form {
