@@ -5,14 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchApartmentRequest;
 use App\Models\Apartment;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Client\Factory;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\PromiseInterface;
-use Illuminate\Support\Facades\DB;
+
+
 
 class ApartmentController extends Controller
 {
@@ -99,10 +96,13 @@ class ApartmentController extends Controller
                     $ext = '.json';
 
                     //ricerca delle coordinate trai i POIs(i nostri appartamenti)
-                    $coordinates = Http::get($geocodeURL . $val_data['address'] . '.json?key=' . $tomtomKey);
+                    $client = new Client();
+                    $promise = $client->getAsync($geocodeURL . $val_data['address'] . $ext . '?key=' . $tomtomKey);
 
-                    $latitude = $coordinates->json()['results'][0]['position']['lat'];
-                    $longitude = $coordinates->json()['results'][0]['position']['lon'];
+                    $response = $promise->wait();
+                    $coordinates = json_decode($response->getBody()->getContents(), true)['results'][0]['position'];
+                    $latitude = $coordinates['lat'];
+                    $longitude =  $coordinates['lon'];
 
 
 
@@ -127,6 +127,7 @@ class ApartmentController extends Controller
 
                             ];
                     }
+
                     // prendo i risultati delle chiamate e li metto insieme
 
                     $results = [];
@@ -167,6 +168,10 @@ class ApartmentController extends Controller
                     }
 
                     //dd($searchedApartments);
+                    $poi = [
+                        "lat" => $latitude,
+                        "lon" => $longitude
+                    ];
 
 
                     if (isset($val_data['services'])) {
@@ -190,6 +195,7 @@ class ApartmentController extends Controller
 
                         return response()->json([
                             'success' => true,
+                            'poi' => $poi,
                             'results' => $filteredApartaments
                         ]);
                     }
@@ -200,6 +206,7 @@ class ApartmentController extends Controller
 
                     return response()->json([
                         'success' => true,
+                        'poi' => $poi,
                         'results' => $searchedApartments
                     ]);
                 }
