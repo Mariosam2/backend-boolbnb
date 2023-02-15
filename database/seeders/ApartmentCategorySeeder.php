@@ -15,7 +15,7 @@ class ApartmentCategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['Minicasa', 'Luxury', 'Fronte lago', 'Fronte mare', 'Sulle piste', 'Design', 'Dimore storiche', 'Case Gallegianti', 'Case sull\'albero', 'Nel deserto'];
+        $categories = ['Minicasa', 'Luxury', 'Fronte lago', 'Fronte mare', 'Sulle piste', 'Design', 'Dimore storiche', 'Case Galleggianti', 'Case sull\'albero', 'Nel deserto'];
 
         foreach ($categories as $category) {
             $new_category = new ApartmentCategory();
