@@ -19,7 +19,7 @@ class SearchMiddleware
         $services = $request->query('services');
         $category = $request->query('category');
         $address = $request->query('address');
-        $request->services = json_decode($services);
+        $request->services = $services;
         $request->category = $category;
         $request->address = $address;
 

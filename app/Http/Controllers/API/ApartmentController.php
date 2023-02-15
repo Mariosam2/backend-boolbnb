@@ -148,7 +148,7 @@ class ApartmentController extends Controller
         $validator = Validator::make($data, [
             'address' => 'nullable|max:255',
             'category' => 'nullable|exists:apartment_categories,id',
-            'services' => 'nullable|array|exists:services,id'
+            'services' => 'nullable|exists:services,id'
 
         ]);
 
@@ -251,8 +251,7 @@ class ApartmentController extends Controller
                     //dd($searchedApartments);
                 }
                 if (isset($val_data['services'])) {
-                    //dd($val_data['services']);
-                    $services = $val_data['services'];
+                    $services = explode(',', $val_data['services']);
                     //dd($searchedApartments);
 
                     $filteredApartaments = $this->filterApartments($searchedApartments, $services);

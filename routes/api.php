@@ -28,4 +28,4 @@ Route::get('/apartments/{apartment:slug}', [ApartmentController::class, 'show'])
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/categories', [ApartmentCategoryController::class, 'index']);
 Route::post('/messages', [MessageController::class, 'store']);
-Route::get('/search', [ApartmentController::class, 'search'])->where('services', '^(\[.*\])$')->middleware(SearchMiddleware::class)->name('search');
+Route::get('/search', [ApartmentController::class, 'search'])->middleware(SearchMiddleware::class)->name('search');
