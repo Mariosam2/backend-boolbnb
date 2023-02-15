@@ -22,11 +22,11 @@
                                 src="{{ Storage::exists($message->media) ? asset('storage/' . $message->media) : $message->media }}"
                                 alt="Title">
                             <div class="card-body d-flex justify-content-between align-items-center">
-                                <div class="data">
+                                <div class="data ps-5">
                                     {{ substr($message->created_at, 2, 9) }}
 
                                 </div>
-                                <div class="info d-flex  align-items-center gap-2">
+                                <div class="info d-flex  align-items-center gap-3">
                                     <div class="img_msg rounded-5 text-white">
                                         {{ substr($message->name, 0, 1) }}
                                         {{ substr($message->surname, 0, 1) }}
