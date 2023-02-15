@@ -1,9 +1,6 @@
 @extends('layouts.user')
 @section('content')
     <div class="col d-flex flex-column justify-content-center">
-        @if (isset($user))
-            {{ $user }}
-        @endif
         <div class="container-fluid">
             <div class="apartments py-5">
                 <div class="d-flex justify-content-between">
@@ -39,7 +36,7 @@
 
                                         </label>
                                         <div class="text-end">
-                                            <a href="#" class="sponsor_btn text-white">
+                                            <a href="{{ route('plans') }}" class="sponsor_btn text-white">
                                                 Sponsorizza
                                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                                             </a>

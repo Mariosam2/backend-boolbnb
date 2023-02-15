@@ -30,9 +30,8 @@ class ApartmentController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $stripeCustomer = $user->createAsStripeCustomer();
         $apartments =  Auth::user()->apartments()->get();
-        return view('apartments.index', compact('apartments', 'user'));
+        return view('apartments.index', compact('apartments'));
     }
 
     /**

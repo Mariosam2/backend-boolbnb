@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,8 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
-        Route::post('/payments', [WebhookController::class, 'handlePayments'])->middleware('csrf');;
+        Route::get('/plans', [PaymentController::class, 'index'])->name('plans');
+        Route::post('/plans/purchase', [PaymentController::class, 'handlePayment'])->name('plans.purchase');
         Route::resource('apartments', ApartmentController::class)->parameters([
             'apartments' => 'apartment:slug',
         ]);
@@ -39,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 
 require __DIR__ . '/auth.php';
