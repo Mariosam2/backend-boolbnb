@@ -1,6 +1,9 @@
 @extends('layouts.user')
 @section('content')
     <div class="col d-flex flex-column justify-content-center">
+        @if (isset($user))
+            {{ $user }}
+        @endif
         <div class="container-fluid">
             <div class="apartments py-5">
                 <div class="d-flex justify-content-between">
