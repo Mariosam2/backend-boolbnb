@@ -48,7 +48,7 @@
                                     {{ $message->body }}
                                 </div>
                                 <a target=”_blank” href="mailto:{{ $message->email }}" class="btn send_msg_btn me-4">
-                                    <h6> Rispondi</h6>
+                                    Rispondi
                                 </a>
                             </div>
                         </div>
