@@ -26,6 +26,8 @@
     <script src="{{ asset('assets/js/services-web.min.js') }}"></script>
 
     <!-- Scripts -->
+    @vite(['resources/scss/app.scss'])
+
     @vite(['resources/js/app.js'])
 </head>
 
