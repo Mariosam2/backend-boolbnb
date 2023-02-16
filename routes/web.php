@@ -26,8 +26,8 @@ Route::middleware(['auth', 'verified'])
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
         Route::get('products/{apartment:slug}', [PaymentController::class, 'index'])->name('products');
-        Route::get('products/purchase/{apartment:slug}/{product:product_id}', [PaymentController::class, 'show'])->name('products.purchase');
-        Route::post('products/process-payment/{apartment:slug}/{product:product_id}/', [PaymentController::class, 'handlePayment'])->name('products.process-payment');
+        Route::get('products/purchase/{apartment:slug}/{product:prod_id}', [PaymentController::class, 'show'])->name('products.purchase');
+        Route::post('products/process-payment/{apartment:slug}/{product:prod_id}/', [PaymentController::class, 'handlePayment'])->name('products.process-payment');
         Route::resource('apartments', ApartmentController::class)->parameters([
             'apartments' => 'apartment:slug',
         ]);

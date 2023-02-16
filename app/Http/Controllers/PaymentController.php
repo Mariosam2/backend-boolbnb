@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apartment;
 use App\Models\Product;
 use App\Models\Promotion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -17,24 +18,37 @@ class PaymentController extends Controller
 
         $products = Product::all();
         //dd($promotions);
-
-        return view('products.plans', compact('products', 'apartment'));
+        if ($apartment->subscription) {
+            if ($apartment->subscription->status == 'active') {
+                //TODO: aggiungere un messaggio all'utente al redirect
+                return view('not-found');
+            }
+        } else {
+            return view('products.plans', compact('products', 'apartment'));
+        }
     }
 
-    public function show(Apartment $apartment, $product_id)
+    public function show(Apartment $apartment, $prod_id)
     {
-        $product = Product::find($product_id)->first();
-        return view('products.payment', compact('apartment', 'product'));
+        if ($apartment->subscription) {
+            if ($apartment->subscription->status == 'active') {
+                //TODO: aggiungere un messaggio all'utente al redirect
+                return view('not-found');
+            }
+        } else {
+            $product = Product::where('prod_id', '=', $prod_id)->first();
+            return view('products.payment', compact('apartment', 'product'));
+        }
     }
 
 
 
 
-    public function handlePayment(Request $request, Apartment $apartment, $product_id)
+    public function handlePayment(Request $request, Apartment $apartment, $prod_id)
     {
 
         //dd($request->all(), $promotion_id, $apartment);
-        $product = Product::find($product_id)->first();
+        $product = Product::where('prod_id', '=', $prod_id)->first();
         Stripe::setApiKey(env('STRIPE_KEY'));
         $user = Auth::user();
         //dd($request->stripeToken);
@@ -51,9 +65,18 @@ class PaymentController extends Controller
                 $product->name,
                 $product->price_id
             )->create($paymentMethod->id);
-            /* $newSubscription->update([
-                'billing_cycle_anchor' => strtotime('+3 days'),
-            ]); */
+            if ($product->prod_id == 'prod_NMsadp2zoXAM1a') {
+                $newSubscription->ends_at = Carbon::now()->addDays(1); // or any other date
+                $newSubscription->update();
+            } else if ($product->prod_id == 'prod_NMsbDauQJZnChL') {
+                $newSubscription->ends_at = Carbon::now()->addDays(3); // or any other date
+                $newSubscription->update();
+            } else if ($product->prod_id == 'prod_NMsbX1g0XSE4ns') {
+                $newSubscription->ends_at = Carbon::now()->addDays(7); // or any other date
+                $newSubscription->update();
+            }
+
+
             $newSubscription->apartment_id = $apartment->id;
             $newSubscription->save();
             $apartment->subscription_id = $newSubscription->id;
