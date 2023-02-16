@@ -37,7 +37,7 @@
                                         </label>
                                         <div class="text-end">
                                             @if (!isset($apartment->subscription) || $apartment->subscription->stripe_status !== 'active')
-                                                <a href="{{ route('promo', $apartment->slug) }}"
+                                                <a href="{{ route('products', $apartment->slug) }}"
                                                     class="sponsor_btn text-white">
                                                     Sponsorizza
                                                     <i class="fa-solid fa-wand-magic-sparkles"></i>

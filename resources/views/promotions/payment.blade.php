@@ -9,7 +9,7 @@
 
 
                 <form role="form"
-                    action="{{ route('promo.process-payment', ['apartment' => $apartment->slug, 'promotion' => $promotion->id]) }}"
+                    action="{{ route('products.process-payment', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}"
                     method="post" class="stripe-payment" data-cc-on-file="false"
                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="stripe-payment">
                     @csrf

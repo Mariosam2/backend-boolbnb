@@ -25,9 +25,9 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
-        Route::get('promotions/{apartment:slug}', [PaymentController::class, 'index'])->name('promo');
-        Route::get('purchase/{apartment:slug}/{promotion:id}', [PaymentController::class, 'show'])->name('promo.purchase');
-        Route::post('/promotions/process-payment/{apartment:slug}/{promotion:id}/', [PaymentController::class, 'handlePayment'])->name('promo.process-payment');
+        Route::get('products/{apartment:slug}', [PaymentController::class, 'index'])->name('products');
+        Route::get('products/purchase/{apartment:slug}/{product:product_id}', [PaymentController::class, 'show'])->name('products.purchase');
+        Route::post('products/process-payment/{apartment:slug}/{product:product_id}/', [PaymentController::class, 'handlePayment'])->name('products.process-payment');
         Route::resource('apartments', ApartmentController::class)->parameters([
             'apartments' => 'apartment:slug',
         ]);

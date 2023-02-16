@@ -7,7 +7,7 @@
 
         @forelse($promotions as $promotion)
             <a class="d-block pt-5 mx-4"
-                href="{{ route('promo.purchase', ['apartment' => $apartment->slug, 'promotion' => $promotion->id]) }}">{{ $promotion->name }}</a>
+                href="{{ route('products.purchase', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}">{{ $product->name }}</a>
         @empty
         @endforelse
     </div>

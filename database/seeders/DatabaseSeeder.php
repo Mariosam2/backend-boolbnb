@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Promotion;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             [
                 ApartmentCategorySeeder::class,
                 ServiceSeeder::class,
-                PromotionSeeder::class,
+                ProductSeeder::class,
                 ApartmentSeeder::class,
                 MessageSeeder::class,
 
