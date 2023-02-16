@@ -10,7 +10,7 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'img'];
 
     /**
      * The apartments that belong to the Service

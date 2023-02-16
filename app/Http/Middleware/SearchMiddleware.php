@@ -21,7 +21,9 @@ class SearchMiddleware
         $address = $request->query('address');
         $radius = $request->query('radius');
         $guests = $request->query('guests');
-        $request->services = json_decode($services);
+        
+
+        $request->services = $services;
         $request->category = $category;
         $request->address = $address;
         $request->radius = $radius;

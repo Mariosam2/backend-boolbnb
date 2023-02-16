@@ -3,7 +3,13 @@
 
 @section('content')
     <div class="col">
-        <h1 class="mt-5  ps-5">Modifica questo appartamento</h1>
+        <div class="mt-5 ps-5">
+            <h1>Modifica: {{ $apartment->title }}</h1>
+            <a href="{{ route('apartments.index') }}" class="torna">
+                <i class="fa-solid fa-chevron-left"></i>
+                Torna alla pagina dei tuoi appartamenti
+            </a>
+        </div>
         @if ($errors->any())
             <div class="alert alert-danger " role="alert">
                 <ul>
@@ -14,7 +20,7 @@
             </div>
         @endif
         <form action="{{ route('apartments.update', $apartment->slug) }}" method="POST"
-            class=" ms_form m-5 p-5 rounded-3 row justify-content-between" enctype="multipart/form-data">
+            class="m-5 rounded-3 row justify-content-between" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="col-6">

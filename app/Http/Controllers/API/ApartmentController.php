@@ -154,6 +154,7 @@ class ApartmentController extends Controller
             'radius' => 'nullable|numeric|max:100000',
             'guests' => 'nullable|numeric|min:0|max:128'
 
+
         ]);
 
         if ($validator->fails()) {
@@ -255,8 +256,7 @@ class ApartmentController extends Controller
                     //dd($searchedApartments);
                 }
                 if (isset($val_data['services'])) {
-                    //dd($val_data['services']);
-                    $services = $val_data['services'];
+                    $services = explode(',', $val_data['services']);
                     //dd($searchedApartments);
 
                     $filteredApartaments = $this->filterApartments($searchedApartments, $services);
