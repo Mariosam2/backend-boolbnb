@@ -127,6 +127,18 @@ class ApartmentController extends Controller
         return $filteredApartaments;
     }
 
+    public function filterApartmentsByGuests(mixed $searchedApartments, int $guests)
+    {
+        $filteredApartaments = [];
+        foreach ($searchedApartments as $searchedApartment) {
+            if ($searchedApartment->beds === $guests) {
+                array_push($filteredApartaments, $searchedApartment);
+            };
+        }
+
+        return $filteredApartaments;
+    }
+
 
 
     /**
@@ -150,7 +162,7 @@ class ApartmentController extends Controller
         $validator = Validator::make($data, [
             'address' => 'nullable|max:255',
             'category' => 'nullable|exists:apartment_categories,id',
-            'services' => 'nullable|array|exists:services,id',
+            'services' => 'nullable|exists:services,id',
             'radius' => 'nullable|numeric|max:100000',
             'guests' => 'nullable|numeric|min:0|max:128'
 
@@ -273,10 +285,8 @@ class ApartmentController extends Controller
 
                 if (isset($val_data['guests'])) {
                     $guests = $val_data['guests'];
-
-                    foreach ($searchedApartments as $searchedApartment) {
-                        if ($searchedApartment->beds);
-                    }
+                    $filteredApartaments = $this->filterApartmentsByGuests($searchedApartments, $guests);
+                    $searchedApartment = $filteredApartaments;
                 }
 
 
