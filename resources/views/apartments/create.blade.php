@@ -1,7 +1,4 @@
 @extends('layouts.user')
-
-
-
 @section('content')
     <div class="col">
         <div class="mt-5 ps-5">
@@ -28,8 +25,9 @@
 
                         <div class="mb-3 ">
                             <label for="title" class="form-label">Titolo*</label>
-                            <input type="text" name="title" id="title" class="form-control" placeholder=""
-                                aria-describedby="helpId" value="{{ old('title') }}">
+                            <input type="text" name="title" id="title"
+                                class="form-control @error('title') 'is-invalid' @enderror" placeholder=""
+                                aria-describedby="helpId" value="{{ old('title') }}" required>
                         </div>
                         <div class="searchBoxWrapper"></div>
                     </div>
@@ -37,46 +35,54 @@
 
 
                         <div class="mb-3">
-                            <label for="apartment_category_id" class="form-label">Categorie*</label>
+                            <label for="apartment_category_id"
+                                class="form-label @error('apartment_category_id') 'is-invalid' @enderror">Categorie*</label>
                             <select class="form-select form-select-md" name="apartment_category_id"
                                 id="apartment_category_id">
                                 <option selected value="[]" disabled>None</option>
                                 @foreach ($categories as $apartment_category)
                                     <option value="{{ $apartment_category->id }}"
-                                        {{ old('apartment_category_id') ? 'selected' : '' }}>
+                                        {{ in_array($apartment_category->id, (array) old('apartment_category_id')) ? 'selected' : '' }}>
                                         {{ $apartment_category->name }}
                                     </option>
                                 @endforeach
                             </select>
+
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="mq" class="form-label">M.Q.*</label>
-                            <input type="number" name="mq" id="mq" class="form-control" placeholder=""
+                            <input type="number" name="mq" id="mq"
+                                class="form-control  @error('mq') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="32767" value="{{ old('mq') }}"
                                 required>
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="beds" class="form-label">Letti*</label>
-                            <input type="number" name="beds" id="beds" class="form-control" placeholder=""
+                            <input type="number" name="beds" id="beds"
+                                class="form-control  @error('beds') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="127" value="{{ old('beds') }}"
                                 required>
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="total_rooms" class="form-label">Camere*</label>
-                            <input type="number" name="total_rooms" id="total_rooms" class="form-control" placeholder=""
+                            <input type="number" name="total_rooms" id="total_rooms"
+                                class="form-control @error('total_rooms') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="127" value="{{ old('total_rooms') }}"
                                 required>
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="baths" class="form-label">Bagni*</label>
-                            <input type="number" name="baths" id="baths" class="form-control" placeholder=""
+                            <input type="number" name="baths" id="baths"
+                                class="form-control  @error('baths') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="127" value="{{ old('baths') }}"
                                 required>
                         </div>
                         <div class="mb-3 mx-2">
-                            <label for="guests" class="form-label">Ospiti</label>
-                            <input type="number" name="guests" id="guests" class="form-control" placeholder=""
-                                aria-describedby="helpId" min="1" max="127" value="{{ old('guests') }}">
+                            <label for="guests" class="form-label  ">Ospiti*</label>
+                            <input type="number" name="guests" id="guests"
+                                class="form-control @error('guests') 'is-invalid' @enderror" placeholder=""
+                                aria-describedby="helpId" min="1" max="127" required
+                                value="{{ old('guests') }}">
                         </div>
 
 
@@ -107,17 +113,18 @@
                             <option value="" disabled>Seleziona i Servizi</option>
 
                             @foreach ($services as $service)
-                                <option value="{{ $service->id }}"
-                                    {{ in_array($service->id, old('service', [])) ? 'selected' : '' }}>
-                                    {{ $service->name }}
-                                </option>
+                                @if ($errors->any())
+                                    <option value="{{ $service->id }}"
+                                        {{ in_array($service->id, old('services', [])) ? 'selected' : '' }}>
+                                        {{ $service->name }}
+                                    </option>
+                                @else
+                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                @endif
                             @endforeach
 
-
                         </select>
-                        @error('services')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+
                     </div>
                 </div>
 
@@ -131,8 +138,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="media" class="form-label">Immagine*</label>
-                                <input type="file" class="form-control" name="media" id="media" placeholder=""
-                                    aria-describedby="fileHelpId" required>
+                                <input type="file" class="form-control  @error('media') 'is-invalid' @enderror"
+                                    name="media" id="media" placeholder="" aria-describedby="fileHelpId" required>
                             </div>
 
                         </div>
@@ -142,10 +149,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrizione*</label>
-                    <textarea class="form-control" name="description" id="description" rows="3" required>{{ old('description') }}</textarea>
+                    <textarea class="form-control @error('description') 'is-invalid' @enderror" name="description" id="description"
+                        rows="3" required>{{ old('description') }}</textarea>
                     <div class="row mt-3 justify-content-end">
                         <button type="submit  " class="btn button col-2 ">Crea</button>
-
                     </div>
         </form>
 
