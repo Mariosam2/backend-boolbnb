@@ -20,11 +20,11 @@ class Apartment extends Model
         $apartmentSlug = Str::slug($title);
         return $apartmentSlug;
     }
-
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class);
     }
+
 
     /**
      * Get the user associated with the Apartment

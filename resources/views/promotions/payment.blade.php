@@ -8,8 +8,10 @@
             <div class="panel-body">
 
 
-                <form role="form" action="{{ route('plans.purchase') }}" method="post" class="stripe-payment"
-                    data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="stripe-payment">
+                <form role="form"
+                    action="{{ route('promo.process-payment', ['apartment' => $apartment->slug, 'promotion' => $promotion->id]) }}"
+                    method="post" class="stripe-payment" data-cc-on-file="false"
+                    data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="stripe-payment">
                     @csrf
 
                     <div class='form-row row'>

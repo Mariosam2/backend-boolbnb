@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Promotion extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'price', 'duration'];
+    protected $fillable = ['name', 'slug', 'price', 'duration'];
 
     /**
      * The apartments that belong to the Promotion

@@ -4,7 +4,6 @@ use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,16 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
-        Route::get('/plans', [PaymentController::class, 'index'])->name('plans');
-        Route::post('/plans/purchase', [PaymentController::class, 'handlePayment'])->name('plans.purchase');
+        Route::get('promotions/{apartment:slug}', [PaymentController::class, 'index'])->name('promo');
+        Route::get('purchase/{apartment:slug}/{promotion:id}', [PaymentController::class, 'show'])->name('promo.purchase');
+        Route::post('/promotions/process-payment/{apartment:slug}/{promotion:id}/', [PaymentController::class, 'handlePayment'])->name('promo.process-payment');
         Route::resource('apartments', ApartmentController::class)->parameters([
             'apartments' => 'apartment:slug',
         ]);

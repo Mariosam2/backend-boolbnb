@@ -36,10 +36,14 @@
 
                                         </label>
                                         <div class="text-end">
-                                            <a href="{{ route('plans', $apartment->slug) }}" class="sponsor_btn text-white">
-                                                Sponsorizza
-                                                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                                            </a>
+                                            @if (!isset($apartment->subscription) || $apartment->subscription->stripe_status !== 'active')
+                                                <a href="{{ route('promo', $apartment->slug) }}"
+                                                    class="sponsor_btn text-white">
+                                                    Sponsorizza
+                                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                                </a>
+                                            @endif
+
                                             <!-- show -->
                                             <a href="http://localhost:5174/blog/{{ $apartment->slug }}"
                                                 class="btn show_btn text-white">
