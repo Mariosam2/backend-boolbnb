@@ -229,12 +229,54 @@ span {
 
     .img_msg {
         background-color: $bb-primary;
-        padding: 1rem;
-
+        height: 80px;
+        width: 80px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
     }
 
     .data {
         color: $bb-light;
+    }
+
+    .data_hide {
+        display: none;
+    }
+
+    .img_hide {
+        display: block;
+    }
+
+    @media screen and (max-width:1750px) {
+        .img_hide {
+            display: none;
+        }
+
+        .data_hide {
+            display: block;
+        }
+
+        .data_visible {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width:1400px) {
+        .info {
+            padding-left: 1rem;
+        }
+    }
+
+    @media screen and (max-width:1200px) {
+        .info {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width:992px) {
+        .body {
+            display: none;
+        }
     }
 
     .name {
