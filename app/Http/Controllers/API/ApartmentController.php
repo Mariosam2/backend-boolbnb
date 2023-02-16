@@ -274,8 +274,8 @@ class ApartmentController extends Controller
                 if (isset($val_data['guests'])) {
                     $guests = $val_data['guests'];
 
-                    foreach($searchedApartments as $searchedApartment){
-                        if($searchedApartment->beds)
+                    foreach ($searchedApartments as $searchedApartment) {
+                        if ($searchedApartment->beds);
                     }
                 }
 
