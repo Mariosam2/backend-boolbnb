@@ -27,7 +27,7 @@ class UpdateApartmentRequest extends FormRequest
             'title' => 'required|max:100',
             'media' => 'required|image',
             'apartment_category_id' => 'nullable|exists:apartment_categories,id',
-            'description' => 'required|max:16,777,215',
+            'description' => 'required|max:16777215',
             'mq' => 'required|numeric|min:0|max:32767',
             'address' => 'required|max:255',
             'beds' => 'required|numeric|min:0|max:128',
