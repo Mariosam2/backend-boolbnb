@@ -127,11 +127,11 @@ class ApartmentController extends Controller
         return $filteredApartaments;
     }
 
-    public function filterApartmentsByGuests(mixed $searchedApartments, int $guests)
+    public function filterApartmentsByBeds(mixed $searchedApartments, int $beds)
     {
         $filteredApartaments = [];
         foreach ($searchedApartments as $searchedApartment) {
-            if ($searchedApartment->beds === $guests) {
+            if ($searchedApartment->beds === $beds) {
                 array_push($filteredApartaments, $searchedApartment);
             };
         }
@@ -154,7 +154,7 @@ class ApartmentController extends Controller
             'category' => $request->category,
             'services' => $request->services,
             'radius' => $request->radius,
-            'guests' => $request->guests
+            'beds' => $request->guests
         ];
 
         //dd($data);
@@ -164,7 +164,7 @@ class ApartmentController extends Controller
             'category' => 'nullable|exists:apartment_categories,id',
             'services' => 'nullable|exists:services,id',
             'radius' => 'nullable|numeric|max:100000',
-            'guests' => 'nullable|numeric|min:0|max:128'
+            'beds' => 'nullable|numeric|min:0|max:128'
 
 
         ]);
@@ -283,9 +283,9 @@ class ApartmentController extends Controller
                     $searchedApartments = $filteredApartaments;
                 }
 
-                if (isset($val_data['guests'])) {
-                    $guests = $val_data['guests'];
-                    $filteredApartaments = $this->filterApartmentsByGuests($searchedApartments, $guests);
+                if (isset($val_data['beds'])) {
+                    $beds = $val_data['beds'];
+                    $filteredApartaments = $this->filterApartmentsByBeds($searchedApartments, $beds);
                     $searchedApartment = $filteredApartaments;
                 }
 
