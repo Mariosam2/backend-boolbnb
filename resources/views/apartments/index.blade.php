@@ -36,7 +36,7 @@
 
                                         </label>
                                         <div class="text-end">
-                                            <a href="{{ route('plans') }}" class="sponsor_btn text-white">
+                                            <a href="{{ route('plans', $apartment->slug) }}" class="sponsor_btn text-white">
                                                 Sponsorizza
                                                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                                             </a>

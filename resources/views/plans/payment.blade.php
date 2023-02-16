@@ -1,9 +1,5 @@
 @extends('layouts.user')
 
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-</head>
 
 
 @section('content')
@@ -18,7 +14,7 @@
 
                     <div class='form-row row'>
                         <div class='col-xs-12 form-group required'>
-                            <label class='control-label'>Name on Card</label> <input class='form-control' size='4'
+                            <label class='control-label'>Name on Card</label> <input class='form-control cardholder-name'
                                 type='text'>
                         </div>
                     </div>
@@ -64,8 +60,8 @@
     </div>
 
     </body>
-
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="{{ asset('assets/js/jquery.slim.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/stripe.js') }}"></script>
 
     <script type="text/javascript">
         $(function() {
@@ -93,12 +89,15 @@
 
                 if (!$form.data('cc-on-file')) {
                     e.preventDefault();
+                    console.log($('.cardholder-name').val(), $('.card-num').val());
                     Stripe.setPublishableKey($form.data('stripe-publishable-key'));
                     Stripe.createToken({
+                        name: $('.cardholder-name').val(),
                         number: $('.card-num').val(),
                         cvc: $('.card-cvc').val(),
                         exp_month: $('.card-expiry-month').val(),
-                        exp_year: $('.card-expiry-year').val()
+                        exp_year: $('.card-expiry-year').val(),
+
                     }, stripeRes);
                 }
 

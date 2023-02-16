@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -9,7 +10,7 @@ use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
-    public function index()
+    public function index(Apartment $apartment)
     {
 
 
