@@ -19,9 +19,15 @@ class SearchMiddleware
         $services = $request->query('services');
         $category = $request->query('category');
         $address = $request->query('address');
+        $radius = $request->query('radius');
+        $guests = $request->query('guests');
+        
+
         $request->services = $services;
         $request->category = $category;
         $request->address = $address;
+        $request->radius = $radius;
+        $request->guests = $guests;
 
         return $next($request);
     }

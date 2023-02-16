@@ -25,18 +25,18 @@ class UpdateApartmentRequest extends FormRequest
     {
         return [
             'title' => 'required|max:100',
-            'media' => 'nullable|image',
+            'media' => 'required|image',
             'apartment_category_id' => 'nullable|exists:apartment_categories,id',
-            'description' => 'required',
-            'mq' => 'required',
-            'address' => 'required',
-            'beds' => 'required',
-            'total_rooms' => 'required',
-            'baths' => 'required',
-            'guests' => 'nullable',
-            'check_in' => 'nullable',
-            'check_out' => 'nullable',
-            'price' => 'nullable|numeric',
+            'description' => 'required|max:16,777,215',
+            'mq' => 'required|numeric|min:0|max:32767',
+            'address' => 'required|max:255',
+            'beds' => 'required|numeric|min:0|max:128',
+            'total_rooms' => 'required|numeric|min:0|max:128',
+            'baths' => 'required|numeric|min:0|max:128',
+            'guests' => 'required|numeric|min:0|max:128',
+            'check_in' => 'nullable|max:255',
+            'check_out' => 'nullable|max:255',
+            'price' => 'nullable|numeric|max:999.99',
             'services' => 'nullable|exists:services,id'
 
         ];
