@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Stripe\Stripe;
+use GuzzleHttp\Client;
 
 class PaymentController extends Controller
 {
@@ -19,7 +20,7 @@ class PaymentController extends Controller
         $products = Product::all();
         //dd($promotions);
         if ($apartment->subscription) {
-            if ($apartment->subscription->status == 'active') {
+            if ($apartment->subscription->stripe_status == 'active') {
                 //TODO: aggiungere un messaggio all'utente al redirect
                 return view('not-found');
             }
@@ -31,7 +32,7 @@ class PaymentController extends Controller
     public function show(Apartment $apartment, $prod_id)
     {
         if ($apartment->subscription) {
-            if ($apartment->subscription->status == 'active') {
+            if ($apartment->subscription->stripe_status == 'active') {
                 //TODO: aggiungere un messaggio all'utente al redirect
                 return view('not-found');
             }
@@ -82,10 +83,45 @@ class PaymentController extends Controller
             $apartment->subscription_id = $newSubscription->id;
             $apartment->save();
         }
+        if (isset($apartment->subscription)) {
+            if (!$apartment->subscription->stripe_status == 'active') {
+                $client = new Client();
+                $promise = $client->getAsync('https://api.stripe.com/v1/subscriptions/' . $apartment->subscription->stripe_id . '?key=' . env('STRIPE_SECRET'));
+                $response = $promise->wait();
+                $currentSubscription = json_decode($response->getBody()->getContents(), true);
+                $currentProductId = json_decode($response->getBody()->getContents(), true)['plan']['product'];
+                if ($product->prod_id == $currentProductId) {
+                    //resume
+                    $currentSubscription->resume();
+                } else {
+                    //creo un nuovo abbonamento
+                    $newSubscription = $user->newSubscription(
+                        $product->name,
+                        $product->price_id
+                    )->create($paymentMethod->id);
+                    if ($product->prod_id == 'prod_NMsadp2zoXAM1a') {
+                        $newSubscription->ends_at = Carbon::now()->addDays(1); // or any other date
+                        $newSubscription->update();
+                    } else if ($product->prod_id == 'prod_NMsbDauQJZnChL') {
+                        $newSubscription->ends_at = Carbon::now()->addDays(3); // or any other date
+                        $newSubscription->update();
+                    } else if ($product->prod_id == 'prod_NMsbX1g0XSE4ns') {
+                        $newSubscription->ends_at = Carbon::now()->addDays(7); // or any other date
+                        $newSubscription->update();
+                    }
+
+
+                    $newSubscription->apartment_id = $apartment->id;
+                    $newSubscription->save();
+                    $apartment->subscription_id = $newSubscription->id;
+                    $apartment->save();
+                }
+            }
+        }
 
 
 
-
-        return to_route('dashboard');
+        //TODO: return con un messaggio
+        return to_route('apartments.index')->with('message', 'Il pagamento è andato a buon fine');
     }
 }

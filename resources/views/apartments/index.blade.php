@@ -19,7 +19,8 @@
                 <div class="row">
                     @forelse($apartments as $apartment)
                         <div class="col-sm-12 col-md-6 col-xl-4 g-4">
-                            <div class="card border-0">
+                            <div
+                                class="card border-0{{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Bronze' ? 'bronze' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Silver' ? 'silver' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Gold' ? 'gold' : '' }}">
                                 <div class="card_img">
                                     <img class="my-img img-fluid"
                                         src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
@@ -36,12 +37,20 @@
 
                                         </label>
                                         <div class="text-end">
-                                            @if (!isset($apartment->subscription) || $apartment->subscription->stripe_status !== 'active')
+                                            @if (!isset($apartment->subscription))
                                                 <a href="{{ route('products', $apartment->slug) }}"
                                                     class="sponsor_btn text-white">
                                                     Sponsorizza
                                                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                                                 </a>
+                                            @elseif(isset($apartment->subscription))
+                                                @if ($apartment->subscription->stripe_status !== 'active')
+                                                    <a href="{{ route('products', $apartment->slug) }}"
+                                                        class="sponsor_btn text-white">
+                                                        Sponsorizza
+                                                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                                    </a>
+                                                @endif
                                             @endif
 
                                             <!-- show -->

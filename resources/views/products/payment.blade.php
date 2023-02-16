@@ -44,11 +44,7 @@
                         </div>
                     </div>
 
-                    <div class='form-row row'>
-                        <div class='col-md-12 hide error form-group'>
-                            <div class='alert-danger alert'>Fix the errors before you begin.</div>
-                        </div>
-                    </div>
+
 
                     <div class="row">
                         <button class="btn btn-success btn-lg btn-block" type="submit">Pay</button>
