@@ -219,15 +219,15 @@ span {
 
 
 a.bronze {
-    color: brown;
+    color: #CD7F32;
 }
 
 a.silver {
-    color: grey;
+    color: #C0C0C0;
 }
 
 a.gold {
-    color: rgb(149, 149, 12);
+    color: #FFD700;
 }
 
 .card {
@@ -334,4 +334,110 @@ a.gold {
 
 
 
+}
+
+a.buy {
+    color: #51D48E;
+    background-color: #51d48e4b;
+    width: 50%;
+    padding: 10px;
+    opacity: 60%;
+
+}
+
+a.buy:hover {
+    color: #51D48E;
+    background-color: #51d48e4b;
+    opacity: 100%;
+
+}
+
+.col-plans {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.panel-body {
+    // Colore primario di Stripe
+    $primary-color: #6772e5;
+
+    // Stilizzazione del form
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f6f9fc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: "Helvetica Neue", sans-serif;
+    }
+
+    // Stilizzazione del titolo del form
+    form h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    // Stilizzazione delle etichette del form
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #485766;
+        display: block;
+    }
+
+    // Stilizzazione degli input del form
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d8e1e8;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-bottom: 16px;
+        color: #485766;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+
+        &::placeholder {
+            color: #acb7c4;
+        }
+    }
+
+    // Stilizzazione del pulsante del form
+    input[type="submit"] {
+        color: #51D48E;
+        background-color: #51d48e4b;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        padding: 12px 24px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        opacity: 60%;
+
+
+        &:hover {
+            color: #51D48E;
+            opacity: 100%;
+
+            background-color: #51d48e4b;
+        }
+    }
+
+}
+
+.panel-default {
+    p {
+        font-size: 30px;
+        color: #51D48E;
+
+    }
 }
