@@ -20,13 +20,14 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--TomTom-->
-    <link rel="stylesheet" type="text/css"
-        href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css" />
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
-    </script>
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js">
-    </script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/Searchbox.css') }}" />
+
+    <script src="{{ asset('assets/js/Searchbox-web.js') }}"></script>
+    <script src="{{ asset('assets/js/services-web.min.js') }}"></script>
+
     <!-- Scripts -->
+    @vite(['resources/scss/app.scss'])
+
     @vite(['resources/js/app.js'])
 </head>
 

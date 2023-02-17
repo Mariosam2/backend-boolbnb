@@ -217,6 +217,23 @@ span {
     }
 }
 
+
+a.bronze {
+    color: brown;
+}
+
+a.silver {
+    color: grey;
+}
+
+a.gold {
+    color: rgb(149, 149, 12);
+}
+
+.card-header.sponsor {
+    background-color: #7cb6f8;
+}
+
 /* Messages View */
 .ms_card {
     border-radius: 1.5rem;
@@ -295,4 +312,4 @@ span {
             color: $bb-success;
         }
     }
-}
+

@@ -30,6 +30,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $apartments =  Auth::user()->apartments()->get();
         return view('apartments.index', compact('apartments'));
     }

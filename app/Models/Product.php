@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Promotion extends Model
+class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'price', 'duration'];
+    protected $fillable = ['name', 'slug', 'price_id'];
 
     /**
      * The apartments that belong to the Promotion

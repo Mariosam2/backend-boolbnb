@@ -20,9 +20,9 @@ class ApartmentController extends Controller
             'results' => Apartment::with(['user', 'services', 'views', 'promotions', 'apartment_category'])->paginate(6)
         ]);
     }
-    public function show($slug)
+    public function show(Apartment $apartment)
     {
-        $apartment = Apartment::with('user', 'services', 'views', 'promotions', 'apartment_category')->where('slug', $slug)->first();
+
 
         if ($apartment) {
             return response()->json([
