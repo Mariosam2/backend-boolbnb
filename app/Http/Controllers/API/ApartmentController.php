@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchApartmentRequest;
 use App\Models\Apartment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
@@ -15,11 +16,49 @@ class ApartmentController extends Controller
 {
     public function index()
     {
+        //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
+        $apartments = Apartment::where('subscription_id', '!=', null)->with(['user', 'services', 'views', 'subscription', 'apartment_category'])->get();
+
+
+        $apartments = $this->bubbleSortByProduct($apartments);
+
         return response()->json([
             'success' => true,
-            'results' => Apartment::where('subscription_id', '!=', null)->orderBy('subscription_id')->with(['user', 'services', 'views',  'apartment_category'])->paginate(6)
+            'results' => $apartments
         ]);
     }
+    /**
+     * Takes a collection of apartments and sort it by type of promotion Gold,Silver,Bronze
+     * @param mixed $apartments
+     * @return mixed $apartments sorted
+     */
+    public function bubbleSortByProduct(mixed $apartments)
+    {
+        $swapped = null;
+        do {
+            $swapped = false;
+            for ($i = 0; $i < count($apartments) - 1; $i++) {
+                if ($apartments[$i]->subscription != null && $apartments[$i + 1]->subscription != null) {
+                    //faccio le chiamate per ottenere i prodotti collegati all'apartamento
+                    $firstProductId = $apartments[$i]->subscription->product->id;
+                    $secondProductId = $apartments[$i + 1]->subscription->product->id;
+                    //dd($firstProductId, $secondProductId);
+                    //ordino gli appartamenti in base all'id dei prodotti
+                    if ($secondProductId < $firstProductId) {
+                        //swap
+                        $temp = $apartments[$i];
+                        $apartments[$i] = $apartments[$i + 1];
+                        $apartments[$i + 1] = $temp;
+                        $swapped = true;
+                        //dd($apartments);
+                    }
+                }
+            }
+        } while ($swapped);
+        return $apartments;
+    }
+
+
     public function show(Apartment $apartment)
     {
 
@@ -251,7 +290,7 @@ class ApartmentController extends Controller
 
 
                     foreach ($coordinates as $coordinate) {
-                        $searchedApartment = Apartment::with(['user', 'services', 'views', 'apartment_category'])->where([
+                        $searchedApartment = Apartment::with(['user', 'services', 'views', 'subscription', 'apartment_category'])->where([
                             ['latitude', '=', $coordinate['lat']],
                             ['longitude', '=', $coordinate['lon']],
                         ])->get();
@@ -264,7 +303,7 @@ class ApartmentController extends Controller
                         "lon" => $longitude
                     ];
                 } else if (!isset($val_data['address'])) {
-                    $searchedApartments = Apartment::with(['user', 'services', 'views', 'apartment_category'])->get();
+                    $searchedApartments = Apartment::with(['user', 'services', 'views', 'subscription', 'apartment_category'])->get();
                     //dd($searchedApartments);
                 }
                 if (isset($val_data['services'])) {
@@ -292,7 +331,11 @@ class ApartmentController extends Controller
 
                 //dd($searchedApartments);
                 $searchedApartmentsCollection = collect($searchedApartments);
+                //dd($searchedApartmentsCollection);
 
+
+                $searchedApartmentsCollection = $this->bubbleSortByProduct($searchedApartmentsCollection);
+                $searchedApartments = $searchedApartmentsCollection->where('visible', '=', true);
 
                 return response()->json([
                     'success' => true,
@@ -300,11 +343,10 @@ class ApartmentController extends Controller
                     'results' => $searchedApartments
                 ]);
             } catch (\Exception $e) {
-                /* return response()->json([
+                return response()->json([
                     'success' => false,
                     'results' => 'not found'
-                ]); */
-                dd($e);
+                ]);
             }
         }
     }

@@ -21,7 +21,7 @@ class PaymentController extends Controller
         //dd($promotions);
         if ($apartment->subscription) {
             if ($apartment->subscription->stripe_status == 'active') {
-                //TODO: aggiungere un messaggio all'utente al redirect
+
                 return view('not-found');
             }
         } else {
@@ -33,7 +33,7 @@ class PaymentController extends Controller
     {
         if ($apartment->subscription) {
             if ($apartment->subscription->stripe_status == 'active') {
-                //TODO: aggiungere un messaggio all'utente al redirect
+
                 return view('not-found');
             }
         } else {
@@ -50,6 +50,7 @@ class PaymentController extends Controller
 
         //dd($request->all(), $promotion_id, $apartment);
         $product = Product::where('prod_id', '=', $prod_id)->first();
+        //dd($product->id);
         Stripe::setApiKey(env('STRIPE_KEY'));
         $user = Auth::user();
         //dd($request->stripeToken);
@@ -79,6 +80,7 @@ class PaymentController extends Controller
 
 
             $newSubscription->apartment_id = $apartment->id;
+            $newSubscription->product_id = $product->id;
             $newSubscription->save();
             $apartment->subscription_id = $newSubscription->id;
             $apartment->save();
@@ -110,8 +112,8 @@ class PaymentController extends Controller
                         $newSubscription->update();
                     }
 
-
                     $newSubscription->apartment_id = $apartment->id;
+                    $newSubscription->product_id = $product->id;
                     $newSubscription->save();
                     $apartment->subscription_id = $newSubscription->id;
                     $apartment->save();
