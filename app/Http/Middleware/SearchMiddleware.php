@@ -20,14 +20,14 @@ class SearchMiddleware
         $category = $request->query('category');
         $address = $request->query('address');
         $radius = $request->query('radius');
-        $guests = $request->query('beds');
+        $beds = $request->query('beds');
 
 
         $request->services = $services;
         $request->category = $category;
         $request->address = $address;
         $request->radius = $radius;
-        $request->beds = $guests;
+        $request->beds = $beds;
 
         return $next($request);
     }

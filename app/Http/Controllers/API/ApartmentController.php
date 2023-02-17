@@ -17,7 +17,7 @@ class ApartmentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'results' => Apartment::with(['user', 'services', 'views',  'apartment_category'])->paginate(6)
+            'results' => Apartment::where('subscription_id', '!=', null)->orderBy('subscription_id')->with(['user', 'services', 'views',  'apartment_category'])->paginate(6)
         ]);
     }
     public function show(Apartment $apartment)
@@ -131,7 +131,7 @@ class ApartmentController extends Controller
     {
         $filteredApartaments = [];
         foreach ($searchedApartments as $searchedApartment) {
-            if ($searchedApartment->beds === $beds) {
+            if ($searchedApartment->beds == $beds) {
                 array_push($filteredApartaments, $searchedApartment);
             };
         }
@@ -154,7 +154,7 @@ class ApartmentController extends Controller
             'category' => $request->category,
             'services' => $request->services,
             'radius' => $request->radius,
-            'beds' => $request->guests
+            'beds' => $request->beds
         ];
 
         //dd($data);
@@ -286,11 +286,13 @@ class ApartmentController extends Controller
                 if (isset($val_data['beds'])) {
                     $beds = $val_data['beds'];
                     $filteredApartaments = $this->filterApartmentsByBeds($searchedApartments, $beds);
-                    $searchedApartment = $filteredApartaments;
+                    $searchedApartments = $filteredApartaments;
                 }
 
 
                 //dd($searchedApartments);
+                $searchedApartmentsCollection = collect($searchedApartments);
+
 
                 return response()->json([
                     'success' => true,
