@@ -3,58 +3,60 @@
 
 
 @section('content')
-    <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
-            <div class="panel-body">
+    <div class="col panel panel-default mt-5">
 
+        <p class="text-center" for="amount">Importo:
+            <strong>
 
-                <form role="form"
-                    action="{{ route('products.process-payment', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}"
-                    method="post" class="stripe-payment" data-cc-on-file="false"
-                    data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="stripe-payment">
-                    @csrf
+                @if ($product->name == 'Bronze')
+                    10$
+                @elseif ($product->name == 'Silver')
+                    25$
+                @else
+                    50$
+                @endif
+            </strong>
 
-                    <div class='form-row row'>
-                        <div class='col-xs-12 form-group required'>
-                            <label class='control-label'>Name on Card</label> <input class='form-control cardholder-name'
-                                type='text' required>
-                        </div>
-                    </div>
+        </p>
+        <div class="panel-body d-flex justify-content-center">
 
-                    <div class='form-row row'>
-                        <div class='col-xs-12 form-group card required'>
-                            <label class='control-label'>Card Number</label> <input autocomplete='off'
-                                class='form-control card-num' size='20' type='text' required>
-                        </div>
-                    </div>
-
-                    <div class='form-row row'>
-                        <div class='col-xs-12 col-md-4 form-group cvc required'>
-                            <label class='control-label'>CVC</label>
-                            <input autocomplete='off' class='form-control card-cvc' placeholder='e.g 595' size='4'
-                                type='text' required>
-                        </div>
-                        <div class='col-xs-12 col-md-4 form-group expiration required'>
-                            <label class='control-label'>Expiration Month</label> <input
-                                class='form-control card-expiry-month' placeholder='MM' size='2' type='text'
-                                required>
-                        </div>
-                        <div class='col-xs-12 col-md-4 form-group expiration required'>
-                            <label class='control-label'>Expiration Year</label> <input
-                                class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'
-                                required>
-                        </div>
-                    </div>
+            <form role="form"
+                action="{{ route('products.process-payment', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}"
+                method="post" class="stripe-payment mt-5" data-cc-on-file="false"
+                data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="stripe-payment">
+                @csrf
 
 
 
-                    <div class="row">
-                        <button class="btn btn-success btn-lg btn-block" type="submit">Pay</button>
-                    </div>
 
-                </form>
-            </div>
+
+
+                <label class='control-label'> Card Number</label>
+                <input autocomplete="cc-family-name" id="card_number" pattern="[0-9]{13,19}" class='form-control card-num'
+                    size='20' type='text' required>
+
+                <label class='control-label'>Name on Card</label>
+                <input id="card_name" class='form-control cardholder-name' type='text' required>
+
+                <label class='control-label'>Expiration Month</label> <input class='form-control card-expiry-month'
+                    placeholder='MM' size='2' type='text' required>
+                <label class='control-label'>Expiration Year</label> <input class='form-control card-expiry-year'
+                    placeholder='YYYY' size='4' type='text' required>
+
+                <label class='control-label'>CVC</label>
+                <input id="cvv" pattern="[0-9]{3,4}" autocomplete='off' class='form-control card-cvc'
+                    placeholder='es 111' size='4' type='text' required>
+
+                <input type="submit" value="Effettua pagamento">
+
+
+
+
+
+
+            </form>
         </div>
+
     </div>
     </div>
     </div>
