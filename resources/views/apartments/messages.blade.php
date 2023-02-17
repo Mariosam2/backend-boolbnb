@@ -12,14 +12,13 @@
             <div class="row row-cols-1">
                 @forelse ($messages as $message)
                     <div class="col">
-                        <div class="card ms_card d-flex flex-row flex-wrap my-3">
+                        <div class="card ms_card d-flex flex-row flex-wrap my-3 new-message">
                             <div class="col-3 d-flex  align-items-center">
                                 <img width="250" height="150" class="apartment-img"
                                     src="{{ Storage::exists($message->media) ? asset('storage/' . $message->media) : $message->media }}"
                                     alt="Title">
                                 <span class="data data_visible ps-3">
                                     {{ substr($message->created_at, 2, 9) }}
-
                                 </span>
                             </div>
                             <div class="col-3 d-flex align-items-center gap-3">
@@ -38,7 +37,6 @@
                                     </h6>
                                     <div class="data data_hide">
                                         {{ substr($message->created_at, 2, 9) }}
-
                                     </div>
                                 </div>
                             </div>
@@ -47,17 +45,15 @@
                                     <h5>{{ $message->title }}</h5>
                                     {{ $message->body }}
                                 </div>
-                                <a target=”_blank” href="mailto:{{ $message->email }}" class="btn send_msg_btn me-4">
+                                <a target="_blank" href="mailto:{{ $message->email }}" class="btn send_msg_btn me-4">
                                     Rispondi
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 @empty
-                    <p>Non Hai messaggi!</p>
+                    <p>Non hai messaggi!</p>
                 @endforelse
-
             </div>
         </div>
     </div>
