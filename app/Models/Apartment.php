@@ -70,18 +70,6 @@ class Apartment extends Model
 
 
     /**
-     * The promotions that belong to the Apartment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function promotions(): BelongsToMany
-    {
-        return $this->belongsToMany(Promotion::class);
-    }
-
-
-
-    /**
      * Get the apartment_category that owns the Apartment
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
