@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -21,6 +22,16 @@ class ApartmentSeeder extends Seeder
         $apartments = config('apartments.apartments');
         $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
         foreach ($apartments as $apartment) {
+            $allServices = json_decode(json_encode(Service::all()));
+            $numberOfServices = rand(0, count($allServices));
+            $apartmentServices = [];
+
+            for ($i = 0; $i < $numberOfServices; $i++) {
+                $serviceToAdd = rand(0, count($allServices));
+                array_push($apartmentServices, $allServices[$serviceToAdd]);
+            }
+
+            //dd($apartmentServices);
             $apartment['price'] = floatval(number_format($apartment['price'], 2));
             //dd($apartment['price']);
             $apartment['slug'] = Str::slug($apartment['title']);
@@ -42,6 +53,7 @@ class ApartmentSeeder extends Seeder
                 }
 
                 $new_apartment = Apartment::make($apartment);
+                $new_apartment->services()->attach($apartmentServices);
                 $new_apartment->save();
             } catch (\Exception $e) {
                 var_dump($e->getMessage());
