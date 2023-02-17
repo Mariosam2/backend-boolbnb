@@ -131,7 +131,7 @@ class ApartmentController extends Controller
     {
         $filteredApartaments = [];
         foreach ($searchedApartments as $searchedApartment) {
-            if ($searchedApartment->beds == $beds) {
+            if ($searchedApartment->beds >= $beds) {
                 array_push($filteredApartaments, $searchedApartment);
             };
         }
