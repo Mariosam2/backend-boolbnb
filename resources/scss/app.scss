@@ -243,9 +243,7 @@ a.gold {
 }
 
 /* Messages View */
-.new-message {
-    font-size: 20px;
-}
+
 
 .ms_card {
     border-radius: 1.5rem;
@@ -326,6 +324,12 @@ a.gold {
             color: $bb-success;
         }
     }
+
+}
+
+.card.ms_card.new_message {
+    background-color: #a7a5a5 !important;
+    color: white !important;
 
 }
 

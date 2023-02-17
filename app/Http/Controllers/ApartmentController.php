@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
@@ -65,7 +65,22 @@ class ApartmentController extends Controller
             ->get();
         return view('apartments.messages', compact('messages'));
     }
+    public function updateMessage(Request $request, $id)
+    {
+        $message = Message::findOrFail($id);
+        $message->is_new = false;
+        $message->save();
+        
+        return redirect()->back();
+    }
+/*     public function readMessage($id)
+{
+    $message = Message::find($id);
+    $message->is_new = false;
+    $message->save();
 
+    return redirect()->route('apartments.messages');
+} */
     public function store(StoreApartmentRequest $request)
     {
         try {
