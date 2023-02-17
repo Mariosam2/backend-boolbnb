@@ -3,76 +3,87 @@
 
 
 @section('content')
-    <div class="col">
-        <h1 class="mb-5 mt-3 ms-5">Sponsorizza </h1>
-        <div class="row row-cols-md-3 row-cols-sm-1 justify-content-evenly align-items-center my-5 pt-5 flex-row-reverse">
+    <div class="col col-plans">
+        <h1 class="mb-5 mt-5 ms-5">Sponsorizza: {{ $apartment->title }} </h2>
+            <a href="{{ route('apartments.index') }}" class="torna mb-5 ms-5">
+                <i class="fa-solid fa-chevron-left"></i>
+                Torna alla pagina dei tuoi appartamenti
+            </a>
+            <div class="row   justify-content-evenly align-items-center my-5 pt-5 flex-row-reverse">
 
-            @forelse($products as $product)
-                <div class="col-1 col-md-3 text-center  sponsor-card">
-                    <div class="card mb-4  shadow-sm">
-                        <div class="card-header sponsor py-3 ">
-                            <span class="text-white">In evidenza per
-                                @if ($product->name == 'Bronze')
-                                    1 giorno
-                                @elseif ($product->name == 'Silver')
-                                    3 giorni
-                                @else
-                                    7 giorni
-                                @endif
-                                {{ $product->duration }}
-                            </span>
+                @forelse($products as $product)
+                    <div class="col-sm-10 col-md-5 col-lg-3 text-center  sponsor-card">
+                        <div class="card mb-4  shadow-sm">
+                            <div class="card-header sponsor py-3 ">
+                                <span class="text-white">In evidenza per
+                                    <strong>
+
+                                        @if ($product->name == 'Bronze')
+                                            1 giorno
+                                        @elseif ($product->name == 'Silver')
+                                            3 giorni
+                                        @else
+                                            7 giorni
+                                        @endif
+                                        {{ $product->duration }}
+                                </span>
+                                </strong>
+
+                            </div>
+                            <div class="card-body body-sponsor d-flex flex-column text-center justify-content-evenly">
+
+                                <h1 class="mt-4">
+
+                                    <a class="d-block text-uppercase text-decoration-none {{ $product->name == 'Bronze' ? 'bronze' : '' }} {{ $product->name == 'Silver' ? 'silver' : '' }} {{ $product->name == 'Gold' ? 'gold' : '' }}"
+                                        href="{{ route('products.purchase', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}">
+
+
+                                        {{ $product->name }}
+                                    </a>
+
+
+                                </h1>
+
+                                <span class="text-center">
+                                    Sponsorizzato per
+                                    @if ($product->name == 'Bronze')
+                                        1 giorno.
+                                    @elseif ($product->name == 'Silver')
+                                        3 giorni.
+                                    @else
+                                        7 giorni.
+                                    @endif
+                                    <br>
+                                    Prima posizione durante la ricerca
+                                    <br>
+                                    Icona distintiva per sponsorizzazione
+                                    <br>
+                                    Sezione dedicata in homepage del sito
+                                </span>
+                                <h2 class="my-4">
+                                    @if ($product->name == 'Bronze')
+                                        10 $
+                                    @elseif ($product->name == 'Silver')
+                                        25$
+                                    @else
+                                        50$
+                                    @endif
+
+                                    </h3>
+                                    <span class="text-center">
+
+                                        <a href="{{ route('products.purchase', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}"
+                                            type="button" class=" btn  buy">Acquista</a>
+                                    </span>
+
+                            </div>
                         </div>
-                        <div class="card-body body-sponsor d-flex flex-column text-center justify-content-evenly">
 
-                            <h2 class="mt-4">
-
-                                <a class="d-block text-uppercase text-decoration-none {{ $product->name == 'Bronze' ? 'bronze' : '' }} {{ $product->name == 'Silver' ? 'silver' : '' }} {{ $product->name == 'Gold' ? 'gold' : '' }}"
-                                    href="{{ route('products.purchase', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}">
-
-
-                                    {{ $product->name }}
-                                </a>
-
-
-                            </h2>
-
-                            <span class="text-center">
-                                Sponsorizzato per
-                                @if ($product->name == 'Bronze')
-                                    1 giorno.
-                                @elseif ($product->name == 'Silver')
-                                    3 giorni.
-                                @else
-                                    7 giorni.
-                                @endif
-                                <br>
-                                Prima posizione durante la ricerca
-                                <br>
-                                Icona distintiva per sponsorizzazione
-                                <br>
-                                Sezione dedicata in homepage del sito
-                            </span>
-                            <h3 class="my-4">
-                                @if ($product->name == 'Bronze')
-                                    10 $
-                                @elseif ($product->name == 'Silver')
-                                    25$
-                                @else
-                                    50$
-                                @endif
-
-                            </h3>
-
-                            <a href="{{ route('products.purchase', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}"
-                                type="button" class="w-100 btn btn-lg btn-outline-primary">Acquista</a>
-                        </div>
                     </div>
 
-                </div>
-
-            @empty
-            @endforelse
-        </div>
+                @empty
+                @endforelse
+            </div>
 
     </div>
 @endsection

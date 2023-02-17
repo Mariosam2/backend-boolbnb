@@ -219,15 +219,15 @@ span {
 
 
 a.bronze {
-    color: brown;
+    color: #CD7F32;
 }
 
 a.silver {
-    color: grey;
+    color: #C0C0C0;
 }
 
 a.gold {
-    color: rgb(149, 149, 12);
+    color: #FFD700;
 }
 
 .card {
@@ -334,4 +334,25 @@ a.gold {
 
 
 
+}
+
+a.buy {
+    color: #51D48E;
+    background-color: #51d48e4b;
+    width: 50%;
+    padding: 10px;
+    opacity: 60%;
+
+}
+
+a.buy:hover {
+    color: #51D48E;
+    background-color: #51d48e4b;
+    opacity: 100%;
+
+}
+
+.col-plans {
+    height: 100vh;
+    overflow-y: auto;
 }
