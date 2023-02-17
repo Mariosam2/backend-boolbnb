@@ -230,8 +230,16 @@ a.gold {
     color: rgb(149, 149, 12);
 }
 
+.card {
+    border-radius: 30px;
+
+}
+
 .card-header.sponsor {
-    background-color: #7cb6f8;
+    background-color: #46BAE2;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+
 }
 
 /* Messages View */
@@ -318,5 +326,12 @@ a.gold {
             color: $bb-success;
         }
     }
+
+}
+
+.body-sponsor {
+    min-height: 500px;
+
+
 
 }
