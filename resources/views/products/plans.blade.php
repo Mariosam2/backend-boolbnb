@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="col">
-
         <h1 class="mb-5">Sponsorizza </h1>
         <div class="row  justify-content-evenly align-items-center my-5 flex-row-reverse">
 
@@ -60,8 +59,9 @@
                                 @endif
 
                             </h3>
-
-                            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Acquista</button>
+                            a
+                            <a href="{{ route('products.purchase', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}"
+                                type="button" class="w-100 btn btn-lg btn-outline-primary">Acquista</a>
                         </div>
                     </div>
 
