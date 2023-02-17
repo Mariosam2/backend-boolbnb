@@ -17,7 +17,7 @@ class ApartmentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'results' => Apartment::with(['user', 'services', 'views',  'apartment_category'])->paginate(6)
+            'results' => Apartment::where('subscription_id', '!=', null)->orderBy('subscription_id')->with(['user', 'services', 'views',  'apartment_category'])->paginate(6)
         ]);
     }
     public function show(Apartment $apartment)

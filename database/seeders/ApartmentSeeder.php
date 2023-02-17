@@ -20,15 +20,16 @@ class ApartmentSeeder extends Seeder
     public function run()
     {
         $apartments = config('apartments.apartments');
-        $tomtom_key = 'Ad83Ah6WsxYFXscdqk3lFXmhKanlaKHs';
+        $tomtom_key = 'FiLLCEGWt31cQ9ECIWAD6zYjczzeC6zn';
         foreach ($apartments as $apartment) {
-            $allServices = json_decode(json_encode(Service::all()));
-            $numberOfServices = rand(0, count($allServices));
+            $allServices = Service::all()->toArray();
+            //dd($allServices);
+            $numberOfServices = rand(1, count($allServices) - 1);
             $apartmentServices = [];
 
             for ($i = 0; $i < $numberOfServices; $i++) {
-                $serviceToAdd = rand(0, count($allServices));
-                array_push($apartmentServices, $allServices[$serviceToAdd]);
+                $serviceToAdd = rand(0, count($allServices) - 1);
+                array_push($apartmentServices, $allServices["$serviceToAdd"]['id']);
             }
 
             //dd($apartmentServices);
@@ -51,13 +52,14 @@ class ApartmentSeeder extends Seeder
                 } else {
                     continue;
                 }
-
-                $new_apartment = Apartment::make($apartment);
-                $new_apartment->services()->attach($apartmentServices);
-                $new_apartment->save();
             } catch (\Exception $e) {
                 var_dump($e->getMessage());
             }
+            $new_apartment = Apartment::create($apartment);
+            $new_apartment->services()->attach($apartmentServices);
+
+            //dd($new_apartment->services);
+
         }
     }
 }
