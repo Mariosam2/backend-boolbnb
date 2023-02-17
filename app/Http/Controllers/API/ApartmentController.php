@@ -17,7 +17,7 @@ class ApartmentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'results' => Apartment::with(['user', 'services', 'views', 'promotions', 'apartment_category'])->paginate(6)
+            'results' => Apartment::with(['user', 'services', 'views',  'apartment_category'])->paginate(6)
         ]);
     }
     public function show(Apartment $apartment)
