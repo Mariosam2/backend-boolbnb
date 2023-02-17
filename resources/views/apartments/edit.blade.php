@@ -28,7 +28,7 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Titolo:*</label>
                     <input type="text" name="title" id="title" class="form-control" placeholder=""
-                        aria-describedby="helpId" value="{{ old('title', $apartment->title) }}">
+                        aria-describedby="helpId" value="{{ old('title', $apartment->title) }}" required>
 
                 </div>
                 <div class="searchBoxWrapper"></div>
@@ -90,7 +90,7 @@
                         <label for="guests" class="form-label">Ospiti:</label>
                         <input type="number" name="guests" id="guests" class="form-control" placeholder=""
                             aria-describedby="helpId" min="1" max="127"
-                            value="{{ old('guests', $apartment->guests) }}">
+                            value="{{ old('guests', $apartment->guests) }}" required>
                     </div>
 
 
@@ -148,7 +148,7 @@
                                         {{ $service->name }}</option>
                                 @endif
                             @empty
-                                <option value="" disabled>Sorry 😥 no services in the system</option>
+                                <option value="" disabled>Scusa 😥 non ci sono servizi nel sistema</option>
                             @endforelse
 
                         </select>
@@ -159,7 +159,7 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione:*</label>
-                <textarea class="form-control" name="description" id="description" rows="3">{{ old('description', $apartment->description) }}</textarea>
+                <textarea class="form-control" name="description" id="description" rows="3" required>{{ old('description', $apartment->description) }}</textarea>
 
             </div>
             <div class="row  justify-content-end">

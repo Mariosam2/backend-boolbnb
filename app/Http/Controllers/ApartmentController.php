@@ -11,6 +11,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 
 
 class ApartmentController extends Controller
@@ -57,8 +58,12 @@ class ApartmentController extends Controller
      */
     public function messages()
     {
-        $apartments = Auth::user()->apartments()->get();
-        return view('apartments.messages', compact('apartments'));
+        $messages = DB::table('apartments')
+            ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
+            ->where('apartments.user_id', Auth::id())
+            ->orderByDesc('messages.id')
+            ->get();
+        return view('apartments.messages', compact('messages'));
     }
 
     public function store(StoreApartmentRequest $request)

@@ -84,6 +84,7 @@ span {
 .create_btn {
     background-color: $bb-success-soft;
     color: $bb-success;
+    font-weight: 600;
     padding: 1.25rem 2.25rem;
     font-size: 20px;
     border-radius: 0.5rem;
@@ -216,6 +217,7 @@ span {
     }
 }
 
+
 a.bronze {
     color: brown;
 }
@@ -230,5 +232,84 @@ a.gold {
 
 .card-header.sponsor {
     background-color: #7cb6f8;
-
 }
+
+/* Messages View */
+.ms_card {
+    border-radius: 1.5rem;
+
+    .apartment-img {
+        object-fit: cover;
+        border-radius: 1.5rem 0 0 1.5rem;
+
+    }
+
+    .img_msg {
+        background-color: $bb-primary;
+        height: 80px;
+        width: 80px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+    }
+
+    .data {
+        color: $bb-light;
+    }
+
+    .data_hide {
+        display: none;
+    }
+
+    .img_hide {
+        display: block;
+    }
+
+    @media screen and (max-width:1750px) {
+        .img_hide {
+            display: none;
+        }
+
+        .data_hide {
+            display: block;
+        }
+
+        .data_visible {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width:1400px) {
+        .info {
+            padding-left: 1rem;
+        }
+    }
+
+    @media screen and (max-width:1200px) {
+        .info {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width:992px) {
+        .body {
+            display: none;
+        }
+    }
+
+    .name {
+        margin-bottom: -1px;
+    }
+
+    .send_msg_btn {
+        background-color: $bb-success-soft;
+        color: $bb-success;
+        font-weight: bold;
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+
+        &:hover {
+            background-color: $bb-success-soft;
+            color: $bb-success;
+        }
+    }
+

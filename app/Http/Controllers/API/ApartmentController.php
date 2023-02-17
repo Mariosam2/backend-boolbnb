@@ -127,6 +127,18 @@ class ApartmentController extends Controller
         return $filteredApartaments;
     }
 
+    public function filterApartmentsByBeds(mixed $searchedApartments, int $beds)
+    {
+        $filteredApartaments = [];
+        foreach ($searchedApartments as $searchedApartment) {
+            if ($searchedApartment->beds === $beds) {
+                array_push($filteredApartaments, $searchedApartment);
+            };
+        }
+
+        return $filteredApartaments;
+    }
+
 
 
     /**
@@ -140,7 +152,9 @@ class ApartmentController extends Controller
         $data = [
             'address' => $request->address,
             'category' => $request->category,
-            'services' => $request->services
+            'services' => $request->services,
+            'radius' => $request->radius,
+            'beds' => $request->guests
         ];
 
         //dd($data);
@@ -148,7 +162,10 @@ class ApartmentController extends Controller
         $validator = Validator::make($data, [
             'address' => 'nullable|max:255',
             'category' => 'nullable|exists:apartment_categories,id',
-            'services' => 'nullable|exists:services,id'
+            'services' => 'nullable|exists:services,id',
+            'radius' => 'nullable|numeric|max:100000',
+            'beds' => 'nullable|numeric|min:0|max:128'
+
 
         ]);
 
@@ -199,7 +216,7 @@ class ApartmentController extends Controller
                             ]
                         ];
                     } else {
-                        $defaultRadius = 50000;
+                        $defaultRadius = 20000;
                         $geometryList =
                             [
                                 [
@@ -264,6 +281,12 @@ class ApartmentController extends Controller
                     $filteredApartaments = $this->filterApartmentsByCategory($searchedApartments, $category);
                     //dd($searchedApartments);
                     $searchedApartments = $filteredApartaments;
+                }
+
+                if (isset($val_data['beds'])) {
+                    $beds = $val_data['beds'];
+                    $filteredApartaments = $this->filterApartmentsByBeds($searchedApartments, $beds);
+                    $searchedApartment = $filteredApartaments;
                 }
 
 
