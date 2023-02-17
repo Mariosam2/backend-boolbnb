@@ -251,7 +251,7 @@ class ApartmentController extends Controller
 
 
                     foreach ($coordinates as $coordinate) {
-                        $searchedApartment = Apartment::with(['user', 'services', 'views', 'promotions', 'apartment_category'])->where([
+                        $searchedApartment = Apartment::with(['user', 'services', 'views', 'apartment_category'])->where([
                             ['latitude', '=', $coordinate['lat']],
                             ['longitude', '=', $coordinate['lon']],
                         ])->get();
@@ -264,7 +264,7 @@ class ApartmentController extends Controller
                         "lon" => $longitude
                     ];
                 } else if (!isset($val_data['address'])) {
-                    $searchedApartments = Apartment::with(['user', 'services', 'views', 'promotions', 'apartment_category'])->get();
+                    $searchedApartments = Apartment::with(['user', 'services', 'views', 'apartment_category'])->get();
                     //dd($searchedApartments);
                 }
                 if (isset($val_data['services'])) {
