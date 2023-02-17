@@ -235,8 +235,14 @@ a.gold {
 }
 
 /* Messages View */
+.new-message {
+    font-size: 20px;
+}
+
 .ms_card {
     border-radius: 1.5rem;
+
+
 
     .apartment-img {
         object-fit: cover;
@@ -312,4 +318,5 @@ a.gold {
             color: $bb-success;
         }
     }
+
 }
