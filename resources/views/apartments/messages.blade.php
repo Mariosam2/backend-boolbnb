@@ -63,6 +63,9 @@
                 @empty
                     <p>Non hai messaggi!</p>
                 @endforelse
+                <div class="pagination d-flex justify-content-center">
+                    {{ $messages->links() }}
+                </div>
             </div>
         </div>
     </div>
