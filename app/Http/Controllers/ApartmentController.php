@@ -62,12 +62,12 @@ class ApartmentController extends Controller
             ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
             ->where('apartments.user_id', Auth::id())
             ->orderByDesc('messages.id')
-            ->get();
+            ->paginate(5);
         return view('apartments.messages', compact('messages'));
     }
-    public function updateMessage(Request $request, $id)
+    public function updateMessage($id)
     {
-        $message = Message::findOrFail($id);
+        $message = Message::find($id);
         $message->is_new = false;
         $message->save();
         

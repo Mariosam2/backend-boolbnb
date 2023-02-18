@@ -14,7 +14,7 @@
                     <div class="col">
 
 
-                        <form method="POST" action="{{ route('apartments.update_message', ['id' => $message->id]) }}">
+                        <form method="POST" action="{{ route('apartments.updateMessage', ['id' => $message->id]) }}">
                             @csrf
                             @method('PUT')
                             <div type="submit"
@@ -67,20 +67,21 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
+        $(function() {
             $('.ms_card').click(function() {
-                var id = $(this).data('id');
+                var messageCard = $(this).closest('.card');
+                var messageId = messageCard.data('id');
+
                 $.ajax({
-                    type: "PUT",
-                    url: "{{ route('apartments.update_message', '') }}/" + id,
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
+                    url: '{{ route('apartments.updateMessage', ['id' => '__ID__']) }}'.replace(
+                        '__ID__', messageId),
+                    method: 'PUT',
                     success: function(response) {
-                        if (response.success) {
-                            $(this).removeClass('new_message');
-                        }
-                    }.bind(this)
+                        messageCard.removeClass('new_message');
+                    },
+                    error: function() {
+                        alert('Errore durante l\'aggiornamento del messaggio.');
+                    }
                 });
             });
         });

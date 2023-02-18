@@ -328,8 +328,14 @@ a.gold {
 }
 
 .card.ms_card.new_message {
-    background-color: #a7a5a5 !important;
-    color: white !important;
+    border: 2px solid rgb(167, 161, 161);
+    background-color: rgba($color: #c4c1c1, $alpha: 0.5);
+    font-weight: bolder;
+
+    h6,
+    h5 {
+        font-weight: bolder;
+    }
 
 }
 
