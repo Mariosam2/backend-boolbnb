@@ -32,6 +32,11 @@ Route::middleware(['auth', 'verified'])
             'apartments' => 'apartment:slug',
         ]);
         Route::get('messages', [ApartmentController::class, 'messages'])->prefix('apartements')->name('apartments.messages');
+        Route::put('messages/{id}', [ApartmentController::class, 'updateMessage'])->name('apartments.updateMessage');
+       /*  Route::post('messages/{id}/read', [ApartmentController::class, 'readMessage'])->name('apartments.messages.read'); */
+        
+       
+
     });
 
 Route::middleware('auth')->group(function () {

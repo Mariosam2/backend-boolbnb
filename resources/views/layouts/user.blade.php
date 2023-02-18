@@ -25,6 +25,9 @@
     <script src="{{ asset('assets/js/Searchbox-web.js') }}"></script>
     <script src="{{ asset('assets/js/services-web.min.js') }}"></script>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Scripts -->
     @vite(['resources/scss/app.scss'])
 
