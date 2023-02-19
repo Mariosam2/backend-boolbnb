@@ -19,6 +19,7 @@ class MessageSeeder extends Seeder
 
         foreach ($messages as $message) {
             $new_message = new Message();
+            $new_message->is_read = false;
             $new_message::create($message);
         }
     }

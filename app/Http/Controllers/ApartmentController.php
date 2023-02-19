@@ -65,22 +65,20 @@ class ApartmentController extends Controller
             ->paginate(5);
         return view('apartments.messages', compact('messages'));
     }
+
+
     public function updateMessage($id)
     {
-        $message = Message::find($id);
-        $message->is_new = false;
-        $message->save();
-
-        return redirect()->back();
+        try {
+            $message = Message::find($id)->first();
+            $message->is_read = false;
+            $message->save();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return view('not-found');
+        }
     }
-    /*     public function readMessage($id)
-{
-    $message = Message::find($id);
-    $message->is_new = false;
-    $message->save();
 
-    return redirect()->route('apartments.messages');
-} */
     public function store(StoreApartmentRequest $request)
     {
         //dd($request);

@@ -353,8 +353,17 @@ a.gold {
 
 
     .apartment-img {
+        height: 100%;
+        max-width: 70%;
         object-fit: cover;
         border-radius: 1.5rem 0 0 1.5rem;
+
+    }
+
+    @media screen and (max-width: 1200px) {
+        .apartment-img {
+            max-width: 100%;
+        }
 
     }
 
@@ -366,9 +375,7 @@ a.gold {
         border-radius: 50%;
     }
 
-    .data {
-        color: $bb-light;
-    }
+
 
     .data_hide {
         display: none;
@@ -378,41 +385,7 @@ a.gold {
         display: block;
     }
 
-    @media screen and (max-width:1750px) {
-        .img_hide {
-            display: none;
-        }
 
-        .data_hide {
-            display: block;
-        }
-
-        .data_visible {
-            display: none;
-        }
-    }
-
-    @media screen and (max-width:1400px) {
-        .info {
-            padding-left: 1rem;
-        }
-    }
-
-    @media screen and (max-width:1200px) {
-        .info {
-            display: none;
-        }
-    }
-
-    @media screen and (max-width:992px) {
-        .body {
-            display: none;
-        }
-    }
-
-    .name {
-        margin-bottom: -1px;
-    }
 
     .send_msg_btn {
         background-color: $bb-success-soft;
@@ -429,9 +402,10 @@ a.gold {
 
 }
 
+
+
 .card.ms_card.new_message {
-    border: 2px solid rgb(167, 161, 161);
-    background-color: rgba($color: #c4c1c1, $alpha: 0.5);
+    background-color: rgba($color: #c4c1c1, $alpha: 0.3);
     font-weight: bolder;
 
     h6,

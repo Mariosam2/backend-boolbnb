@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->boolean('is_new')->default(true)->after('body');
-            
+            $table->boolean('is_read')->default(false)->after('body');
         });
     }
 
@@ -27,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->dropColumn('is_new');
+            $table->dropColumn('is_read');
         });
     }
 };
