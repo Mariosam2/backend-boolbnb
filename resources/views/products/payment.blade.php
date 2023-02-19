@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <div class="col panel panel-default mt-5">
+    <div class="col panel panel-default mt-5 flex-grow-1">
 
         <p class="text-center" for="amount">Importo:
             <strong>

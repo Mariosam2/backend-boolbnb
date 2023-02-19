@@ -70,10 +70,10 @@ class ApartmentController extends Controller
         $message = Message::find($id);
         $message->is_new = false;
         $message->save();
-        
+
         return redirect()->back();
     }
-/*     public function readMessage($id)
+    /*     public function readMessage($id)
 {
     $message = Message::find($id);
     $message->is_new = false;
@@ -83,6 +83,7 @@ class ApartmentController extends Controller
 } */
     public function store(StoreApartmentRequest $request)
     {
+
         try {
 
             $val_data = $request->validated();

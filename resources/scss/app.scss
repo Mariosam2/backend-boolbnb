@@ -85,7 +85,7 @@ span {
     background-color: $bb-success-soft;
     color: $bb-success;
     font-weight: 600;
-    padding: 1.25rem 2.25rem;
+    padding: 1rem 2rem;
     font-size: 20px;
     border-radius: 0.5rem;
 
@@ -147,7 +147,14 @@ span {
         background-color: $bb-danger-light;
     }
 
-    /* chekbox style */
+
+
+}
+
+/* create + edit   views */
+
+/* chekbox style */
+.ms_slider {
     .switch {
         --button-width: 3.5em;
         --button-height: 2em;
@@ -155,18 +162,18 @@ span {
         --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
         --toggle-shadow-offset: 10px;
         --toggle-wider: 3em;
-        --color-green: #4296f4;
-        --color-grey: #cccccc;
+        --color-false: #cccccc;
+
     }
 
     .slider {
         display: inline-block;
         width: var(--button-width);
         height: var(--button-height);
-        background-color: var(--color-green);
+        background-color: var(--color-false);
         border-radius: calc(var(--button-height) / 2);
         position: relative;
-        transition: 0.3s all ease-in-out;
+
     }
 
     .slider::after {
@@ -184,7 +191,7 @@ span {
     }
 
     .switch input[type="checkbox"]:checked+.slider {
-        background-color: var(--color-grey);
+        background: linear-gradient(to right, $bb-secondary, $bb-primary);
     }
 
     .switch input[type="checkbox"]:checked+.slider::after {
@@ -204,10 +211,8 @@ span {
         transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
     }
 
-
 }
 
-/* create + edit   views */
 
 .torna {
     color: $bb-light;
@@ -241,6 +246,53 @@ a.gold {
     border-top-right-radius: 30px;
 
 }
+
+.ms_form {
+
+
+
+
+
+    input:not(.tt-search-box-input),
+    textarea,
+    select {
+        border-color: #cccccc;
+        border-radius: 0px;
+        transition: all 0.3s ease;
+    }
+
+    input:focus:not(.tt-search-box-input, input[type='file']),
+    textarea:focus {
+        box-shadow: 0px 0px 10px #cccccc;
+        border-color: transparent;
+    }
+
+
+
+    input[type='file']:focus,
+    select:focus {
+        box-shadow: none;
+        border-color: #cccccc;
+        outline: none;
+    }
+
+    .ms_submit-button {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 568px) {
+        .ms_submit-button {
+            width: 25%;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .ms_submit-button {
+            width: 15%;
+        }
+    }
+}
+
 
 /* Messages View */
 

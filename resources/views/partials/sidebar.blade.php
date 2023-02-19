@@ -1,7 +1,7 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ms_sidebar p-2 p-md-3 p-xxl-5">
-    <div class="position-sticky pt-3 sidebar-sticky h-100 d-flex flex-column">
-        <img src="{{ asset('assets/boolbnb-white.svg') }}" alt="">
-        <ul class="nav flex-column mt-5">
+<nav id="sidebarMenu" class="col-2 d-xl-block bg-light sidebar collapse ms_sidebar p-xl-4">
+    <div class="position-sticky pt-5 sidebar-sticky h-100 d-flex flex-column">
+        <img style="max-width: 200px" src="{{ asset('assets/boolbnb-white.svg') }}" alt="">
+        <ul class="nav flex-column mt-4 mt-xxl-5">
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link active">
                     <span class="align-text-bottom"></span>

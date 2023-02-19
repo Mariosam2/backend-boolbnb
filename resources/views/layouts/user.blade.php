@@ -38,10 +38,10 @@
     <div id="app">
 
 
-
-        <main class="">
+        @include('partials.header')
+        <main id="site_main">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row row-cols-2">
                     @include('partials.sidebar')
 
 
@@ -80,12 +80,14 @@
                         })
                         searchBoxInput.addEventListener('blur', function() {
                             if (this.value == '') {
-                                this.value = '{{ isset($apartment) ? old('address', $apartment->address) : old('address') }}'
+                                this.value = '{{ isset($apartment) ? old('address', $apartment->address) : old('address') }}';
+
                             }
                         })
                         searchBoxInput.addEventListener('focus', function() {
                             if (this.value == '') {
                                 this.value = '{{ isset($apartment) ? old('address', $apartment->address) : old('address') }}'
+
                             }
                         })
                     </script>

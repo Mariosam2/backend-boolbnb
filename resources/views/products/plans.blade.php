@@ -3,16 +3,16 @@
 
 
 @section('content')
-    <div class="col col-plans">
-        <h1 class="mb-5 mt-5 ms-5">Sponsorizza: {{ $apartment->title }} </h2>
-            <a href="{{ route('apartments.index') }}" class="torna mb-5 ms-5">
+    <div class="col col-plans flex-grow-1">
+        <h1 class="  ms-0 mb-3 mt-5 ms-sm-5">Sponsorizza: {{ $apartment->title }} </h2>
+            <a href="{{ route('apartments.index') }}" class="torna mb-5 ms-0 ms-sm-5">
                 <i class="fa-solid fa-chevron-left"></i>
                 Torna alla pagina dei tuoi appartamenti
             </a>
             <div class="row   justify-content-evenly align-items-center my-5 pt-5 flex-row-reverse">
 
                 @forelse($products as $product)
-                    <div class="col-sm-10 col-md-5 col-lg-3 text-center  sponsor-card">
+                    <div class="col-12 col-sm-8 col-md-5 col-xxl-3 text-center  sponsor-card">
                         <div class="card mb-4  shadow-sm">
                             <div class="card-header sponsor py-3 ">
                                 <span class="text-white">In evidenza per

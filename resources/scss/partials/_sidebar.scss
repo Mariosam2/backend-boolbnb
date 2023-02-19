@@ -2,7 +2,8 @@
 
 
 
-.ms_sidebar {
+.row .ms_sidebar {
+    max-width: 300px;
     background: linear-gradient($bb-primary, $bb-secondary);
     border-radius: 0 2rem 2rem 0;
     height: 100vh;

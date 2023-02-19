@@ -1,7 +1,7 @@
 @extends('layouts.user')
 @section('content')
-    <div class="col">
-        <div class="mt-5 ps-5">
+    <div class="col flex-grow-1 p-3 p-xxl-0 ">
+        <div class="mt-5 mb-3 mb-xxl-0 ps-2 ps-xxl-5">
             <h1>Aggiungi un nuovo appartamento</h1>
             <a href="{{ route('apartments.index') }}" class="torna">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -17,10 +17,11 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('apartments.store') }}" method="POST" class=" m-5 rounded-3" enctype="multipart/form-data">
+        <form action="{{ route('apartments.store') }}" method="POST" class=" col-12 col-xxl-10 ms_form  m-xxl-5  rounded-3"
+            enctype="multipart/form-data">
             @csrf
-            <div class="row d-flex ">
-                <div class="col-7">
+            <div class="row d-flex  ">
+                <div class="col-12 col-xxl-7">
                     <div class="title-category">
 
                         <div class="mb-3 ">
@@ -31,7 +32,7 @@
                         </div>
                         <div class="searchBoxWrapper"></div>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between justify-content-xxl-start my-3 flex-wrap">
 
 
                         <div class="mb-3">
@@ -106,53 +107,65 @@
                         </div>
 
                     </div>
-                    <div class="d-flex my-3 align-items-center justify-content-center">
+                    <div class="d-flex my-3 align-items-center flex-wrap">
+                        <div class="ms_slider">
 
-                        <label for="services" class="mx-3">Servizi</label>
-                        <select multiple class="custom-select" name="services[]" id="services">
-                            <option value="" disabled>Seleziona i Servizi</option>
+                            <label class="switch d-flex align-items-center gap-2">
+                                <label for="visible" class="me-3">Visibilità dell'appartmento</label>
+                                <input type="hidden" id="visible" name="visible" value="{{ old('visible', '0') }}">
+                                <input type="checkbox" id="visible" name="visible" value="{{ old('visible', '1') }}">
+                                <span class="slider"></span>
 
-                            @foreach ($services as $service)
-                                @if ($errors->any())
-                                    <option value="{{ $service->id }}"
-                                        {{ in_array($service->id, old('services', [])) ? 'selected' : '' }}>
-                                        {{ $service->name }}
-                                    </option>
-                                @else
-                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                @endif
-                            @endforeach
 
-                        </select>
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center my-3 my-lg-0 ms-md-5 ps-sm-5">
+                            <label for="services" class=" form-label me-4">Servizi</label>
+                            <select multiple class="custom-select" name="services[]" id="services">
+                                <option class="p-1" value="" disabled>Seleziona i Servizi</option>
 
+                                @foreach ($services as $service)
+                                    @if ($errors->any())
+                                        <option class="p-1" value="{{ $service->id }}"
+                                            {{ in_array($service->id, old('services', [])) ? 'selected' : '' }}>
+                                            {{ $service->name }}
+                                        </option>
+                                    @else
+                                        <option class="p-1" value="{{ $service->id }}">{{ $service->name }}</option>
+                                    @endif
+                                @endforeach
+
+                            </select>
+
+                        </div>
                     </div>
                 </div>
 
-                <div class="d-flex col-5 justify-content-center align-items-end">
+                <div class="d-flex col-12  col-xxl-5 justify-content-start justify-content-xxl-center align-items-center">
 
-                    <div class="d-flex ">
-                        <div class="form-group mx-3">
-                            <div class="placeholder">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png"
-                                    width="400" alt="Placeholder">
-                            </div>
-                            <div class="mb-3">
-                                <label for="media" class="form-label">Immagine*</label>
-                                <input type="file" class="form-control  @error('media') 'is-invalid' @enderror"
-                                    name="media" id="media" placeholder="" aria-describedby="fileHelpId" required>
-                            </div>
 
+                    <div class="form-group my-2 my-xxl-0 mx-0 mx-xxl-3">
+                        <div class="placeholder d-none d-xxl-block mb-2">
+                            <img src="https://imgs.search.brave.com/BocBdGDWAt5ELNZ5UQCJMxSKQHjtPqtYtPUSdbCDclQ/rs:fit:1040:584:1/g:ce/aHR0cHM6Ly93d3cu/bG9naXN0ZWMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE3/LzEyL3BsYWNlaG9s/ZGVyLnBuZw"
+                                width="400" alt="Placeholder">
+                        </div>
+                        <div class="mb-3">
+                            <label for="media" class="form-label">Immagine*</label>
+                            <input type="file" class="form-control  @error('media') 'is-invalid' @enderror"
+                                name="media" id="media" placeholder="" aria-describedby="fileHelpId" required>
                         </div>
 
                     </div>
+
+
 
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrizione*</label>
                     <textarea class="form-control @error('description') 'is-invalid' @enderror" name="description" id="description"
                         rows="3" required>{{ old('description') }}</textarea>
-                    <div class="row mt-3 justify-content-end">
-                        <button type="submit  " class="btn button col-2 ">Crea</button>
+                    <div class="d-flex mt-3 justify-content-end">
+                        <button type="submit  " class="btn button ms_submit-button">Crea</button>
                     </div>
         </form>
 

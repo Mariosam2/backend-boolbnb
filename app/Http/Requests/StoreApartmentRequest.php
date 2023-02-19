@@ -37,6 +37,7 @@ class StoreApartmentRequest extends FormRequest
             'check_in' => 'nullable|max:255',
             'check_out' => 'nullable|max:255',
             'price' => 'nullable|numeric|max:999.99',
+            'visible' => 'required|boolean',
             'services' => 'nullable|exists:services,id'
 
 

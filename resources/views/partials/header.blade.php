@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light  shadow-sm">
-    <div class="container">
+<nav class="navbar navbar-expand-md d-block d-xl-none navbar-light bg-light px-4  shadow-sm">
+    <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
             <div class="logo">
                 <h3 class="mt-2">BoolBnb</h3>
