@@ -1,8 +1,8 @@
 @extends('layouts.user')
 @section('content')
-    <div class="col d-flex flex-column justify-content-center flex-grow-1">
-        <div class="container-fluid px-0 px-sm-2">
-            <div class="apartments py-5">
+    <div class="col d-flex flex-column justify-content-center flex-grow-1 px-0">
+        <div class="container-fluid" style="height: 100vh; overflow-y:auto">
+            <div class="apartments spacing">
                 <div class="d-flex justify-content-between flex-wrap">
                     <h1>I Tuoi Appartamenti</h1>
                     <a name="" id="" class="create_btn mt-3 mt-md-0 mb-3 me-lg-3"
@@ -16,9 +16,9 @@
                         {{ session('message') }}
                     </div>
                 @endif
-                <div class="row">
+                <div class="row g-3">
                     @forelse($apartments as $apartment)
-                        <div class="col-sm-12 col-md-6 col-xl-4 g-4">
+                        <div class="col-sm-12 col-md-6 col-xl-4">
                             <div
                                 class="card border-0 h-100 {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Bronze' ? 'bronze' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Silver' ? 'silver' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Gold' ? 'gold' : '' }}">
                                 <div class="card_img">

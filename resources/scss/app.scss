@@ -95,14 +95,40 @@ span {
     }
 }
 
+/* header */
+.dropdown-menu.ms_logout {
+    min-width: 0;
+}
+
+.navbar.ms_navbar {
+    background: linear-gradient(to right, $bb-primary, $bb-secondary);
+
+    .navbar-nav.ms_navbar-nav .nav-link,
+    .nav-link.ms_nav-link {
+        color: $bb-lighter;
+        font-size: 1.2rem;
+        font-family: $bb-font-secondary;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .navbar-nav.ms_navbar-nav .nav-link,
+        .nav-link.ms_nav-link {
+            margin-top: 0.25rem;
+        }
+    }
+
+
+
+}
+
+
 /* index view */
 .apartments {
-    height: 100vh;
-    overflow-y: auto;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+
+
+
 
     .card-body {
         padding: 1.6rem;
@@ -150,6 +176,25 @@ span {
 
 
 }
+
+.spacing {
+    padding: 8rem 0 4rem 0;
+}
+
+@media screen and (max-width: 769px) {
+    .spacing {
+        padding: 13rem 0 4rem 0;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .spacing {
+        padding: 4rem 0 4rem 0;
+    }
+
+}
+
+
 
 /* create + edit   views */
 
@@ -254,8 +299,7 @@ a.gold {
 
 
     input:not(.tt-search-box-input),
-    textarea,
-    select {
+    textarea {
         border-color: #cccccc;
         border-radius: 0px;
         transition: all 0.3s ease;
@@ -267,10 +311,16 @@ a.gold {
         border-color: transparent;
     }
 
-
-
-    input[type='file']:focus,
+    select,
     select:focus {
+        border: none;
+        box-shadow: none;
+        outline: none;
+    }
+
+
+
+    input[type='file']:focus {
         box-shadow: none;
         border-color: #cccccc;
         outline: none;

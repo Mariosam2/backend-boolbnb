@@ -1,7 +1,7 @@
 @extends('layouts.user')
 @section('content')
-    <div class="col flex-grow-1 p-3 p-xxl-0 ">
-        <div class="mt-5 mb-3 mb-xxl-0 ps-2 ps-xxl-5">
+    <div class="col flex-grow-1 spacing " style="height: 100vh; overflow-y:auto">
+        <div class="mb-3 mb-xxl-0 ps-3 ps-xxl-5">
             <h1>Modifica: {{ $apartment->title }}</h1>
             <a href="{{ route('apartments.index') }}" class="torna">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -18,7 +18,7 @@
             </div>
         @endif
         <form action="{{ route('apartments.update', $apartment->slug) }}" method="POST"
-            class=" col-12 col-xxl-10 ms_form  m-xxl-5  rounded-3" enctype="multipart/form-data">
+            class=" col-12 col-xxl-10 ms_form p-3 pt-xxl-5 px-xxl-5  rounded-3" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row d-flex  ">
@@ -111,7 +111,7 @@
                         </div>
 
                     </div>
-                    <div class="d-flex my-3 align-items-center flex-wrap">
+                    <div class="d-flex my-2 align-items-center flex-wrap">
                         <div class="ms_slider">
 
                             <label class="switch d-flex align-items-center gap-2">
@@ -124,24 +124,25 @@
 
                             </label>
                         </div>
-                        <div class="d-flex align-items-center my-3 my-lg-0 ms-md-5 ps-sm-5">
+                        <div class="d-flex align-items-center my-2 my-lg-0 ms-md-5 ps-sm-5">
                             <label for="services" class="form-label me-4">Servizi</label>
                             <select multiple class="form-select form-select-sm" name="services[]" id="services">
-                                <option value="" disabled>Select a service</option>
+                                <option class="p-1" value="" disabled>Select a service</option>
                                 @forelse ($services as $service)
                                     @if ($errors->any())
                                         <!-- Pagina con errori di validazione, deve usare old per verificare quale id di service preselezionare -->
-                                        <option value="{{ $service->id }}"
+                                        <option class="p-1" value="{{ $service->id }}"
                                             {{ in_array($service->id, old('services', [])) ? 'selected' : '' }}>
                                             {{ $service->name }}</option>
                                     @else
                                         <!-- Pagina caricate per la prima volta: deve mostrarare i service preseleziononati dal db -->
-                                        <option value="{{ $service->id }}"
+                                        <option class="p-1" value="{{ $service->id }}"
                                             {{ $apartment->services->contains($service->id) ? 'selected' : '' }}>
                                             {{ $service->name }}</option>
                                     @endif
                                 @empty
-                                    <option value="" disabled>Scusa 😥 non ci sono servizi nel sistema</option>
+                                    <option class="p-1" value="" disabled>Scusa 😥 non ci sono servizi nel
+                                        sistema</option>
                                 @endforelse
 
                             </select>

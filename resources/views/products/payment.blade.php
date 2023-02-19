@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <div class="col panel panel-default mt-5 flex-grow-1">
+    <div class="col panel panel-default flex-grow-1 spacing">
 
         <p class="text-center" for="amount">Importo:
             <strong>
@@ -22,7 +22,7 @@
 
             <form role="form"
                 action="{{ route('products.process-payment', ['apartment' => $apartment->slug, 'product' => $product->prod_id]) }}"
-                method="post" class="stripe-payment mt-5" data-cc-on-file="false"
+                method="post" class="stripe-payment mt-4" data-cc-on-file="false"
                 data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="stripe-payment">
                 @csrf
 

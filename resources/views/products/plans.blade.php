@@ -3,8 +3,8 @@
 
 
 @section('content')
-    <div class="col col-plans flex-grow-1">
-        <h1 class="  ms-0 mb-3 mt-5 ms-sm-5">Sponsorizza: {{ $apartment->title }} </h2>
+    <div class="col col-plans flex-grow-1 spacing">
+        <h1 class="  ms-0 mb-3  ms-sm-5">Sponsorizza: {{ $apartment->title }} </h2>
             <a href="{{ route('apartments.index') }}" class="torna mb-5 ms-0 ms-sm-5">
                 <i class="fa-solid fa-chevron-left"></i>
                 Torna alla pagina dei tuoi appartamenti

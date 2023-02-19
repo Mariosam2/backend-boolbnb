@@ -29,7 +29,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Scripts -->
-    @vite(['resources/scss/app.scss'])
 
     @vite(['resources/js/app.js'])
 </head>
@@ -39,6 +38,7 @@
 
 
         @include('partials.header')
+
         <main id="site_main">
             <div class="container-fluid">
                 <div class="row row-cols-2">

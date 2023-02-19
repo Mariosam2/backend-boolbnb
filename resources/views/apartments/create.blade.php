@@ -1,7 +1,7 @@
 @extends('layouts.user')
 @section('content')
-    <div class="col flex-grow-1 p-3 p-xxl-0 ">
-        <div class="mt-4 mb-3 mb-xxl-0 ps-2 ps-xxl-5">
+    <div class="col flex-grow-1 spacing " style="height: 100vh; overflow-y:auto">
+        <div class="mb-3 mb-xxl-0 ps-3 ps-xxl-5">
             <h1>Aggiungi un nuovo appartamento</h1>
             <a href="{{ route('apartments.index') }}" class="torna">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -17,8 +17,9 @@
                 </ul>
             </div>
         @endif
+
         <form action="{{ route('apartments.store') }}" method="POST"
-            class=" col-12 col-xxl-10 ms_form  pt-xxl-5 px-xxl-5  rounded-3" enctype="multipart/form-data">
+            class=" col-12 col-xxl-10 ms_form p-3 pt-xxl-5 px-xxl-5  rounded-3" enctype="multipart/form-data">
             @csrf
             <div class="row d-flex  ">
                 <div class="col-12 col-xxl-7">
@@ -28,7 +29,7 @@
                             <label for="title" class="form-label">Titolo*</label>
                             <input type="text" name="title" id="title"
                                 class="form-control @error('title') 'is-invalid' @enderror" placeholder=""
-                                aria-describedby="helpId" value="{{ old('title') }}" required>
+                                aria-describedby="helpId" value="{{ old('title') }}">
                         </div>
                         <div class="searchBoxWrapper"></div>
                     </div>
@@ -54,36 +55,31 @@
                             <label for="mq" class="form-label">M.Q.*</label>
                             <input type="number" name="mq" id="mq"
                                 class="form-control  @error('mq') 'is-invalid' @enderror" placeholder=""
-                                aria-describedby="helpId" min="1" max="32767" value="{{ old('mq') }}"
-                                required>
+                                aria-describedby="helpId" min="1" max="32767" value="{{ old('mq') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="beds" class="form-label">Letti*</label>
                             <input type="number" name="beds" id="beds"
                                 class="form-control  @error('beds') 'is-invalid' @enderror" placeholder=""
-                                aria-describedby="helpId" min="1" max="127" value="{{ old('beds') }}"
-                                required>
+                                aria-describedby="helpId" min="1" max="127" value="{{ old('beds') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="total_rooms" class="form-label">Camere*</label>
                             <input type="number" name="total_rooms" id="total_rooms"
                                 class="form-control @error('total_rooms') 'is-invalid' @enderror" placeholder=""
-                                aria-describedby="helpId" min="1" max="127" value="{{ old('total_rooms') }}"
-                                required>
+                                aria-describedby="helpId" min="1" max="127" value="{{ old('total_rooms') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="baths" class="form-label">Bagni*</label>
                             <input type="number" name="baths" id="baths"
                                 class="form-control  @error('baths') 'is-invalid' @enderror" placeholder=""
-                                aria-describedby="helpId" min="1" max="127" value="{{ old('baths') }}"
-                                required>
+                                aria-describedby="helpId" min="1" max="127" value="{{ old('baths') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="guests" class="form-label  ">Ospiti*</label>
                             <input type="number" name="guests" id="guests"
                                 class="form-control @error('guests') 'is-invalid' @enderror" placeholder=""
-                                aria-describedby="helpId" min="1" max="127" required
-                                value="{{ old('guests') }}">
+                                aria-describedby="helpId" min="1" max="127" value="{{ old('guests') }}">
                         </div>
 
 
@@ -107,7 +103,7 @@
                         </div>
 
                     </div>
-                    <div class="d-flex my-3 align-items-center flex-wrap">
+                    <div class="d-flex my-2 align-items-center flex-wrap">
                         <div class="ms_slider">
 
                             <label class="switch d-flex align-items-center gap-2">
@@ -119,7 +115,7 @@
 
                             </label>
                         </div>
-                        <div class="d-flex align-items-center my-4 my-lg-0 ms-md-5 ps-sm-5">
+                        <div class="d-flex align-items-center my-2 my-lg-0 ms-md-5 ps-sm-5">
                             <label for="services" class=" form-label me-4">Servizi</label>
                             <select multiple class="custom-select" name="services[]" id="services">
                                 <option class="p-1" value="" disabled>Seleziona i Servizi</option>
@@ -153,7 +149,7 @@
                         <div class="mb-3">
                             <label for="media" class="form-label">Immagine*</label>
                             <input type="file" class="form-control  @error('media') 'is-invalid' @enderror"
-                                name="media" id="media" placeholder="" aria-describedby="fileHelpId" required>
+                                name="media" id="media" placeholder="" aria-describedby="fileHelpId">
                         </div>
 
                     </div>
@@ -164,7 +160,7 @@
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrizione*</label>
                     <textarea class="form-control @error('description') 'is-invalid' @enderror" name="description" id="description"
-                        rows="3" required>{{ old('description') }}</textarea>
+                        rows="3">{{ old('description') }}</textarea>
                     <div class="d-flex mt-3 justify-content-end">
                         <button type="submit  " class="btn button ms_submit-button">Crea</button>
                     </div>
