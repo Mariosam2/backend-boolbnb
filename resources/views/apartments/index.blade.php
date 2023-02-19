@@ -1,7 +1,7 @@
 @extends('layouts.user')
 @section('content')
-    <div class="col d-flex flex-column justify-content-center mt-5 flex-grow-1">
-        <div class="container-fluid">
+    <div class="col d-flex flex-column justify-content-center flex-grow-1">
+        <div class="container-fluid px-0 px-sm-2">
             <div class="apartments py-5">
                 <div class="d-flex justify-content-between flex-wrap">
                     <h1>I Tuoi Appartamenti</h1>
@@ -20,16 +20,16 @@
                     @forelse($apartments as $apartment)
                         <div class="col-sm-12 col-md-6 col-xl-4 g-4">
                             <div
-                                class="card border-0 {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Bronze' ? 'bronze' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Silver' ? 'silver' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Gold' ? 'gold' : '' }}">
+                                class="card border-0 h-100 {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Bronze' ? 'bronze' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Silver' ? 'silver' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Gold' ? 'gold' : '' }}">
                                 <div class="card_img">
                                     <img class="my-img img-fluid"
                                         src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
                                         alt="Title">
                                 </div>
-                                <div class="card-body text-start">
+                                <div class="card-body text-start d-flex flex-column justify-content-between">
                                     <h5 class="pb-3">{{ $apartment->title }}</h5>
 
-                                    <div class="text-end d-flex justify-content-between mt-3 mb-2 flex-wrap">
+                                    <div class="text-end d-flex justify-content-between  flex-wrap">
                                         @if (!isset($apartment->subscription))
                                             <a href="{{ route('products', $apartment->slug) }}"
                                                 class="sponsor_btn text-white">
@@ -48,13 +48,13 @@
 
                                         <!-- show -->
                                         <a href="http://localhost:5174/blog/{{ $apartment->slug }}"
-                                            class="d-inline-block btn show_btn mx-2  mb-2 text-white">
+                                            class="d-inline-block btn show_btn mx-2  mb-2 text-white flex-grow-1 flex-md-grow-0">
                                             Visualizza
                                             <i class="fas fa-eye fa-sm fa-fw"></i>
                                         </a>
                                         <!-- edit -->
                                         <a href="{{ route('apartments.edit', $apartment->slug) }}"
-                                            class="d-inline-block btn mx-2 mb-2 edit_btn text-white">
+                                            class="d-inline-block btn mx-2 mb-2 edit_btn text-white flex-grow-1 flex-md-grow-0">
                                             Modifica
                                             <i class="fas fa-pencil fa-sm fa-fw"></i>
                                         </a>
@@ -62,7 +62,7 @@
                                         <!-- Modal trigger button -->
                                         <a type="button" data-bs-toggle="modal"
                                             data-bs-target="#apartment-{{ $apartment->slug }}"
-                                            class="d-inline-block btn mx-2 ms-2 ms-md-auto mb-2 delete_btn text-white">
+                                            class="d-inline-block btn mx-2 ms-2 ms-md-auto mb-2 delete_btn text-white flex-grow-1 flex-md-grow-0">
                                             Cancella
                                             <i class="fa-solid fa-trash"></i>
 

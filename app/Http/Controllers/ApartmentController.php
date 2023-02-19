@@ -83,7 +83,7 @@ class ApartmentController extends Controller
 } */
     public function store(StoreApartmentRequest $request)
     {
-
+        //dd($request);
         try {
 
             $val_data = $request->validated();
@@ -153,7 +153,7 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         $apartmentSlug = $apartment->slug;
-        dd($apartmentSlug);
+        //dd($apartmentSlug);
         return view("http://localhost:5174/blog/$apartmentSlug", compact('apartment'));
     }
 
@@ -187,6 +187,7 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
+        //dd($request);
         try {
 
             $val_data = $request->validated();

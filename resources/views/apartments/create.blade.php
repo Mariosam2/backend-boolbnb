@@ -1,7 +1,7 @@
 @extends('layouts.user')
 @section('content')
     <div class="col flex-grow-1 p-3 p-xxl-0 ">
-        <div class="mt-5 mb-3 mb-xxl-0 ps-2 ps-xxl-5">
+        <div class="mt-4 mb-3 mb-xxl-0 ps-2 ps-xxl-5">
             <h1>Aggiungi un nuovo appartamento</h1>
             <a href="{{ route('apartments.index') }}" class="torna">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -17,8 +17,8 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('apartments.store') }}" method="POST" class=" col-12 col-xxl-10 ms_form  m-xxl-5  rounded-3"
-            enctype="multipart/form-data">
+        <form action="{{ route('apartments.store') }}" method="POST"
+            class=" col-12 col-xxl-10 ms_form  pt-xxl-5 px-xxl-5  rounded-3" enctype="multipart/form-data">
             @csrf
             <div class="row d-flex  ">
                 <div class="col-12 col-xxl-7">
@@ -119,7 +119,7 @@
 
                             </label>
                         </div>
-                        <div class="d-flex align-items-center my-3 my-lg-0 ms-md-5 ps-sm-5">
+                        <div class="d-flex align-items-center my-4 my-lg-0 ms-md-5 ps-sm-5">
                             <label for="services" class=" form-label me-4">Servizi</label>
                             <select multiple class="custom-select" name="services[]" id="services">
                                 <option class="p-1" value="" disabled>Seleziona i Servizi</option>
@@ -146,7 +146,8 @@
 
                     <div class="form-group my-2 my-xxl-0 mx-0 mx-xxl-3">
                         <div class="placeholder d-none d-xxl-block mb-2">
-                            <img src="https://imgs.search.brave.com/BocBdGDWAt5ELNZ5UQCJMxSKQHjtPqtYtPUSdbCDclQ/rs:fit:1040:584:1/g:ce/aHR0cHM6Ly93d3cu/bG9naXN0ZWMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE3/LzEyL3BsYWNlaG9s/ZGVyLnBuZw"
+                            <img width="100%" height="300"style="object-fit: cover"
+                                src="https://imgs.search.brave.com/BocBdGDWAt5ELNZ5UQCJMxSKQHjtPqtYtPUSdbCDclQ/rs:fit:1040:584:1/g:ce/aHR0cHM6Ly93d3cu/bG9naXN0ZWMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE3/LzEyL3BsYWNlaG9s/ZGVyLnBuZw"
                                 width="400" alt="Placeholder">
                         </div>
                         <div class="mb-3">
