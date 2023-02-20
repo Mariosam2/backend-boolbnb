@@ -9,22 +9,37 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
-
-
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class ApartmentController extends Controller
 {
+
+    public function paginate($items, $perPage = 4, $page = null)
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $total = count($items);
+        $currentpage = $page;
+        $offset = ($currentpage * $perPage) - $perPage;
+        $itemstoshow = array_slice($items, $offset, $perPage);
+        return new LengthAwarePaginator($itemstoshow, $total, $perPage);
+    }
+
+
     public function index()
     {
         //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
         $apartments = Apartment::where('subscription_id', '!=', null)->with(['user', 'services', 'views', 'subscription', 'apartment_category'])->get();
+        //dd($apartments);
 
-
-        $apartments = $this->bubbleSortByProduct($apartments);
+        $sortedApartments = $this->bubbleSortByProduct($apartments);
+        $paginatedApartments = $this->paginate($sortedApartments->toArray(), 6);
+        $paginatedApartments->setPath('http://127.0.0.1:8000/api/showcase');
+        //dd($paginatedApartments);
 
         return response()->json([
             'success' => true,
-            'results' => $apartments
+            'results' => $paginatedApartments
         ]);
     }
     /**
@@ -52,6 +67,11 @@ class ApartmentController extends Controller
                         $swapped = true;
                         //dd($apartments);
                     }
+                } else if ($apartments[$i]->subscription == null & $apartments[$i + 1]->subscription != null) {
+                    $temp = $apartments[$i];
+                    $apartments[$i] = $apartments[$i + 1];
+                    $apartments[$i + 1] = $temp;
+                    $swapped = true;
                 }
             }
         } while ($swapped);
@@ -335,6 +355,7 @@ class ApartmentController extends Controller
 
 
                 $searchedApartmentsCollection = $this->bubbleSortByProduct($searchedApartmentsCollection);
+                dd($searchedApartmentsCollection);
                 $searchedApartments = $searchedApartmentsCollection->where('visible', '=', true);
 
                 return response()->json([

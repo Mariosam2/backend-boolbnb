@@ -46,7 +46,11 @@
                 <label class='control-label'>CVC</label>
                 <input id="cvv" pattern="[0-9]{3,4}" autocomplete='off' class='form-control card-cvc'
                     placeholder='es 111' size='4' type='text'>
-                <div class="error"></div>
+                <div class="error">
+                    <div class="hide">
+
+                    </div>
+                </div>
                 <input type="submit" value="Effettua pagamento">
 
 
