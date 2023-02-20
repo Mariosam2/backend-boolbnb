@@ -82,7 +82,7 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
 
-        dd($apartment->with('services'));
+        $apartment = $apartment->load('services'); 
 
         if ($apartment) {
             return response()->json([
