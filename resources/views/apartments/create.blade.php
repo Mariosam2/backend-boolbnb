@@ -27,7 +27,7 @@
 
                         <div class="mb-3 ">
                             <label for="title" class="form-label">Titolo*</label>
-                            <input type="text" name="title" id="title"
+                            <input required type="text" name="title" id="title"
                                 class="form-control @error('title') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" value="{{ old('title') }}">
                         </div>
@@ -39,10 +39,15 @@
                         <div class="mb-3">
                             <label for="apartment_category_id"
                                 class="form-label @error('apartment_category_id') 'is-invalid' @enderror">Categorie*</label>
-                            <select class="form-select form-select-md" name="apartment_category_id"
+                            <select required class="form-select form-select-md" name="apartment_category_id"
                                 id="apartment_category_id">
-                                <option selected value="[]" disabled>None</option>
                                 @foreach ($categories as $apartment_category)
+                                    @if ($apartment_category == '1')
+                                        <option selected value="{{ $apartment_category->id }}"
+                                            {{ old('apartment_category_id', $apartment->apartment_category->id) == $apartment_category->id ? 'selected' : '' }}>
+                                            {{ $apartment_category->name }}
+                                        </option>
+                                    @endif
                                     <option value="{{ $apartment_category->id }}"
                                         {{ in_array($apartment_category->id, (array) old('apartment_category_id')) ? 'selected' : '' }}>
                                         {{ $apartment_category->name }}
@@ -53,31 +58,31 @@
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="mq" class="form-label">M.Q.*</label>
-                            <input type="number" name="mq" id="mq"
+                            <input required type="number" name="mq" id="mq"
                                 class="form-control  @error('mq') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="32767" value="{{ old('mq') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="beds" class="form-label">Letti*</label>
-                            <input type="number" name="beds" id="beds"
+                            <input required type="number" name="beds" id="beds"
                                 class="form-control  @error('beds') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="127" value="{{ old('beds') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="total_rooms" class="form-label">Camere*</label>
-                            <input type="number" name="total_rooms" id="total_rooms"
+                            <input required type="number" name="total_rooms" id="total_rooms"
                                 class="form-control @error('total_rooms') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="127" value="{{ old('total_rooms') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="baths" class="form-label">Bagni*</label>
-                            <input type="number" name="baths" id="baths"
+                            <input required type="number" name="baths" id="baths"
                                 class="form-control  @error('baths') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="127" value="{{ old('baths') }}">
                         </div>
                         <div class="mb-3 mx-2">
                             <label for="guests" class="form-label  ">Ospiti*</label>
-                            <input type="number" name="guests" id="guests"
+                            <input required type="number" name="guests" id="guests"
                                 class="form-control @error('guests') 'is-invalid' @enderror" placeholder=""
                                 aria-describedby="helpId" min="1" max="127" value="{{ old('guests') }}">
                         </div>

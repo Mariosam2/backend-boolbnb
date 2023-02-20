@@ -42,7 +42,6 @@
                             <label for="apartment_category_id" class="form-label">Categorie:*</label>
                             <select class="form-select form-select-md" name="apartment_category_id"
                                 id="apartment_category_id">
-                                <option selected value="[]">None</option>
                                 @foreach ($categories as $apartment_category)
                                     <option value="{{ $apartment_category->id }}"
                                         {{ old('apartment_category_id', $apartment->apartment_category->id) == $apartment_category->id ? 'selected' : '' }}>

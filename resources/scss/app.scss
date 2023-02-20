@@ -334,7 +334,8 @@ a.gold {
 
     select,
     select:focus {
-        border: none;
+        border-color: #cccccc;
+        border-radius: 0px;
         box-shadow: none;
         outline: none;
     }
