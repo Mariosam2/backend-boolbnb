@@ -29,7 +29,7 @@
                                     alt="Title">
                             </div>
                             <div
-                                class="col-3 d-flex d-none d-xl-flex flex-column p-3 justify-content-center align-items-start gap-3 ps-5">
+                                class="col-3 d-flex d-none d-xxl-flex flex-row p-3 justify-content-center align-items-center gap-3 ps-5">
 
                                 <div class="img_msg text-white d-flex justify-content-center align-items-center">
                                     {{ substr($message->name, 0, 1) }}
