@@ -31,9 +31,10 @@ Route::middleware(['auth', 'verified'])
         Route::resource('apartments', ApartmentController::class)->parameters([
             'apartments' => 'apartment:slug',
         ]);
+        Route::get('messages', [ApartmentController::class, 'messages'])->name('apartments.messages');
+        Route::put('message/{id}/{all}', [ApartmentController::class, 'updateMessage'])->name('apartments.updateMessage');
     });
-Route::get('messages', [ApartmentController::class, 'messages'])->name('apartments.messages');
-Route::put('prova/{id}', [ApartmentController::class, 'updateMessage']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

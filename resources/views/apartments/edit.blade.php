@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('content')
-    <div class="col flex-grow-1 spacing " style="height: 100vh; overflow-y:auto">
+    <div class="col flex-grow-1 spacing remove_scrollbar" style="height: 100vh; overflow-y:auto">
         <div class="mb-3 mb-xxl-0 ps-3 ps-xxl-5">
             <h1>Modifica: {{ $apartment->title }}</h1>
             <a href="{{ route('apartments.index') }}" class="torna">

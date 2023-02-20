@@ -1,11 +1,11 @@
 @extends('layouts.user')
 @section('content')
-    <div class="col d-flex flex-column justify-content-center flex-grow-1 px-0">
-        <div class="container-fluid" style="height: 100vh; overflow-y:auto">
+    <div class="col d-flex flex-column justify-content-center flex-grow-1 px-2 px-xl-5">
+        <div class="container-fluid remove_scrollbar" style="height: 100vh; overflow-y:auto">
             <div class="apartments spacing">
                 <div class="d-flex justify-content-between flex-wrap">
                     <h1>I Tuoi Appartamenti</h1>
-                    <a name="" id="" class="create_btn mt-3 mt-md-0 mb-3 me-lg-3"
+                    <a name="" id="" class="create_btn mt-3 mt-md-0 mb-4 me-lg-3"
                         href="{{ route('apartments.create') }}" role="button">Aggiungi
                         un appartamento
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>

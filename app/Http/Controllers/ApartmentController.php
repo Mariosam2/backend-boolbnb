@@ -63,19 +63,42 @@ class ApartmentController extends Controller
             ->where('apartments.user_id', Auth::id())
             ->orderByDesc('messages.id')
             ->paginate(5);
+        //dd($messages);
         return view('apartments.messages', compact('messages'));
     }
 
 
-    public function updateMessage($id)
+    public function updateMessage($id, $all)
     {
         try {
-            $message = Message::find($id)->first();
-            $message->is_read = false;
-            $message->save();
-            return redirect()->back();
+            $messages = DB::table('apartments')
+                ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
+                ->where('apartments.user_id', Auth::id())
+                ->orderByDesc('messages.id')->get();
+            if (filter_var($all, FILTER_VALIDATE_BOOLEAN)) {
+                foreach ($messages as $message) {
+                    $message->is_read = true;
+                    $read_message = Message::find($message->id);
+                    $read_message->is_read = true;
+                    $read_message->save();
+                }
+            } else {
+                foreach ($messages as $message) {
+                    if ($message->id == $id) {
+                        $message->is_read = true;
+                        $read_message = Message::find($id);
+                        $read_message->is_read = true;
+                        $read_message->save();
+                    }
+                }
+            }
+
+            return response()->json([
+                'results' => $messages,
+                'all' => filter_var($all, FILTER_VALIDATE_BOOLEAN)
+            ]);
         } catch (\Exception $e) {
-            return view('not-found');
+            return to_route('not-found');
         }
     }
 
