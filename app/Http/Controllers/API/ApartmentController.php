@@ -81,9 +81,6 @@ class ApartmentController extends Controller
 
     public function show(Apartment $apartment)
     {
-
-        dd($apartment->with('services'));
-
         if ($apartment) {
             return response()->json([
                 'success' => true,
@@ -357,7 +354,8 @@ class ApartmentController extends Controller
 
                 $searchedApartmentsCollection = $this->bubbleSortByProduct($searchedApartmentsCollection);
                 //dd($searchedApartmentsCollection);
-                $searchedApartments = $searchedApartmentsCollection->where('visible', '=', true);
+                $searchedApartments = $searchedApartmentsCollection->where('visible', '=', true)->values();
+                //dd($searchedApartments);
 
                 return response()->json([
                     'success' => true,
