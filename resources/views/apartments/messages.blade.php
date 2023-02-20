@@ -37,15 +37,15 @@
                                 </div>
 
                                 <div class="info">
-                                    <span class="data  text-center  text-secondary">
-                                        {{ substr($message->created_at, 2, 9) }}
-                                    </span>
                                     <h6 class="name">
                                         {{ $message->name }} {{ $message->surname }}
                                     </h6>
                                     <h6>
                                         {{ $message->email }}
                                     </h6>
+                                    <span class="data  text-center  text-secondary">
+                                        {{ substr($message->created_at, 2, 9) }}
+                                    </span>
                                 </div>
                             </div>
                             <div
