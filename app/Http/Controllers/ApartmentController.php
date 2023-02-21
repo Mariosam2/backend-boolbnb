@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-    protected $tomtomKey = "AbilOiLO5qK9c5AeZy40iPxSxKAY2G9U";
+    protected $tomtomKey = "DTunj3EjYUvPwXVpG88PRAlGDhO22xSb";
 
     public function getKey()
     {
