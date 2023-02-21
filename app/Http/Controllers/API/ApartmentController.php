@@ -265,7 +265,7 @@ class ApartmentController extends Controller
 
 
 
-                    if (isset($val_data['radius'])) {
+                    if (isset($val_data['radius']) && $val_data['radius'] != 0) {
                         $geometryList = [
                             [
                                 "type" => "CIRCLE",
@@ -357,8 +357,8 @@ class ApartmentController extends Controller
                 //dd($searchedApartmentsCollection);
                 $searchedApartments = $searchedApartmentsCollection->where('visible', '=', true)->values();
                 //dd($searchedApartments);
-                $searchedApartments = $this->paginate($searchedApartments->toArray(), 6);
-                $searchedApartments->setPath('http://127.0.0.1:8000/api/search');
+                /* $searchedApartments = $this->paginate($searchedApartments->toArray(), 6);
+                $searchedApartments->setPath('http://127.0.0.1:8000/api/search'); */
 
                 return response()->json([
                     'success' => true,
