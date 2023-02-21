@@ -1,8 +1,8 @@
 @extends('layouts.user.log')
 <!-- TODO fix stylesheet -->
 @section('content')
-    <div id="user_access">
-        <div class="col-md-10 col-lg-6 col-sm-10">
+    <div id="user_access" class="px-2 px-md-0">
+        <div class="col-12 col-md-10 col-xl-4">
 
             <div class="content">
 

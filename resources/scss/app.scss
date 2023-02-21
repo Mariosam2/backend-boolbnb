@@ -127,6 +127,15 @@ span {
     min-width: 0;
 }
 
+.navbar-toggler.ms_navbar-toggler {
+    border: none;
+    color: white;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
 .navbar.ms_navbar {
     background: linear-gradient(to right, $bb-primary, $bb-secondary);
 
@@ -142,6 +151,19 @@ span {
         .navbar-nav.ms_navbar-nav .nav-link,
         .nav-link.ms_nav-link {
             margin-top: 0.25rem;
+        }
+
+        .dropdown-menu#ms_dropdown {
+            padding: 0px;
+            border: none;
+            background: linear-gradient(to right, $bb-primary, $bb-secondary);
+
+            .dropdown-item {
+                padding: 0px;
+                color: white;
+                font-family: $bb-font-secondary;
+            }
+
         }
     }
 

@@ -4,7 +4,7 @@
 
 @section('content')
     <div id="user_access" class="py-5">
-        <div class="col-sm-10 col-md-8 col-lg-10">
+        <div class="col-sm-10 col-md-9 col-xl-7">
 
             <div class="content my-4">
                 <!-- TODO add link correct -->
