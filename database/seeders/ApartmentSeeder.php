@@ -56,7 +56,7 @@ class ApartmentSeeder extends Seeder
                 var_dump($e->getMessage());
             }
             $new_apartment = Apartment::create($apartment);
-            $new_apartment->services()->attach($apartmentServices);
+            $new_apartment->services()->syncWithoutDetaching($apartmentServices); 
 
             //dd($new_apartment->services);
 
