@@ -26,10 +26,27 @@ class ApartmentController extends Controller
     }
 
 
-    public function index()
+    public function showCase()
     {
         //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
         $apartments = Apartment::where('subscription_id', '!=', null)->with(['user', 'services', 'views', 'subscription', 'apartment_category'])->get();
+        //dd($apartments);
+
+        $sortedApartments = $this->bubbleSortByProduct($apartments);
+        $paginatedApartments = $this->paginate($sortedApartments->toArray(), 6);
+        $paginatedApartments->setPath('http://127.0.0.1:8000/api/showcase');
+        //dd($paginatedApartments);
+
+        return response()->json([
+            'success' => true,
+            'results' => $paginatedApartments
+        ]);
+    }
+
+    public function index()
+    {
+        //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
+        $apartments = Apartment::with(['user', 'services', 'views', 'subscription', 'apartment_category'])->get();
         //dd($apartments);
 
         $sortedApartments = $this->bubbleSortByProduct($apartments);
@@ -265,7 +282,7 @@ class ApartmentController extends Controller
 
 
 
-                    if (isset($val_data['radius'])) {
+                    if (isset($val_data['radius']) && $val_data['radius'] != 0) {
                         $geometryList = [
                             [
                                 "type" => "CIRCLE",

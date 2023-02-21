@@ -9,7 +9,7 @@ return [
             "check_in" => "14:00-22:00",
             "check_out" => "00:00-10:00",
             "price" => 124,
-            "media" => "https://imgs.search.brave.com/s-LYV1Rxa23sNUCRQQ-u5RG6gvgGpPLPwZaLI3cs1E4/rs:fit:560:320:1/g:ce/aHR0cHM6Ly9jZi5i/c3RhdGljLmNvbS94/ZGF0YS9pbWFnZXMv/aG90ZWwvbWF4NTAw/LzQwNzU2MDMxLmpw/Zz9rPTc1OGQzNmM5/M2QwMWM1NDg5MjY1/ZTljOTEzZTY3ODkx/MmViMjQ3YmY4YjFi/Yzk5Y2FlNzJiZTVl/MTYyYzRhNTcmbz0m/aHA9MQ",
+            "media" => "https://cf.bstatic.com/xdata/images/hotel/max1024x768/40756031.jpg?k=758d36c93d01c5489265e9c913e678912eb247bf8b1bc99cae72be5e162c4a57&o=&hp=1",
             "beds" => 3,
             "total_rooms" => 6,
             "title" => "Vatican Angels Casa Vacanze",
