@@ -4,6 +4,123 @@ return [
     'apartments' => [
         [
             "user_id" => 11,
+            "apartment_category_id" => 6,
+            "address" => "Via Toscana 46, Roma",
+            "check_in" => "14:00-22:00",
+            "check_out" => "00:00-10:00",
+            "price" => 124,
+            "media" => "https://imgs.search.brave.com/s-LYV1Rxa23sNUCRQQ-u5RG6gvgGpPLPwZaLI3cs1E4/rs:fit:560:320:1/g:ce/aHR0cHM6Ly9jZi5i/c3RhdGljLmNvbS94/ZGF0YS9pbWFnZXMv/aG90ZWwvbWF4NTAw/LzQwNzU2MDMxLmpw/Zz9rPTc1OGQzNmM5/M2QwMWM1NDg5MjY1/ZTljOTEzZTY3ODkx/MmViMjQ3YmY4YjFi/Yzk5Y2FlNzJiZTVl/MTYyYzRhNTcmbz0m/aHA9MQ",
+            "beds" => 3,
+            "total_rooms" => 6,
+            "title" => "Vatican Angels Casa Vacanze",
+            "description" => "The flat protected by the Angels. Accogliente appartamento ad un passo dai Musei Vaticani ed a 5 minuti a piedi da San Pietro. Luminosa e completamente ristrutturata, la casa a 200 metri dalla fermata della metro, è il punto di partenza ideale per visitare la città.",
+            "guests" => 2,
+            "baths" => 1,
+            "visible" => true,
+            "mq" => 70,
+            "latitude" => "38.644097",
+            "longitude" => "0.043462",
+        ],
+        [
+            "user_id" => 11,
+            "apartment_category_id" => 6,
+            "address" => "Via Nerva 4, Roma",
+            "check_in" => "14:00-22:00",
+            "check_out" => "00:00-10:00",
+            "price" => 114,
+            "media" => "https://a0.muscache.com/im/pictures/a1019789-5866-42fd-b986-92aeb9f20dce.jpg",
+            "beds" => 4,
+            "total_rooms" => 4,
+            "title" => "Foglie colorate a tema Apt",
+            "description" => "Bellissimo appartamento progettato con  vasca idromassaggio, cromoterapia e musica. Metropolitana (metropolitana)Ponte Lungo  proprio in fondo alla casa, a pochi minuti dal Colosseo , dai Musei Vaticani, dalla fontana di Trevi. Il prezzo include le tasse romane; ricorda che  per le leggi romane è un obbligo fornire informazioni di identificazione durante le operazioni di check-in. La casa ha due appartamenti diversi",
+            "guests" => 2,
+            "baths" => 1,
+            "visible" => true,
+            "mq" => 70,
+            "latitude" => "38.644097",
+            "longitude" => "0.043462",
+        ],
+        [
+            "user_id" => 11,
+            "apartment_category_id" => 6,
+            "address" => "Via Umbria, 15, Roma",
+            "check_in" => "14:00-22:00",
+            "check_out" => "00:00-10:00",
+            "price" => 70,
+            "media" => "https://a0.muscache.com/im/pictures/ea83507f-fcde-42a9-ae43-607bccccd9af.jpg",
+            "beds" => 2,
+            "total_rooms" => 6,
+            "title" => "Vaticano fantastico",
+            "description" => "AS Vaticano Apartment è un appartamento al 3° piano di un palazzo storico con ascensore, in Via Tolemaide 28. In posizione tranquilla è composto da soggiorno/cucina, attrezzato di tutto il necessario per preparare e consumare i pasti, frigorifero, forno, microonde, una camera con letto matrimoniale e un bagno con doccia, moderno recentemente ristrutturato. Offre inoltre Wi-Fi gratuito, TV a schermo piatto, aria condizionata, riscaldamento, asciugacapelli, set di cortesia, lenzuola e asciugamani per tutti gli ospiti, caffè, tè, torte e marmellate in omaggio.",
+            "guests" => 2,
+            "baths" => 1,
+            "visible" => true,
+            "mq" => 70,
+            "latitude" => "38.644097",
+            "longitude" => "0.043462",
+        ],
+        [
+            "user_id" => 11,
+            "apartment_category_id" => 6,
+            "address" => "Via Giovanni Battista de Rossi, 12, Roma",
+            "check_in" => "14:00-22:00",
+            "check_out" => "00:00-10:00",
+            "price" => 90,
+            "media" => "https://a0.muscache.com/im/pictures/94ef5ce1-ba5a-409f-997c-a05430ccaf1d.jpg",
+            "beds" => 4,
+            "total_rooms" => 6,
+            "title" => "Il vostro Nido a Trastevere",
+            "description" => "L'appartamento è situato esattamente al centro del famoso quartiere romano di Trastevere, nascosto dietro un portoncino su strada che non dimenticherete mai.
+            La scelta di bar e ristoranti è illimitata e tutto questo intorno a voi.
+            Tutte le maggiori attrazioni del Centro Storico di Roma sono raggiungibili a piedi: Trastevere, Campo dé Fiori, Piazza Navona, Pantheon, i Fori, Colosseo, il Vaticano.
+            Per non parlare delle vie dello shopping made in Italy.. Via Frattina, Via Condotti, Via del Corso...
+            Lo spazio
+            **appartamento molto tranquillo** Moderno, accogliente e ben fornito
+            L'appartamento è localizzato esattamente nel centro del famoso quartiere Trastevere a Roma.
+            Una vecchia bottega trasteverina trasformata in un mini loft di 30mq provvista di ogni necessità. Il vostro nido con porta su strada a Trastevere.",
+            "guests" => 2,
+            "baths" => 1,
+            "visible" => true,
+            "mq" => 70,
+            "latitude" => "38.644097",
+            "longitude" => "0.043462",
+        ],
+        [
+            "user_id" => 11,
+            "apartment_category_id" => 6,
+            "address" => "Via Reno, 24B, Roma",
+            "check_in" => "14:00-22:00",
+            "check_out" => "00:00-10:00",
+            "price" => 140,
+            "media" => "https://a0.muscache.com/im/pictures/5a309735-cf74-4f3d-b705-09a1ae4b684d.jpg",
+            "beds" => 2,
+            "total_rooms" => 5,
+            "title" => "Loft in vivace stabile a Testaccio",
+            "description" => "l'appartamento è dotato di TV satellitare e prese USB per ricaricare direttamente cellulari e PC senza bisogno di adattatori.
+            Nel quartiere Testaccio si effettua la raccolta differenziata dei rifiuti, gli ospiti sono pertanto pregati di separare e smaltire i rifiuti secondo le modalità indicate nella casa.
+            Intera casa
+            Saremo a disposizione degli ospiti in caso di necessità o anche solo per aiutarli a programmare spostamenti e raggiungere la casa.
+            Tra comodità di mezzi e servizi e posizione centrale, Testaccio fa la storia di Roma in modo unico – basta passarci attraverso e sintonizzarsi con la sua intensità.
+            Collegatissimo con i mezzi pubblici.
+            (a 800 metri) Metro B/B1 Piramide per direzioni: Laurentina / Rebibbia / Conca D'Oro
+            Treno Roma Lido di Ostia per il mare
+            (a 900metri) Stazione Ostiense
+            (a 1 km) Stazione Trastevere
+            A 250 metri fermata delle seguenti linee bus:
+            3 (direzione stazione Trastevere 4 fermate per Trastevere; direzione Valle Giulia 3 fermate per Aventino Circo Massimo, 5 fermate per Colosseo 8 Fermate per Porta San Giovanni)
+            8 ( direzione Labicano- Porta Maggiore 3 fermate per Aventino Circo Massimo, 5 fermate per Colosseo, 9 fermate per Porta San Giovanni; direzione Casaletto 4 fermate per Trastevere)
+            30 (direzione Clodio 2 fermate per Piazza Venezia, 4 fermate per Largo Argentina, 7 fermate per Piazza Cavour; direzione Laurentina 2 fermate Stazione Ostiense)
+            75 ( direzione Indipendenza (4 fermate Aventino, 5 fermate Circo Massimo, 8 fermate Colosseo,; direzione Poerio 6 fermate per raggiungere il Gianicolo)
+            280 (direzione Mancini tantissime fermate sul Lungotevere per raggiungere i monumenti e le piazze più famosi del centro storico nonché Piazza Cavour; direzione Partigiani 2 fermate per raggiungere la metro B ed il treno Roma Lido di Ostia)",
+            "guests" => 2,
+            "baths" => 1,
+            "visible" => true,
+            "mq" => 90,
+            "latitude" => "38.644097",
+            "longitude" => "0.043462",
+        ],
+        [
+            "user_id" => 11,
             "apartment_category_id" => 7,
             "address" => "Viale delle Terme di Caracalla, 1, Roma",
             "check_in" => "14:00-22:00",
