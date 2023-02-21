@@ -2,6 +2,7 @@
 @use './partials/variables.scss' as *;
 @use './partials/sidebar';
 @use './partials/loginpage';
+@use './partials/dashboard';
 
 // Import all of Bootstrap's CSS
 @import '~bootstrap/scss/bootstrap';
