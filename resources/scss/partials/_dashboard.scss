@@ -1,0 +1,34 @@
+.ms_dashboard-select {
+    width: 30%;
+}
+
+.canvas_container {
+    border: 1px solid #cccccc;
+    border-radius: 3rem;
+    width: 95vw;
+    height: 30vh;
+
+
+
+    #acquisitions {
+        border-radius: 3rem;
+    }
+}
+
+
+
+
+
+@media screen and (min-width: 768px) {
+    .canvas_container {
+        width: 80vw;
+        height: 50vh;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .canvas_container {
+        width: 50vw;
+        height: 50vh;
+    }
+}

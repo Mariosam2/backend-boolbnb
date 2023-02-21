@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Message extends Model
 {
     use HasFactory;
-    protected $fillable = ['full-name', 'apartment_id', 'email', 'body'];
+    protected $fillable = ['name', 'surname', 'apartment_id', 'email', 'body', 'is_read'];
 
     /**
      * Get the apartment that owns the Message

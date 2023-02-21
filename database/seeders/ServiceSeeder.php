@@ -15,12 +15,11 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        $services = ['Wi-Fi', 'Cucina', 'Lavatrice', 'Asciugatrice', 'Aria condizionata', 'Riscaldamento', 'Spazio di lavoro dedicato', 'Tv', 'Asciugacapelli', 'Ferro da stiro'];
+        $services = config('apartment-services');
 
         foreach ($services as $service) {
             $new_service = new Service();
-            $new_service->name = $service;
-            $new_service->save();
+            $new_service::create($service);
         }
     }
 }

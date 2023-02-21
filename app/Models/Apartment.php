@@ -7,18 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Apartment extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'apartment_category_id', 'title', 'slug', 'description', 'visible', 'mq', 'address', 'latitude', 'longitude', 'beds', 'total_rooms', 'baths', 'media', 'guests', 'check_in', 'check_out', 'price'];
+    protected $fillable = ['user_id', 'apartment_category_id', 'title', 'slug', 'description', 'visible', 'mq', 'address', 'free_form_address', 'latitude', 'longitude', 'beds', 'total_rooms', 'baths', 'media', 'guests', 'check_in', 'check_out', 'price',];
 
     public static function slugGenerator($title)
     {
-        $projectSlug = Str::slug($title);
-        return $projectSlug;
+        $apartmentSlug = Str::slug($title);
+        return $apartmentSlug;
     }
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
 
     /**
      * Get the user associated with the Apartment
@@ -61,18 +67,6 @@ class Apartment extends Model
     {
         return $this->hasMany(View::class);
     }
-
-
-    /**
-     * The promotions that belong to the Apartment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function promotions(): BelongsToMany
-    {
-        return $this->belongsToMany(Promotion::class);
-    }
-
 
 
     /**
