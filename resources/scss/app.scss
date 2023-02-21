@@ -153,6 +153,39 @@ span {
 
 
 
+    .card.ms_card_apartment.bronze .sponsor_badge {
+        background: hsla(30, 61%, 50%, 1);
+
+        background: linear-gradient(135deg, hsla(30, 61%, 50%, 1) 0%, hsla(26, 100%, 51%, 1) 65%);
+
+        background: -moz-linear-gradient(135deg, hsla(30, 61%, 50%, 1) 0%, hsla(26, 100%, 51%, 1) 65%);
+
+        background: -webkit-linear-gradient(135deg, hsla(30, 61%, 50%, 1) 0%, hsla(26, 100%, 51%, 1) 65%);
+
+
+
+    }
+
+    .card.ms_card_apartment.silver .sponsor_badge {
+        background: hsla(0, 0%, 62%, 1);
+
+        background: linear-gradient(135deg, hsla(0, 0%, 62%, 1) 0%, hsla(0, 0%, 40%, 1) 65%);
+
+        background: -moz-linear-gradient(135deg, hsla(0, 0%, 62%, 1) 0%, hsla(0, 0%, 40%, 1) 65%);
+
+        background: -webkit-linear-gradient(135deg, hsla(0, 0%, 62%, 1) 0%, hsla(0, 0%, 40%, 1) 65%);
+
+    }
+
+    .card.ms_card_apartment.gold .sponsor_badge {
+        background: hsla(51, 100%, 50%, 1);
+
+        background: linear-gradient(135deg, hsla(51, 100%, 50%, 1) 0%, hsla(44, 100%, 51%, 1) 65%);
+
+        background: -moz-linear-gradient(135deg, hsla(51, 100%, 50%, 1) 0%, hsla(44, 100%, 51%, 1) 65%);
+
+        background: -webkit-linear-gradient(135deg, hsla(51, 100%, 50%, 1) 0%, hsla(44, 100%, 51%, 1) 65%);
+    }
 
     .card-body {
         padding: 1.6rem;
@@ -174,13 +207,16 @@ span {
         }
     }
 
-    .sponsor_btn {
+    .sponsor_btn,
+    .sponsor_badge {
         background: linear-gradient(to right, $bb-primary, $bb-secondary);
         position: absolute;
         top: 10px;
         left: 10px;
         padding: 0.75rem 1.5rem;
         border-radius: 0.5rem;
+        font-family: $bb-font-secondary;
+        color: white;
     }
 
     .show_btn {

@@ -20,7 +20,7 @@
                     @forelse($apartments as $apartment)
                         <div class="col-sm-12 col-md-6 col-xl-4">
                             <div
-                                class="card border-0 h-100 {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Bronze' ? 'bronze' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Silver' ? 'silver' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Gold' ? 'gold' : '' }}">
+                                class="card ms_card_apartment border-0  h-100 {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Bronze' ? 'bronze' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Silver' ? 'silver' : '' }} {{ isset($apartment->subscription) && $apartment->subscription->stripe_status == 'active' && $apartment->subscription->name == 'Gold' ? 'gold' : '' }}">
                                 <div class="card_img">
                                     <img class="my-img img-fluid"
                                         src="{{ Storage::exists($apartment->media) ? asset('storage/' . $apartment->media) : $apartment->media }}"
@@ -43,6 +43,9 @@
                                                     Sponsorizza
                                                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                                                 </a>
+                                            @else
+                                                <span class="d-block sponsor_badge">Sponsorizzato fino
+                                                    al{{ ' ' . date('d-m-Y', strtotime($apartment->subscription->ends_at)) }}</span>
                                             @endif
                                         @endif
 
