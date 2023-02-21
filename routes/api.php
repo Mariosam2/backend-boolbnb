@@ -22,8 +22,8 @@ use App\Http\Middleware\SearchMiddleware;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/showcase', [ApartmentController::class, 'index']);
+Route::get('/apartments', [ApartmentController::class, 'index']);
+Route::get('/showcase', [ApartmentController::class, 'showCase']);
 Route::get('/apartments/{apartment:slug}', [ApartmentController::class, 'show']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/categories', [ApartmentCategoryController::class, 'index']);
