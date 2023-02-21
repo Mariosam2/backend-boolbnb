@@ -241,7 +241,7 @@ class ApartmentController extends Controller
                 $poi = [];
 
                 if (isset($val_data['address'])) {
-                    $tomtomKey = 'DTunj3EjYUvPwXVpG88PRAlGDhO22xSb';
+                    $tomtomKey = 'RitTw3OZunU68B1yxrwneACwmdSgnggU';
                     //genero dei poi utilizzabili nella richiesta all'API di tomtom
                     $apartments = Apartment::all();
 
