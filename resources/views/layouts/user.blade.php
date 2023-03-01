@@ -51,12 +51,12 @@
                         const searchBoxWrapper = document.querySelector('.searchBoxWrapper');
                         const options = {
                             searchOptions: {
-                                key: "RitTw3OZunU68B1yxrwneACwmdSgnggU",
+                                key: "efizXNdkD5DBIWSjEpxGl2mz7uAIk28P",
                                 language: "it-IT",
                                 limit: 5,
                             },
                             autocompleteOptions: {
-                                key: "RitTw3OZunU68B1yxrwneACwmdSgnggU",
+                                key: "efizXNdkD5DBIWSjEpxGl2mz7uAIk28P",
                                 language: "it-IT",
                             },
 
