@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-    protected $tomtomKey = "efizXNdkD5DBIWSjEpxGl2mz7uAIk28P";
+    protected $tomtomKey = "45POhoazK93Ibg5oAGDMtKuyqLhjzUGo";
     /**
      * Takes a collection of apartments and sort it by type of promotion Gold,Silver,Bronze
      * @param mixed $apartments
