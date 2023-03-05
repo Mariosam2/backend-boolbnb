@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,7 +16,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        /*  $schedule->call(function () {
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $subscriptions = $stripe->subscriptions->all([
+                'status' => 'active',
+            ]);
+            //dd($subscriptions);
+            foreach ($subscriptions->data as $subscription) {
+                $subscriptionId = $subscription->id;
+                dd($subscriptionId);
+                $endsAt = date('Y-m-d H:i:s', $subscription->current_period_end);
+
+                DB::table('subscriptions')->where('stripe_id', $subscriptionId)->update(['ends_at' => $endsAt]);
+            }
+        })->dailyAt('17:33'); */
     }
 
     /**
@@ -25,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

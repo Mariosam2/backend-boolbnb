@@ -380,10 +380,11 @@ a.gold {
 
 .ms_form {
 
-    input:not(.tt-search-box-input),
+    input,
+    .tt-search-box-input-container,
     textarea {
         border-color: #cccccc;
-        border-radius: 0px;
+        border-radius: 0.5rem;
         transition: all 0.3s ease;
     }
 
@@ -396,7 +397,7 @@ a.gold {
     select,
     select:focus {
         border-color: #cccccc;
-        border-radius: 0px;
+        border-radius: 0.5rem;
         box-shadow: none;
         outline: none;
     }

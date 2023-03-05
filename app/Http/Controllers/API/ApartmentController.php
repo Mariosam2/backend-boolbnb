@@ -29,7 +29,7 @@ class ApartmentController extends Controller
     public function showCase()
     {
         //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
-        $apartments = Apartment::where('subscription_id', '!=', null)->with(['user', 'services', 'views', 'subscription', 'apartment_category'])->get();
+        $apartments = Apartment::where('subscription_id', '!=', null)->with(['user', 'services', 'views', 'subscription', 'apartment_category'])->orderByDesc('id')->get();
         //dd($apartments);
 
         $sortedApartments = $this->bubbleSortByProduct($apartments);
@@ -43,21 +43,48 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
-        $apartments = Apartment::with(['user', 'services', 'views', 'subscription', 'apartment_category'])->get();
-        //dd($apartments);
+        $data = [
+            'category' => $request->category,
+        ];
 
-        $sortedApartments = $this->bubbleSortByProduct($apartments);
-        $paginatedApartments = $this->paginate($sortedApartments->toArray(), 6);
-        $paginatedApartments->setPath('http://127.0.0.1:8000/api/showcase');
-        //dd($paginatedApartments);
-
-        return response()->json([
-            'success' => true,
-            'results' => $paginatedApartments
+        $validator = Validator::make($data, [
+            'category' => 'nullable|exists:apartment_categories,id',
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'results' => null,
+            ]);
+        } else {
+            $val_data = $validator->validate();
+            if (isset($val_data['category'])) {
+                //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
+                $apartments = Apartment::with(['user', 'services', 'views', 'subscription', 'apartment_category'])->where('apartment_category_id', '=', $val_data['category'])->orderByDesc('id')->get();
+                //dd($apartments);
+
+            } else {
+                //sorto gli appartamenti sponsorizzati in base alla promozione che hanno (Gold, Silver o Bronze)
+                $apartments = Apartment::with(['user', 'services', 'views', 'subscription', 'apartment_category'])->orderByDesc('id')->get();
+                //dd($apartments);
+
+            }
+            $sortedApartments = $this->bubbleSortByProduct($apartments);
+            $paginatedApartments = $this->paginate($sortedApartments->toArray(), 6);
+            if (isset($val_data['category'])) {
+                $paginatedApartments->setPath('http://127.0.0.1:8000/api/apartments?category=' . $val_data['category']);
+            } else {
+                $paginatedApartments->setPath('http://127.0.0.1:8000/api/apartments');
+            }
+
+            //dd($paginatedApartments);
+
+            return response()->json([
+                'success' => true,
+                'results' => $paginatedApartments
+            ]);
+        }
     }
     /**
      * Takes a collection of apartments and sort it by type of promotion Gold,Silver,Bronze
@@ -368,11 +395,11 @@ class ApartmentController extends Controller
                 //dd($searchedApartments);
                 $searchedApartmentsCollection = collect($searchedApartments);
                 //dd($searchedApartmentsCollection);
+                $searchedApartmentsCollection = $searchedApartmentsCollection->where('visible', '=', true)->sortByDesc('id')->values();
 
-
-                $searchedApartmentsCollection = $this->bubbleSortByProduct($searchedApartmentsCollection);
+                $searchedApartments = $this->bubbleSortByProduct($searchedApartmentsCollection);
                 //dd($searchedApartmentsCollection);
-                $searchedApartments = $searchedApartmentsCollection->where('visible', '=', true)->values();
+
                 //dd($searchedApartments);
                 /* $searchedApartments = $this->paginate($searchedApartments->toArray(), 6);
                 $searchedApartments->setPath('http://127.0.0.1:8000/api/search'); */

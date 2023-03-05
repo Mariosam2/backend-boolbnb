@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApartmentController;
 use App\Http\Controllers\API\MessageController;
 use App\Http\Controllers\API\ServiceController;
+use App\Http\Middleware\ApartmentsMiddleware;
 use App\Http\Middleware\SearchMiddleware;
 
 /*
@@ -22,7 +23,7 @@ use App\Http\Middleware\SearchMiddleware;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/apartments', [ApartmentController::class, 'index']);
+Route::get('/apartments', [ApartmentController::class, 'index'])->middleware(ApartmentsMiddleware::class);
 Route::get('/showcase', [ApartmentController::class, 'showCase']);
 Route::get('/apartments/{apartment:slug}', [ApartmentController::class, 'show']);
 Route::get('/services', [ServiceController::class, 'index']);
