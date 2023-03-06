@@ -61,6 +61,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
+            @media screen and (max-width: 400px) {
+                width: 10rem;
+            }
         }
 
         .links {
@@ -107,6 +111,10 @@
             border-radius: 6px;
             padding: 0.8rem;
             min-width: 30rem;
+
+            @media screen and (max-width: 400px) {
+                min-width: 0
+            }
         }
 
         .remember_me {
