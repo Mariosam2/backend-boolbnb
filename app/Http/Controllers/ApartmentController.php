@@ -66,7 +66,7 @@ class ApartmentController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $apartments =  Auth::user()->apartments()->get();
+        $apartments =  Auth::user()->apartments()->orderByDesc('id')->get();
         $apartments = $this->bubbleSortByProduct($apartments);
         return view('apartments.index', compact('apartments'));
     }

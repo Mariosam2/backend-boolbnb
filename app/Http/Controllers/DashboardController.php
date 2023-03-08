@@ -11,7 +11,7 @@ class DashboardController extends Controller
     //
     public function index()
     {
-        $apartments = Auth::user()->apartments()->get();
+        $apartments = Auth::user()->apartments()->orderByDesc('id')->get();
         return view('dashboard', compact('apartments'));
     }
 }

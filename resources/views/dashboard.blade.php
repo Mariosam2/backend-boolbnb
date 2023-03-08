@@ -22,6 +22,14 @@
                     </div>
 
                 </div>
+                @forelse($apartments as $apartment)
+                    @forelse($apartment->views as $view)
+                        <div>{{ $view->apartment_id . ' ' . $view->date }}</div>
+                    @empty
+                    @endforelse
+
+                @empty
+                @endforelse
                 <div class="canvas_container">
 
                     <canvas id="acquisitions"></canvas>
@@ -37,62 +45,89 @@
     </div>
     <script src="{{ asset('assets/js/chart.min.js') }}"></script>
     <script>
-        (async function() {
-            const data = [{
-                    year: 2010,
-                    count: 10
-                },
-                {
-                    year: 2011,
-                    count: 20
-                },
-                {
-                    year: 2012,
-                    count: 15
-                },
-                {
-                    year: 2013,
-                    count: 25
-                },
-                {
-                    year: 2014,
-                    count: 22
-                },
-                {
-                    year: 2015,
-                    count: 30
-                },
-                {
-                    year: 2016,
-                    count: 28
-                },
-            ];
+        //console.log(new Date().getDay());
+        const week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-            new Chart(
-                document.getElementById('acquisitions'), {
-                    type: 'bar',
-                    options: {
-                        animation: true,
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                enabled: true
-                            }
-                        }
-                    },
-                    data: {
-                        labels: data.map(row => row.year),
-                        datasets: [{
-                            label: 'Acquisitions by year',
-                            data: data.map(row => row.count)
-                        }]
-                    }
+        function createData() {
+            const today = new Date().getDay();
+            let data = [];
+            week.forEach((day, index) => {
+                if (index === today - 1) {
+                    data.push({
+                        day: 'Today',
+                        value: 10
+                    });
+                } else {
+                    data.push({
+                        day: day,
+                        value: 10
+                    });
                 }
-            );
-        })();
+
+            })
+            console.log(data);
+            const prevDays = data.slice(0, today);
+            const nextDays = data.slice(today);
+            console.log(prevDays, nextDays, week);
+            data = nextDays.concat(prevDays);
+            return data;
+
+        }
+
+        /*  const data = [{
+                 day: 'Mon',
+                 value: 10
+             },
+             {
+                 day: 'Tue',
+                 value: 20
+             },
+             {
+                 day: 'Wed',
+                 value: 15
+             },
+             {
+                 day: 'Thu',
+                 value: 25
+             },
+             {
+                 day: 'Fri',
+                 value: 22
+             },
+             {
+                 day: 'Sat',
+                 value: 30
+             },
+             {
+                 day: 'Sun',
+                 value: 28
+             },
+         ]; */
+        const data = createData();
+
+        new Chart(
+            document.getElementById('acquisitions'), {
+                type: 'bar',
+                options: {
+                    animation: true,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }
+                },
+                data: {
+                    labels: data.map(row => row.day),
+                    datasets: [{
+                        data: data.map(row => row.value)
+                    }]
+                }
+            }
+        );
     </script>
 @endsection

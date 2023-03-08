@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApartmentController;
 use App\Http\Controllers\API\MessageController;
 use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\ViewsController;
 use App\Http\Middleware\ApartmentsMiddleware;
 use App\Http\Middleware\SearchMiddleware;
 
@@ -29,4 +30,5 @@ Route::get('/apartments/{apartment:slug}', [ApartmentController::class, 'show'])
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/categories', [ApartmentCategoryController::class, 'index']);
 Route::post('/messages', [MessageController::class, 'store']);
+Route::post('/views', [ViewsController::class, 'addView']);
 Route::get('/search', [ApartmentController::class, 'search'])->middleware(SearchMiddleware::class)->name('search');
