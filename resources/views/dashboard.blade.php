@@ -22,14 +22,6 @@
                     </div>
 
                 </div>
-                @forelse($apartments as $apartment)
-                    @forelse($apartment->views as $view)
-                        <div>{{ $view->apartment_id . ' ' . $view->date }}</div>
-                    @empty
-                    @endforelse
-
-                @empty
-                @endforelse
                 <div class="canvas_container">
 
                     <canvas id="acquisitions"></canvas>
@@ -44,68 +36,109 @@
 
     </div>
     <script src="{{ asset('assets/js/chart.min.js') }}"></script>
-    <script>
+    <script type="module">
         //console.log(new Date().getDay());
-        const week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const axios = window.axios;
+        const selectEl = document.getElementById('apartment_id');
+        let currentApartmentId = selectEl.value;
+        const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        //console.log(currentApartmentId);
+        async function getCurrentApartmentViews(){
+            const url = 'http://127.0.0.1:8000/api/views/'+ currentApartmentId;
+            let views;
+            const response = await axios.get(url);
+            return response.data.results;
+           
+                    
+        }
 
-        function createData() {
+        function createWeek() {
             const today = new Date().getDay();
-            let data = [];
-            week.forEach((day, index) => {
+            let week = [];
+            weekDays.forEach((day, index) => {
                 if (index === today - 1) {
-                    data.push({
-                        day: 'Today',
-                        value: 10
-                    });
+                    week.push('Today');
                 } else {
-                    data.push({
-                        day: day,
-                        value: 10
-                    });
+                    week.push(day);
                 }
 
             })
-            console.log(data);
-            const prevDays = data.slice(0, today);
-            const nextDays = data.slice(today);
-            console.log(prevDays, nextDays, week);
-            data = nextDays.concat(prevDays);
-            return data;
+            //console.log(week);
+            const prevDays = week.slice(0, today);
+            const nextDays = week.slice(today);
+            //console.log(prevDays, nextDays, week);
+            week = nextDays.concat(prevDays);
+            //console.log(week);
+            return week;
 
         }
 
-        /*  const data = [{
-                 day: 'Mon',
-                 value: 10
-             },
-             {
-                 day: 'Tue',
-                 value: 20
-             },
-             {
-                 day: 'Wed',
-                 value: 15
-             },
-             {
-                 day: 'Thu',
-                 value: 25
-             },
-             {
-                 day: 'Fri',
-                 value: 22
-             },
-             {
-                 day: 'Sat',
-                 value: 30
-             },
-             {
-                 day: 'Sun',
-                 value: 28
-             },
-         ]; */
-        const data = createData();
 
-        new Chart(
+        function setWeek(){
+            const week = createWeek();
+            let temp = [];
+            let numOfDaysToRemove = 6;
+            for(let i = 0; i < week.length; i++){
+                const date = new Date();
+                let day = date.getDate() - numOfDaysToRemove;
+                date.setDate(day);
+                //console.log(date);
+                
+                //const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+                //console.log(formattedDate);
+                // push oggetto con nome e temp
+               
+                const formattedDay = date.toLocaleDateString('en-US', {weekday: 'long'});
+                const formattedDate = date.toLocaleDateString('en-US', {year:  "numeric"}) + '-' + date.toLocaleDateString('en-US', {month: "2-digit"}) + '-' + date.toLocaleDateString('en-US', {day: "2-digit"});
+                const today = new Date().toLocaleDateString('en-US', {weekday: 'long'});
+                if(today === formattedDay){
+                    temp.push({
+                    day: 'Today',
+                    date: formattedDate
+                })
+                } else {
+                    temp.push({
+                    day: formattedDay,
+                    date: formattedDate
+                })
+                }
+                
+                numOfDaysToRemove--;
+
+            }
+            //console.log(temp);
+            return temp;
+            
+        }
+
+        
+
+
+        async function createData(){
+            const week = setWeek();
+            console.log(week);
+            let views = await getCurrentApartmentViews();
+            console.log(views);
+          
+            let data = [];
+            week.forEach(day=> {
+                let count = 0;
+                for(let i = 0; i < views.length; i++){
+                    if(views[i].date == day.date){
+                        count++;
+
+                    }
+                    console.log(count);
+                }
+                const obj = {day: day.day, value: count, date: day.date};
+                data.push(obj);
+            })
+            return data;
+        }
+
+        const data = await createData();
+
+        let dashboard = new Chart(
             document.getElementById('acquisitions'), {
                 type: 'bar',
                 options: {
@@ -129,5 +162,48 @@
                 }
             }
         );
+
+
+        //When select value changes
+
+        function removeData(chart) {
+            const temp = chart.data.labels.length;
+            for(let i = 0; i < temp; i++){
+                //console.log('elimino label');
+                chart.data.labels.pop();
+            }
+           
+            const dataLen = chart.data.datasets['0'].data.length;
+            for(let i = 0; i < dataLen; i++){
+                let chartData = chart.data.datasets['0'].data;
+                chartData.pop();
+            }
+            
+            chart.update();
+        }
+
+        function addData(chart, data) {
+            data.forEach((el, index) => {
+                chart.data.labels[index] = el.day;
+                
+            })
+            for(let i = 0; i< data.length; i++){
+                chart.data.datasets['0'].data[i] = data[i].value;
+                
+            }
+            chart.update();
+           
+        }
+        selectEl.addEventListener('change', async function() {
+            currentApartmentId = this.value;
+            console.log(currentApartmentId);
+            const newData = await createData();
+            //console.log(newData);
+            removeData(dashboard);
+            //console.log(dashboard.data)
+            addData(dashboard,newData)
+            //console.log(dashboard.data)
+           
+        })
     </script>
 @endsection

@@ -31,4 +31,5 @@ Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/categories', [ApartmentCategoryController::class, 'index']);
 Route::post('/messages', [MessageController::class, 'store']);
 Route::post('/views', [ViewsController::class, 'addView']);
+Route::get('/views/{apartment:id}', [ViewsController::class, 'currentViews'])->middleware(['auth', 'verified']);
 Route::get('/search', [ApartmentController::class, 'search'])->middleware(SearchMiddleware::class)->name('search');
