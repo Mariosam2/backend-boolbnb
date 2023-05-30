@@ -1,0 +1,166 @@
+@use './variables' as *;
+
+#user_access {
+    background: linear-gradient(180deg, $bb-primary 0%, $bb-secondary 100%);
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    .content {
+
+        background-color: $bb-lighter;
+        box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.1);
+        border-radius: 1.3rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        // Close icon
+        .close {
+            position: absolute;
+            right: 32px;
+            top: 32px;
+            width: 27px;
+            height: 27px;
+            opacity: 0.3;
+
+            @media screen and (max-width: 586px) {
+                top: 16px;
+                right: 16px;
+
+            }
+        }
+
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .close:before,
+        .close:after {
+            position: absolute;
+            left: 15px;
+            content: ' ';
+            height: 27px;
+            width: 2px;
+            background-color: #333;
+        }
+
+        .close:before {
+            transform: rotate(45deg);
+        }
+
+        .close:after {
+            transform: rotate(-45deg);
+        }
+
+        // Logo
+        .logo {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 100%;
+            }
+
+            @media screen and (max-width: 500px) {
+                width: 10rem;
+            }
+        }
+
+        .links {
+            display: flex;
+            padding-top: 1.5rem;
+
+            a {
+                padding: 0 1rem;
+                font-size: 1rem;
+                font-weight: 400;
+            }
+
+            .on {
+                color: $bb-primary;
+                font-weight: 700;
+                font-size: 1.1rem;
+            }
+        }
+
+        form {
+            width: 100%;
+
+            .column {
+                display: flex;
+
+                .column_el {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+
+            .mr {
+                margin-right: 1.5rem;
+            }
+        }
+
+        label:not(.form-check-label) {
+            padding-top: 2rem;
+            padding-bottom: 0.8rem;
+            font-family: $bb-font-primary;
+            font-size: 1rem;
+        }
+
+        input:not(.form-check-input) {
+            border: 1px solid #DDDDDD;
+            border-radius: 6px;
+            padding: 0.8rem;
+
+
+            @media screen and (max-width: 400px) {
+                min-width: 0
+            }
+        }
+
+        .remember_me {
+            padding-top: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+
+            .check {
+                padding-top: 0.2rem;
+            }
+
+            label {
+                padding-left: 0.5rem;
+            }
+        }
+
+        .forgot_password {
+            color: $bb-primary;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+
+        .send {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                margin-top: 2rem;
+
+                @media screen and (max-width: 500px) {
+                    padding: 0.6rem 0.8rem;
+                }
+            }
+        }
+    }
+}

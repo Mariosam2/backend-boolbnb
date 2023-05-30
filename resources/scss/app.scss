@@ -1,0 +1,622 @@
+// Import variables
+@use './partials/variables.scss' as *;
+@use './partials/sidebar';
+@use './partials/loginpage';
+@use './partials/dashboard';
+
+// Import all of Bootstrap's CSS
+@import '~bootstrap/scss/bootstrap';
+@import '@tomtom-international/web-sdk-plugin-searchbox/dist/SearchBox.css';
+
+// Reset rules
+* {
+    vertical-align: baseline;
+    font-weight: inherit;
+    font-family: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+// Style rules
+body {
+    font-family: $bb-font-primary;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 500;
+}
+
+p,
+span {
+    font-family: $bb-font-secondary;
+    text-align: left;
+}
+
+
+
+// Button
+.button {
+    border-radius: 1rem;
+    padding: 0.8rem 1.4rem;
+    color: $bb-secondary;
+    font-weight: 500;
+    font-size: 1.1rem;
+    background-color: $bb-secondary-background;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: #398f61;
+        background-color: #1e814c26;
+    }
+}
+
+
+// Utilities
+.title_mark {
+    // mark title with primary color
+    color: $bb-primary;
+    font-weight: 700;
+}
+
+.text_lighter {
+    color: $bb-lighter;
+}
+
+.font_primary {
+    font-family: $bb-font-primary;
+}
+
+.font_secondary {
+    font-family: $bb-font-secondary;
+}
+
+.create_btn {
+    background-color: $bb-secondary-background;
+    color: $bb-success;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    font-size: 20px;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #1e814c26;
+        color: #398f61;
+    }
+}
+
+.read_btn {
+    background-color: $bb-secondary-background;
+    color: $bb-success;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #1e814c26;
+        color: #398f61;
+    }
+
+}
+
+/* header */
+.dropdown-menu.ms_logout {
+    min-width: 0;
+}
+
+.navbar-toggler.ms_navbar-toggler {
+    border: none;
+    color: white;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.navbar.ms_navbar {
+    background: linear-gradient(to right, $bb-primary, $bb-secondary);
+
+    .navbar-nav.ms_navbar-nav .nav-link,
+    .nav-link.ms_nav-link {
+        color: $bb-lighter;
+        font-size: 1.2rem;
+        font-family: $bb-font-secondary;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .navbar-nav.ms_navbar-nav .nav-link,
+        .nav-link.ms_nav-link {
+            margin-top: 0.25rem;
+        }
+
+        .dropdown-menu#ms_dropdown {
+            padding: 0px;
+            border: none;
+            background: linear-gradient(to right, $bb-primary, $bb-secondary);
+
+            .dropdown-item {
+                padding: 0px;
+                color: white;
+                font-family: $bb-font-secondary;
+            }
+
+        }
+    }
+
+
+
+}
+
+
+/* index view */
+.apartments {
+
+
+
+
+    .card.ms_card_apartment.bronze .sponsor_badge {
+        background: hsla(30, 61%, 50%, 1);
+
+        background: linear-gradient(135deg, hsla(30, 61%, 50%, 1) 0%, hsla(26, 100%, 51%, 1) 65%);
+
+        background: -moz-linear-gradient(135deg, hsla(30, 61%, 50%, 1) 0%, hsla(26, 100%, 51%, 1) 65%);
+
+        background: -webkit-linear-gradient(135deg, hsla(30, 61%, 50%, 1) 0%, hsla(26, 100%, 51%, 1) 65%);
+
+
+
+    }
+
+    .card.ms_card_apartment.silver .sponsor_badge {
+        background: hsla(0, 0%, 62%, 1);
+
+        background: linear-gradient(135deg, hsla(0, 0%, 62%, 1) 0%, hsla(0, 0%, 40%, 1) 65%);
+
+        background: -moz-linear-gradient(135deg, hsla(0, 0%, 62%, 1) 0%, hsla(0, 0%, 40%, 1) 65%);
+
+        background: -webkit-linear-gradient(135deg, hsla(0, 0%, 62%, 1) 0%, hsla(0, 0%, 40%, 1) 65%);
+
+    }
+
+    .card.ms_card_apartment.gold .sponsor_badge {
+        background: hsla(51, 100%, 50%, 1);
+
+        background: linear-gradient(135deg, hsla(51, 100%, 50%, 1) 0%, hsla(44, 100%, 51%, 1) 65%);
+
+        background: -moz-linear-gradient(135deg, hsla(51, 100%, 50%, 1) 0%, hsla(44, 100%, 51%, 1) 65%);
+
+        background: -webkit-linear-gradient(135deg, hsla(51, 100%, 50%, 1) 0%, hsla(44, 100%, 51%, 1) 65%);
+    }
+
+    .card-body {
+        padding: 1.6rem;
+        background-color: $bb-background;
+        border-radius: 0 0 1.25rem 1.25rem;
+    }
+
+    .card_img {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        img {
+            border-radius: 1.25rem 1.25rem 0 0;
+            max-width: 100%;
+            height: 23.5rem;
+            max-height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .sponsor_btn,
+    .sponsor_badge {
+        background: linear-gradient(to right, $bb-primary, $bb-secondary);
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-family: $bb-font-secondary;
+        color: white;
+    }
+
+    .show_btn {
+        background-color: $bb-success;
+
+
+    }
+
+    .edit_btn {
+        background-color: $bb-primary;
+    }
+
+    .delete_btn {
+        background-color: $bb-danger-light;
+    }
+
+
+
+}
+
+.spacing {
+    padding: 8rem 0 4rem 0;
+}
+
+@media screen and (max-width: 769px) {
+    .spacing {
+        padding: 13rem 0 4rem 0;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .spacing {
+        padding: 4rem 0 4rem 0;
+    }
+
+}
+
+
+
+/* create + edit   views */
+
+/* chekbox style */
+.ms_slider {
+    .switch {
+        --button-width: 3.5em;
+        --button-height: 2em;
+        --toggle-diameter: 1.5em;
+        --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
+        --toggle-shadow-offset: 10px;
+        --toggle-wider: 3em;
+        --color-false: #cccccc;
+
+    }
+
+    .slider {
+        display: inline-block;
+        width: var(--button-width);
+        height: var(--button-height);
+        background-color: var(--color-false);
+        border-radius: calc(var(--button-height) / 2);
+        position: relative;
+
+    }
+
+    .slider::after {
+        content: "";
+        display: inline-block;
+        width: var(--toggle-diameter);
+        height: var(--toggle-diameter);
+        background-color: #fff;
+        border-radius: calc(var(--toggle-diameter) / 2);
+        position: absolute;
+        top: var(--button-toggle-offset);
+        transform: translateX(var(--button-toggle-offset));
+        box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+        transition: 0.3s all ease-in-out;
+    }
+
+    .switch input[type="checkbox"]:checked+.slider {
+        background: linear-gradient(to right, $bb-secondary, $bb-primary);
+    }
+
+    .switch input[type="checkbox"]:checked+.slider::after {
+        transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
+        box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+    }
+
+    .switch input[type="checkbox"] {
+        display: none;
+    }
+
+    .switch input[type="checkbox"]:active+.slider::after {
+        width: var(--toggle-wider);
+    }
+
+    .switch input[type="checkbox"]:checked:active+.slider::after {
+        transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
+    }
+
+}
+
+
+.torna {
+    width: 100%;
+    color: $bb-light;
+
+    &:hover {
+        color: $bb-light;
+    }
+}
+
+
+a.bronze {
+    color: #CD7F32;
+}
+
+a.silver {
+    color: #C0C0C0;
+}
+
+a.gold {
+    color: #FFD700;
+}
+
+.card {
+    border-radius: 30px;
+
+}
+
+
+
+.ms_form {
+
+    input,
+    .tt-search-box-input-container,
+    textarea {
+        border-color: #cccccc;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    input:focus:not(.tt-search-box-input, input[type='file']),
+    textarea:focus {
+        box-shadow: 0px 0px 10px #cccccc;
+        border-color: transparent;
+    }
+
+    select,
+    select:focus {
+        border-color: #cccccc;
+        border-radius: 0.5rem;
+        box-shadow: none;
+        outline: none;
+    }
+
+
+
+    input[type='file']:focus {
+        box-shadow: none;
+        border-color: #cccccc;
+        outline: none;
+    }
+
+    .ms_submit-button {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 568px) {
+        .ms_submit-button {
+            width: 25%;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .ms_submit-button {
+            width: 15%;
+        }
+    }
+}
+
+
+/* Messages View */
+
+
+.ms_card {
+    border-radius: 1.5rem;
+
+
+
+    .apartment-img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 1.5rem 0 0 1.5rem;
+
+    }
+
+    @media screen and (max-width: 1200px) {
+        .apartment-img {
+            max-width: 100%;
+        }
+
+    }
+
+    .img_msg {
+        background-color: $bb-primary;
+        height: 80px;
+        width: 80px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+    }
+
+
+
+
+    .send_msg_btn {
+        background-color: $bb-secondary-background;
+        color: $bb-success;
+        font-weight: bold;
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+        transition: all 0.2s ease-in;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: #1e814c26;
+            color: #398f61;
+        }
+    }
+
+}
+
+.message_wrapper {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.card.ms_card.new_message {
+    background-color: rgba($color: #c4c1c1, $alpha: 0.3);
+    font-weight: bolder;
+
+
+
+    h6,
+    h5 {
+        font-weight: bolder;
+    }
+
+}
+
+.body-sponsor {
+    min-height: 500px;
+
+
+
+}
+
+a.buy {
+    color: #51D48E;
+    background-color: #e5f9ee;
+    width: 50%;
+    padding: 10px;
+
+    transition: all 0.25s ease;
+
+}
+
+a.buy:hover {
+    color: #51D48E;
+    background-color: #d9f7e6;
+
+
+}
+
+.btn.buy:first-child:active {
+    color: #51D48E;
+    background-color: #d9f7e6;
+    border-color: transparent;
+}
+
+
+
+.col-plans,
+.remove_scrollbar {
+    height: 100vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* .panel-body {
+    // Colore primario di Stripe
+    $primary-color: #6772e5;
+
+    // Stilizzazione del form
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f6f9fc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: "Helvetica Neue", sans-serif;
+    }
+
+    // Stilizzazione del titolo del form
+    form h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    // Stilizzazione delle etichette del form
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #485766;
+        display: block;
+    }
+
+    // Stilizzazione degli input del form
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d8e1e8;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-bottom: 16px;
+        color: #485766;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+
+        &::placeholder {
+            color: #acb7c4;
+        }
+    }
+
+    // Stilizzazione del pulsante del form
+    input[type="submit"] {
+        color: #51D48E;
+        background-color: #51d48e4b;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        padding: 12px 24px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        opacity: 60%;
+
+
+        &:hover {
+            color: #51D48E;
+            opacity: 100%;
+
+            background-color: #51d48e4b;
+        }
+    }
+
+}
+
+.panel-default {
+    p {
+        font-size: 30px;
+        color: #51D48E;
+
+    }
+} */

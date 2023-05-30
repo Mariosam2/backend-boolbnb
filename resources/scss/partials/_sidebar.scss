@@ -1,0 +1,31 @@
+@use './variables' as *;
+
+
+
+.row .ms_sidebar {
+    max-width: 300px;
+    min-width: 280px;
+    background: linear-gradient($bb-primary, $bb-secondary);
+    border-radius: 0 2rem 2rem 0;
+    min-height: 500px;
+    height: 100vh;
+
+    i {
+        margin-right: 0.25rem;
+    }
+
+    ul li a {
+        font-family: $bb-font-secondary;
+        color: $bb-lighter;
+        font-size: 1.2rem;
+        font-weight: 300;
+
+        &:hover,
+        &:visited,
+        &:focus {
+            color: $bb-lighter;
+        }
+
+    }
+
+}
